@@ -3,12 +3,11 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.epam.notebook.test.NotebookTest">
+      <class name="com.epam.dao.test.NotebookMemoryImplTest">
         <methods>
-          <include name="beforeTest"/>
-          <include name="setNullNoteTest"/>
+          <include name="findNoteByTitleTest"/>
         </methods>
-      </class> <!-- com.epam.notebook.test.NotebookTest -->
+      </class> <!-- com.epam.dao.test.NotebookMemoryImplTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

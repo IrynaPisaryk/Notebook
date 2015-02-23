@@ -16,6 +16,8 @@ public interface NotebookDAO {
 	void addNoteWithTitle(Date date, String note, String title) throws IOException;
 
 	void deleteNote(int index) throws IOException;
+	
+	void deleteAllNotes() throws IOException;
 
 	Note findNoteByIndex(int index);
 
@@ -40,4 +42,6 @@ public interface NotebookDAO {
 	Note cloneNote(int index) throws CloneNotSupportedException;
 
 	void formatNote(int index) throws IOException;
+
+	
 }

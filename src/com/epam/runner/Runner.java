@@ -10,7 +10,7 @@ public class Runner {
 	public static void main(String[] args) throws IOException{
 
 		NotebookEditor editor = new NotebookEditor();
-		Date date = new Date();	
+		Date date = new Date();	 
 		Date date1 = new Date(243254654);	
 		Date date2 = new Date(5464);	
 		Date date3 = new Date(675675);	

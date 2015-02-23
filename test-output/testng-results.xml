@@ -1,61 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="6" passed="6">
+<testng-results skipped="0" failed="0" total="5" passed="5">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="70" started-at="2015-02-23T09:53:51Z" finished-at="2015-02-23T09:53:51Z">
+  <suite name="Default suite" duration-ms="32" started-at="2015-02-23T13:02:51Z" finished-at="2015-02-23T13:02:52Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="70" started-at="2015-02-23T09:53:51Z" finished-at="2015-02-23T09:53:51Z">
-      <class name="com.epam.notebook.test.NotebookTest">
-        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.epam.notebook.test.NotebookTest@52d455b8]" name="beforeTest" is-config="true" duration-ms="10" started-at="2015-02-23T06:53:51Z" finished-at="2015-02-23T06:53:51Z">
+    <test name="Default test" duration-ms="32" started-at="2015-02-23T13:02:51Z" finished-at="2015-02-23T13:02:52Z">
+      <class name="com.epam.dao.test.NotebookMemoryImplTest">
+        <test-method status="PASS" signature="addNoteTest()[pri:0, instance:com.epam.dao.test.NotebookMemoryImplTest@7bfcd12c]" name="addNoteTest" duration-ms="11" started-at="2015-02-23T10:02:51Z" finished-at="2015-02-23T10:02:52Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="deleteNoteTest()[pri:0, instance:com.epam.notebook.test.NotebookTest@52d455b8]" name="deleteNoteTest" duration-ms="10" started-at="2015-02-23T06:53:51Z" finished-at="2015-02-23T06:53:51Z">
+        </test-method> <!-- addNoteTest -->
+        <test-method status="PASS" signature="addNoteWithEMailTest()[pri:0, instance:com.epam.dao.test.NotebookMemoryImplTest@7bfcd12c]" name="addNoteWithEMailTest" duration-ms="0" started-at="2015-02-23T10:02:52Z" finished-at="2015-02-23T10:02:52Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- deleteNoteTest -->
-        <test-method status="PASS" signature="getNotebookTest()[pri:0, instance:com.epam.notebook.test.NotebookTest@52d455b8]" name="getNotebookTest" duration-ms="20" started-at="2015-02-23T06:53:51Z" finished-at="2015-02-23T06:53:51Z">
+        </test-method> <!-- addNoteWithEMailTest -->
+        <test-method status="PASS" signature="addNoteWithSignatureTest()[pri:0, instance:com.epam.dao.test.NotebookMemoryImplTest@7bfcd12c]" name="addNoteWithSignatureTest" duration-ms="1" started-at="2015-02-23T10:02:52Z" finished-at="2015-02-23T10:02:52Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- getNotebookTest -->
-        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.epam.notebook.test.NotebookTest@52d455b8]" name="beforeTest" is-config="true" duration-ms="0" started-at="2015-02-23T06:53:51Z" finished-at="2015-02-23T06:53:51Z">
+        </test-method> <!-- addNoteWithSignatureTest -->
+        <test-method status="PASS" signature="changeNoteTest()[pri:0, instance:com.epam.dao.test.NotebookMemoryImplTest@7bfcd12c]" name="changeNoteTest" duration-ms="1" started-at="2015-02-23T10:02:52Z" finished-at="2015-02-23T10:02:52Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.epam.notebook.test.NotebookTest@52d455b8]" name="beforeTest" is-config="true" duration-ms="0" started-at="2015-02-23T06:53:51Z" finished-at="2015-02-23T06:53:51Z">
+        </test-method> <!-- changeNoteTest -->
+        <test-method status="PASS" signature="findNoteByTitleTest()[pri:0, instance:com.epam.dao.test.NotebookMemoryImplTest@7bfcd12c]" name="findNoteByTitleTest" duration-ms="2" started-at="2015-02-23T10:02:52Z" finished-at="2015-02-23T10:02:52Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="deleteNotebookTest()[pri:0, instance:com.epam.notebook.test.NotebookTest@52d455b8]" name="deleteNotebookTest" duration-ms="0" started-at="2015-02-23T06:53:51Z" finished-at="2015-02-23T06:53:51Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- deleteNotebookTest -->
-        <test-method status="PASS" signature="getNoteTest()[pri:0, instance:com.epam.notebook.test.NotebookTest@52d455b8]" name="getNoteTest" duration-ms="0" started-at="2015-02-23T06:53:51Z" finished-at="2015-02-23T06:53:51Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getNoteTest -->
-        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.epam.notebook.test.NotebookTest@52d455b8]" name="beforeTest" is-config="true" duration-ms="0" started-at="2015-02-23T06:53:51Z" finished-at="2015-02-23T06:53:51Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.epam.notebook.test.NotebookTest@52d455b8]" name="beforeTest" is-config="true" duration-ms="10" started-at="2015-02-23T06:53:51Z" finished-at="2015-02-23T06:53:51Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.epam.notebook.test.NotebookTest@52d455b8]" name="beforeTest" is-config="true" duration-ms="0" started-at="2015-02-23T06:53:51Z" finished-at="2015-02-23T06:53:51Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="setNotebookTest()[pri:0, instance:com.epam.notebook.test.NotebookTest@52d455b8]" name="setNotebookTest" duration-ms="0" started-at="2015-02-23T06:53:51Z" finished-at="2015-02-23T06:53:51Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setNotebookTest -->
-        <test-method status="PASS" signature="setNoteTest()[pri:0, instance:com.epam.notebook.test.NotebookTest@52d455b8]" name="setNoteTest" duration-ms="0" started-at="2015-02-23T06:53:51Z" finished-at="2015-02-23T06:53:51Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setNoteTest -->
-      </class> <!-- com.epam.notebook.test.NotebookTest -->
+        </test-method> <!-- findNoteByTitleTest -->
+      </class> <!-- com.epam.dao.test.NotebookMemoryImplTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
