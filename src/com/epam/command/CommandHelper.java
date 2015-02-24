@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.epam.command.all.AddCommand;
-import com.epam.command.all.AddEMailCommand;
-import com.epam.command.all.AddSignCommand;
-import com.epam.command.all.AddTitleCommand;
 import com.epam.command.all.ChangeCommand;
 import com.epam.command.all.CloneCommand;
 import com.epam.command.all.DeleteAllCommand;
@@ -27,9 +24,6 @@ public class CommandHelper {
 
     public CommandHelper(){ 
                     commands.put(CommandName.ADD, new AddCommand());
-                    commands.put(CommandName.ADD_EMAIL, new AddEMailCommand());
-                    commands.put(CommandName.ADD_SIGN, new AddSignCommand());
-                    commands.put(CommandName.ADD_TITLE, new AddTitleCommand());
                     commands.put(CommandName.DETETE, new DeleteCommand());
                     commands.put(CommandName.DELETE_ALL, new DeleteAllCommand());
                     commands.put(CommandName.FIND, new FindNoteCommand());

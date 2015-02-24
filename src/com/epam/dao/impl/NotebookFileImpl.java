@@ -178,24 +178,6 @@ public final class NotebookFileImpl implements NotebookDAO{
 	}
 
 	@Override
-	public void printNote(int index) {
-		notebook = io.readNotebookFromFile();
-		System.out.println(notebook.getNote(index).getDate() + "\n"
-				+ notebook.getNote(index).getNote());
-		if (notebook.getNote(index) instanceof NoteWithEMail) {
-			NoteWithEMail note = (NoteWithEMail) notebook.getNote(index);
-			System.out.println(note.getEMail());
-		} else if (notebook.getNote(index) instanceof NoteWithSignature) {
-			NoteWithSignature note = (NoteWithSignature) notebook
-					.getNote(index);
-			System.out.println(note.getSignature());
-		} else if (notebook.getNote(index) instanceof NoteWithTitle) {
-			NoteWithTitle note = (NoteWithTitle) notebook.getNote(index);
-			System.out.println(note.getTitle());
-		}
-	}
-
-	@Override
 	public void replaceNote(int indexOldNote, Note newNote) throws IOException {
 		notebook = io.readNotebookFromFile();
 		notebook.deleteNote(indexOldNote);

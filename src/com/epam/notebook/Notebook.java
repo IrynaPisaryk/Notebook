@@ -3,7 +3,7 @@ package com.epam.notebook;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Notebook implements Serializable{
+public final class Notebook implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Note> notebook = new ArrayList<Note>();
@@ -11,7 +11,7 @@ public class Notebook implements Serializable{
 	public Note getNote(int index) {
 		return notebook.get(index);
 	}
-	//????
+	
 	public Note getNote() {
 		return notebook.get(0);
 	}

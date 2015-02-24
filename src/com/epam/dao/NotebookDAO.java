@@ -35,8 +35,6 @@ public interface NotebookDAO {
 
 	void sortNote() throws IOException;
 
-	void printNote(int index);
-
 	void replaceNote(int indexOldNote, Note newNote) throws IOException;
 
 	Note cloneNote(int index) throws CloneNotSupportedException;

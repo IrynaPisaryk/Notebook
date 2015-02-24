@@ -8,13 +8,13 @@ import com.epam.notebook.NoteWithTitle;
 
 public class Request {
 	
-	private Note note;
-	private NoteWithEMail noteEMail;
-	private NoteWithSignature noteSignature;
-	private NoteWithTitle noteTitle;
-	private int index;
-	private String field;
-	private Date date;
+	private Note note = null;
+	private NoteWithEMail noteEMail = null;
+	private NoteWithSignature noteSignature = null;
+	private NoteWithTitle noteTitle = null;
+	private int index = 0;
+	private String field = null;
+	private Date date = null;
 	
 	public Request(){
 		

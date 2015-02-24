@@ -59,9 +59,6 @@ public final class NotebookEditor {
 	public void sortNote() throws IOException{
 		dao.sortNote();
 	}
-	public void printNote(int index){
-        dao.printNote(index);
-	}
 	public void replaceNote(int indexOldNote, Note newNote) throws IOException{
         dao.replaceNote(indexOldNote, newNote);
 	}

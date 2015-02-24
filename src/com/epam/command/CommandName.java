@@ -2,10 +2,7 @@ package com.epam.command;
 
 public enum CommandName {
 
-	ADD("add"), 
-	ADD_EMAIL("add_email"), 
-	ADD_SIGN("add_sign"), 
-	ADD_TITLE("add_title"),
+	ADD("add"),
 	DETETE("delete"), 
 	DELETE_ALL("delete_all"),
 	FIND("find"), 
