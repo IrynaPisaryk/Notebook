@@ -30,6 +30,11 @@ public final class NotebookEditor {
 	public void deleteNote(int index) throws IOException{
         dao.deleteNote(index);
 	}
+	
+	public void deleteAllNotes() throws IOException{
+        dao.deleteAllNotes();
+	}
+	
 	public Note findNoteByIndex(int index){
         return dao.findNoteByIndex(index);
 	}

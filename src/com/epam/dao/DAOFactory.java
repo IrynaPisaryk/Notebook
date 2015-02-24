@@ -7,7 +7,7 @@ public final class DAOFactory {
 
 	private static NotebookMemoryImpl notebookMemory = new NotebookMemoryImpl();
 	private static NotebookFileImpl notebookFile = new NotebookFileImpl();
-	private static DAOEnum type = DAOEnum.getType("file");
+	private static DAOEnum type = DAOEnum.getType("memory");
 	
 	public static NotebookDAO getDAO() {
 		switch (type) {
