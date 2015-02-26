@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>5/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>12/0/0</td>
 </tr><tr>
-<td>Started on:</td><td>Mon Feb 23 10:02:51 BRT 2015</td>
+<td>Started on:</td><td>Wed Feb 25 08:12:08 BRT 2015</td>
 </tr>
-<tr><td>Total time:</td><td>0 seconds (32 ms)</td>
+<tr><td>Total time:</td><td>0 seconds (51 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -78,27 +78,121 @@ function toggleAllBoxes() {
 <td title='com.epam.dao.test.NotebookMemoryImplTest.addNoteTest()'><b>addNoteTest</b><br>Test class: com.epam.dao.test.NotebookMemoryImplTest</td>
 <td></td>
 <td>0</td>
-<td>com.epam.dao.test.NotebookMemoryImplTest@7bfcd12c</td></tr>
+<td>com.epam.dao.test.NotebookMemoryImplTest@4f4a7090</td></tr>
 <tr>
 <td title='com.epam.dao.test.NotebookMemoryImplTest.addNoteWithEMailTest()'><b>addNoteWithEMailTest</b><br>Test class: com.epam.dao.test.NotebookMemoryImplTest</td>
 <td></td>
 <td>0</td>
-<td>com.epam.dao.test.NotebookMemoryImplTest@7bfcd12c</td></tr>
+<td>com.epam.dao.test.NotebookMemoryImplTest@4f4a7090</td></tr>
 <tr>
 <td title='com.epam.dao.test.NotebookMemoryImplTest.addNoteWithSignatureTest()'><b>addNoteWithSignatureTest</b><br>Test class: com.epam.dao.test.NotebookMemoryImplTest</td>
 <td></td>
 <td>0</td>
-<td>com.epam.dao.test.NotebookMemoryImplTest@7bfcd12c</td></tr>
+<td>com.epam.dao.test.NotebookMemoryImplTest@4f4a7090</td></tr>
 <tr>
 <td title='com.epam.dao.test.NotebookMemoryImplTest.changeNoteTest()'><b>changeNoteTest</b><br>Test class: com.epam.dao.test.NotebookMemoryImplTest</td>
 <td></td>
 <td>0</td>
-<td>com.epam.dao.test.NotebookMemoryImplTest@7bfcd12c</td></tr>
+<td>com.epam.dao.test.NotebookMemoryImplTest@4f4a7090</td></tr>
+<tr>
+<td title='com.epam.dao.test.NotebookMemoryImplTest.cloneNoteTest()'><b>cloneNoteTest</b><br>Test class: com.epam.dao.test.NotebookMemoryImplTest</td>
+<td></td>
+<td>0</td>
+<td>com.epam.dao.test.NotebookMemoryImplTest@4f4a7090</td></tr>
+<tr>
+<td title='com.epam.dao.test.NotebookMemoryImplTest.deleteAllNotesTest()'><b>deleteAllNotesTest</b><br>Test class: com.epam.dao.test.NotebookMemoryImplTest</td>
+<td><div><pre>java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+	at java.util.ArrayList.rangeCheck(Unknown Source)
+	at java.util.ArrayList.get(Unknown Source)
+	at com.epam.notebook.Notebook.getNote(Notebook.java:16)
+	at com.epam.dao.test.NotebookMemoryImplTest.deleteAllNotesTest(NotebookMemoryImplTest.java:87)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:714)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:767)
+	at org.testng.TestRunner.run(TestRunner.java:617)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1224)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1149)
+	at org.testng.TestNG.run(TestNG.java:1057)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+</pre></div><a href='#' onClick='toggleBox("stack-trace2052915500", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace2052915500'><pre>java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+	at java.util.ArrayList.rangeCheck(Unknown Source)
+	at java.util.ArrayList.get(Unknown Source)
+	at com.epam.notebook.Notebook.getNote(Notebook.java:16)
+	at com.epam.dao.test.NotebookMemoryImplTest.deleteAllNotesTest(NotebookMemoryImplTest.java:87)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:714)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:767)
+	at org.testng.TestRunner.run(TestRunner.java:617)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1224)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1149)
+	at org.testng.TestNG.run(TestNG.java:1057)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+</pre></div></td>
+<td>0</td>
+<td>com.epam.dao.test.NotebookMemoryImplTest@4f4a7090</td></tr>
+<tr>
+<td title='com.epam.dao.test.NotebookMemoryImplTest.deleteNoteTest()'><b>deleteNoteTest</b><br>Test class: com.epam.dao.test.NotebookMemoryImplTest</td>
+<td></td>
+<td>0</td>
+<td>com.epam.dao.test.NotebookMemoryImplTest@4f4a7090</td></tr>
+<tr>
+<td title='com.epam.dao.test.NotebookMemoryImplTest.findNoteByDateTest()'><b>findNoteByDateTest</b><br>Test class: com.epam.dao.test.NotebookMemoryImplTest</td>
+<td></td>
+<td>0</td>
+<td>com.epam.dao.test.NotebookMemoryImplTest@4f4a7090</td></tr>
+<tr>
+<td title='com.epam.dao.test.NotebookMemoryImplTest.findNoteByEMailTest()'><b>findNoteByEMailTest</b><br>Test class: com.epam.dao.test.NotebookMemoryImplTest</td>
+<td></td>
+<td>0</td>
+<td>com.epam.dao.test.NotebookMemoryImplTest@4f4a7090</td></tr>
+<tr>
+<td title='com.epam.dao.test.NotebookMemoryImplTest.findNoteByIndexTest()'><b>findNoteByIndexTest</b><br>Test class: com.epam.dao.test.NotebookMemoryImplTest</td>
+<td></td>
+<td>0</td>
+<td>com.epam.dao.test.NotebookMemoryImplTest@4f4a7090</td></tr>
+<tr>
+<td title='com.epam.dao.test.NotebookMemoryImplTest.findNoteBySignatureTest()'><b>findNoteBySignatureTest</b><br>Test class: com.epam.dao.test.NotebookMemoryImplTest</td>
+<td></td>
+<td>0</td>
+<td>com.epam.dao.test.NotebookMemoryImplTest@4f4a7090</td></tr>
 <tr>
 <td title='com.epam.dao.test.NotebookMemoryImplTest.findNoteByTitleTest()'><b>findNoteByTitleTest</b><br>Test class: com.epam.dao.test.NotebookMemoryImplTest</td>
 <td></td>
 <td>0</td>
-<td>com.epam.dao.test.NotebookMemoryImplTest@7bfcd12c</td></tr>
+<td>com.epam.dao.test.NotebookMemoryImplTest@4f4a7090</td></tr>
 </table><p>
 </body>
 </html>

@@ -10,6 +10,7 @@ public class Response {
 
 	private Notebook notebook;
 	private ArrayList<Note> notes;
+	private Note note;
 	
 	public Response(){
 		notebook = NotebookAdapter.getInstance().getNotebook();
@@ -19,6 +20,10 @@ public class Response {
 		this.notes = notes;
 	}
 	
+	public Response(Note note) {
+		this.note = note;
+	}
+
 	public void setNotebook(Notebook notebook){
 		this.notebook = notebook;
 	}
@@ -33,5 +38,13 @@ public class Response {
 	
 	public ArrayList<Note> getNotes(){
 		return notes;
+	}
+	
+	public void setNote(Note note){
+		this.note = note;
+	}
+	
+	public Note getNote(){
+		return note;
 	}
 }

@@ -5,7 +5,8 @@
     <classes>
       <class name="com.epam.dao.test.NotebookMemoryImplTest">
         <methods>
-          <include name="findNoteByTitleTest"/>
+          <include name="beforeTest"/>
+          <include name="findNoteBySignatureTest"/>
         </methods>
       </class> <!-- com.epam.dao.test.NotebookMemoryImplTest -->
     </classes>
