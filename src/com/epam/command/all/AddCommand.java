@@ -10,7 +10,6 @@ public class AddCommand implements Command {
 
 	@Override
 	public Response execute(Request request) throws IOException{
-		
 		NotebookEditor editor = new NotebookEditor();
 		if(request.getNote() != null){
 			editor.addNote(request.getNote().getDate(), request.getNote().getNote());
