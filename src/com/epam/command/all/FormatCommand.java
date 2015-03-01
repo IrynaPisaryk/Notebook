@@ -13,7 +13,8 @@ public class FormatCommand implements Command {
 	public Response execute(Request request) throws IOException{
 		Response response = new Response();
 		NotebookEditor editor = new NotebookEditor();
-		editor.formatNote(request.getIndex());
+		Object[] obj = request.getParam("formatNote");
+		editor.formatNote((int)obj[0]);
 		return response;
 	}
 }

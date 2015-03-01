@@ -8,9 +8,9 @@ import com.epam.notebook.Notebook;
 
 public class Response {
 
-	private Notebook notebook;
-	private ArrayList<Note> notes;
-	private Note note;
+	private Notebook notebook = null;
+	private ArrayList<Note> notes = null;
+	private Note note = null;
 	
 	public Response(){
 		notebook = NotebookAdapter.getInstance().getNotebook();

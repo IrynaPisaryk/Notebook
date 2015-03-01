@@ -12,7 +12,7 @@ public final class NotebookIO{
 
 	public void writeNotebookIntoFile(Notebook notebook) throws IOException{
 
-		String filename = "C:\\Users\\Irina_Pisarik\\Desktop\\test.txt";         
+		String filename = "C:\\test.txt";         
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;
 		try
@@ -30,7 +30,7 @@ public final class NotebookIO{
 
 	public Notebook readNotebookFromFile(){
 
-		String filename = "C:\\Users\\Irina_Pisarik\\Desktop\\test.txt";
+		String filename = "C:\\test.txt";
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try

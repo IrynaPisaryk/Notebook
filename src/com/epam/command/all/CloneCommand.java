@@ -13,7 +13,8 @@ public class CloneCommand implements Command {
 	public Response execute(Request request) throws IOException, CloneNotSupportedException{
 		Response response = new Response();
 		NotebookEditor editor = new NotebookEditor();
-		editor.cloneNote(request.getIndex());
+		Object[] obj = request.getParam("cloneNote");
+		editor.cloneNote((int)obj[0]);
 		return response;
 	}
 }

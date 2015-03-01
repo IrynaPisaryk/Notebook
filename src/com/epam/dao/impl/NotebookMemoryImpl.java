@@ -56,6 +56,7 @@ public final class NotebookMemoryImpl implements NotebookDAO {
 
 	@Override
 	public Note cloneNote(int index) throws CloneNotSupportedException {
+		notebook.setNote(notebook.getNote(index).clone());
 		return notebook.getNote(index).clone();
 	}
 

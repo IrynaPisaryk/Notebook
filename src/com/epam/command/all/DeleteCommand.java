@@ -13,7 +13,8 @@ public class DeleteCommand implements Command {
 	public Response execute(Request request) throws IOException{
 		Response response = new Response();
 		NotebookEditor editor = new NotebookEditor();
-		editor.deleteNote(request.getIndex());
+		Object[] obj = request.getParam("deleteNote");
+		editor.deleteNote((int)obj[0]);
 		return response;
 	}
 	

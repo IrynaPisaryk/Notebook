@@ -6,6 +6,7 @@ import com.epam.command.Command;
 import com.epam.command.Request;
 import com.epam.command.Response;
 import com.epam.logic.NotebookEditor;
+import com.epam.notebook.Note;
 
 public class ReplaceCommand implements Command {
 
@@ -13,7 +14,8 @@ public class ReplaceCommand implements Command {
 	public Response execute(Request request) throws IOException{
 		Response response = new Response();
 		NotebookEditor editor = new NotebookEditor();
-		editor.replaceNote(request.getIndex(), request.getNote());;
+		Object[] obj = request.getParam("replaceNote");
+		editor.replaceNote((int) obj[0], (Note) obj[1]);;
 		return response;
 	}
 }

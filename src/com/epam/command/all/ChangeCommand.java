@@ -13,7 +13,8 @@ public class ChangeCommand implements Command {
 	public Response execute(Request request) throws IOException{
 		Response response = new Response();
 		NotebookEditor editor = new NotebookEditor();
-		editor.changeNote(request.getIndex(), request.getField());;
+		Object[] obj = request.getParam("changeNote");
+		editor.changeNote((int)obj[0], (String)obj[1]);;
 		return response;
 	}
 }
