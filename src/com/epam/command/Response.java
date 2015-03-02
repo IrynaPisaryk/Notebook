@@ -24,6 +24,16 @@ public class Response {
 		this.note = note;
 	}
 
+	public Response(Note note, Notebook notebook) {
+		this.note = note;
+		this.notebook = notebook;
+	}
+
+	public Response(ArrayList<Note> notes, Notebook notebook) {
+		this.notes = notes;
+		this.notebook = notebook;
+	}
+
 	public void setNotebook(Notebook notebook){
 		this.notebook = notebook;
 	}

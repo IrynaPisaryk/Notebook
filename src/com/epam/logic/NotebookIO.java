@@ -10,9 +10,10 @@ import com.epam.notebook.Notebook;
 
 public final class NotebookIO{
 
+	//сделать ресет??
 	public void writeNotebookIntoFile(Notebook notebook) throws IOException{
 
-		String filename = "C:\\test.txt";         
+		String filename = "C:\\Users\\Irina_Pisarik\\Desktop\\test.txt";         
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;
 		try
@@ -30,7 +31,7 @@ public final class NotebookIO{
 
 	public Notebook readNotebookFromFile(){
 
-		String filename = "C:\\test.txt";
+		String filename = "C:\\Users\\Irina_Pisarik\\Desktop\\test.txt";
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try

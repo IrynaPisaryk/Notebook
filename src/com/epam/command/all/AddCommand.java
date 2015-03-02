@@ -15,7 +15,9 @@ public class AddCommand implements Command {
 
 	@Override
 	public Response execute(Request request) throws IOException{
+	
 		NotebookEditor editor = new NotebookEditor();
+		
 		Object[] obj = request.getParam("addNote");
 		if(obj.length !=0){
 			if(obj[0].getClass() == Note.class){

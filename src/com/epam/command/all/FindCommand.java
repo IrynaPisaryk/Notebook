@@ -22,10 +22,10 @@ public class FindCommand implements Command {
 		ArrayList<Note> notes = new ArrayList<Note>();	
 		Object[] obj = request.getParam("findNote");
 		
-		if(obj[0].getClass() == int.class){		
+		if(obj[0].getClass() == Integer.class){		
 			if((int)obj[0] != -1){
-			Note note = editor.findNoteByIndex((int)obj[0]);
-			Response response = new Response(note);	
+			Note note = editor.findNoteByIndex((Integer)obj[0]);
+			Response response = new Response(note, notebook);	
 			return response;
 			}
 		}
@@ -34,7 +34,7 @@ public class FindCommand implements Command {
 			for(Integer i: index){
 				notes.add(notebook.getNote(i));
 			}	
-			Response response = new Response(notes);	
+			Response response = new Response(notes, notebook);	
 			return response;
 		}
 		else{
@@ -66,7 +66,7 @@ public class FindCommand implements Command {
 					notes.add(notebook.getNote(i));
 				}
 			}			
-			Response response = new Response(notes);	
+			Response response = new Response(notes, notebook);	
 			return response;
 		}
 		return null;		

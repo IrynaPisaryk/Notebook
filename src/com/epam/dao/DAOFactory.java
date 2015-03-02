@@ -3,18 +3,17 @@ package com.epam.dao;
 import com.epam.dao.impl.NotebookFileImpl;
 import com.epam.dao.impl.NotebookMemoryImpl;
 
-public final class DAOFactory {
+public abstract class DAOFactory {
 
-	private static NotebookMemoryImpl notebookMemory = new NotebookMemoryImpl();
-	private static NotebookFileImpl notebookFile = new NotebookFileImpl();
 	private static DAOEnum type = DAOEnum.getType("memory");
+	public abstract NotebookDAO getNotebookDAO();	
 	
 	public static NotebookDAO getDAO() {
 		switch (type) {
 		case USING_MEMORY:
-			return notebookMemory;
+			return NotebookMemoryDAOFactory.getDAO();
 		case USING_FILE:
-			return notebookFile;
+			//return notebookFile;
 		default:
 			return null;
 		}

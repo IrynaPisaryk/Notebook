@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class Request {
 
-	private Map<String, Object[]> parameters = new HashMap<>();
+	private Map<String, Object[]> parameters = new HashMap<String, Object[]>();
 	
 	public void setParam(String key, Object ...obj){
 		Object[] af = new Object[2];
