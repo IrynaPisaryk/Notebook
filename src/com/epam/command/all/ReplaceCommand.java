@@ -11,11 +11,10 @@ import com.epam.notebook.Note;
 public class ReplaceCommand implements Command {
 
 	@Override
-	public Response execute(Request request) throws IOException{
-		Response response = new Response();
+	public Response execute(Request request) throws IOException{		
 		NotebookEditor editor = new NotebookEditor();
 		Object[] obj = request.getParam("replaceNote");
-		editor.replaceNote((int) obj[0], (Note) obj[1]);;
+		Response response = new Response("replaceNote", editor.replaceNote((int) obj[0], (Note) obj[1]));		
 		return response;
 	}
 }

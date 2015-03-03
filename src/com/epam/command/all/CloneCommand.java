@@ -11,10 +11,9 @@ public class CloneCommand implements Command {
 
 	@Override
 	public Response execute(Request request) throws IOException, CloneNotSupportedException{
-		Response response = new Response();
 		NotebookEditor editor = new NotebookEditor();
 		Object[] obj = request.getParam("cloneNote");
-		editor.cloneNote((int)obj[0]);
+		Response response = new Response("cloneNote", editor.cloneNote((int)obj[0]));		
 		return response;
 	}
 }

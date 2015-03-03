@@ -2,7 +2,7 @@ package com.epam.dao;
 
 public abstract class DAOFactory {
 
-	private static DAOEnum type = DAOEnum.getType("file");
+	private static DAOEnum type = DAOEnum.getType("memory");
 	public abstract NotebookDAO getNotebookDAO();	
 	
 	public static NotebookDAO getDAO() {

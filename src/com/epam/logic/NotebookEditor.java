@@ -7,66 +7,67 @@ import java.util.Date;
 import com.epam.dao.DAOFactory;
 import com.epam.dao.NotebookDAO;
 import com.epam.notebook.Note;
+import com.epam.notebook.Notebook;
 
 public final class NotebookEditor {
 
 	 NotebookDAO dao = DAOFactory.getDAO();
 	
-	public void addNote(Date date, String note) throws IOException{       
-        dao.addNote(date, note);
+	public Notebook addNote(Date date, String note) throws IOException{       
+        return dao.addNote(date, note);
 }
 	
-	public void addNoteWithEMail(Date date, String note, String email) throws IOException{
-        dao.addNoteWithEMail(date, note, email);
+	public Notebook addNoteWithEMail(Date date, String note, String email) throws IOException{
+        return dao.addNoteWithEMail(date, note, email);
 }
 	
-	public void addNoteWithSignature(Date date, String note, String signature) throws IOException{
-        dao.addNoteWithSignature(date, note, signature);
+	public Notebook addNoteWithSignature(Date date, String note, String signature) throws IOException{
+        return dao.addNoteWithSignature(date, note, signature);
 }
 	
-	public void addNoteWithTitle(Date date, String note, String title) throws IOException{
-        dao.addNoteWithTitle(date, note, title);
+	public Notebook addNoteWithTitle(Date date, String note, String title) throws IOException{
+        return dao.addNoteWithTitle(date, note, title);
 	}
-	public void deleteNote(int index) throws IOException{
-        dao.deleteNote(index);
+	public Notebook deleteNote(int index) throws IOException{
+        return dao.deleteNote(index);
 	}
 	
-	public void deleteAllNotes() throws IOException{
-        dao.deleteAllNotes();
+	public Notebook deleteAllNotes() throws IOException{
+        return dao.deleteAllNotes();
 	}
 	
 	public Note findNoteByIndex(int index){
         return dao.findNoteByIndex(index);
 	}
-	public ArrayList<Integer> findNoteByTitle(String title){
+	public ArrayList<Note> findNoteByTitle(String title){
 		return dao.findNoteByTitle(title);
 	}
-	public ArrayList<Integer> findNoteBySignature(String signature){
+	public ArrayList<Note> findNoteBySignature(String signature){
 		return dao.findNoteBySignature(signature);
 	}
-	public ArrayList<Integer> findNoteByEMail(String email){
+	public ArrayList<Note> findNoteByEMail(String email){
 		return dao.findNoteByEMail(email);
 	}
-	public ArrayList<Integer> findNoteByDate(Date date){
+	public ArrayList<Note> findNoteByDate(Date date){
 		return dao.findNoteByDate(date);
 	}
-	public ArrayList<Integer> findNoteByNote(String note){
+	public ArrayList<Note> findNoteByNote(String note){
 		return dao.findNoteByNote(note);
 	}
-	public void changeNote(int index, String newNote) throws IOException{
-        dao.changeNote(index, newNote);
+	public Notebook changeNote(int index, String newNote) throws IOException{
+        return dao.changeNote(index, newNote);
 	}
-	public void sortNote() throws IOException{
-		dao.sortNote();
+	public Notebook sortNote() throws IOException{
+		return dao.sortNote();
 	}
-	public void replaceNote(int indexOldNote, Note newNote) throws IOException{
-        dao.replaceNote(indexOldNote, newNote);
+	public Notebook replaceNote(int indexOldNote, Note newNote) throws IOException{
+        return dao.replaceNote(indexOldNote, newNote);
 	}
 	public Note cloneNote(int index) throws CloneNotSupportedException{
 		return dao.cloneNote(index);
 	}
-	public void formatNote(int index) throws IOException{
-        dao.formatNote(index);
+	public Notebook formatNote(int index) throws IOException{
+        return dao.formatNote(index);
 	}
 
 }

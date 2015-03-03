@@ -18,36 +18,41 @@ public final class NotebookMemoryImpl implements NotebookDAO {
 	private Notebook notebook = NotebookAdapter.getInstance().getNotebook();
 
 	@Override
-	public void addNote(Date date, String note) {
+	public Notebook addNote(Date date, String note) {
 		Note newNote = new Note(date, note);
 		notebook.setNote(newNote);
+		return notebook;
 	}
 
 	@Override
-	public void addNoteWithEMail(Date date, String note, String email) {
+	public Notebook addNoteWithEMail(Date date, String note, String email) {
 		NoteWithEMail newMailNote = new NoteWithEMail(date, note, email);
 		notebook.setNote(newMailNote);
+		return notebook;
 	}
 
 	@Override
-	public void addNoteWithSignature(Date date, String note, String signature) {
+	public Notebook addNoteWithSignature(Date date, String note, String signature) {
 		NoteWithSignature newSignatureNote = new NoteWithSignature(date, note,
 				signature);
 		notebook.setNote(newSignatureNote);
+		return notebook;
 	}
 
 	@Override
-	public void addNoteWithTitle(Date date, String note, String title) {
+	public Notebook addNoteWithTitle(Date date, String note, String title) {
 		NoteWithTitle newTitleNote = new NoteWithTitle(date, note, title);
 		notebook.setNote(newTitleNote);
+		return notebook;
 
 	}
 
 	@Override
-	public void changeNote(int index, String newNote) {
+	public Notebook changeNote(int index, String newNote) {
 		if (!notebook.getNote(index).getNote().equals(newNote)) {
 			notebook.getNote(index).setNote(newNote);
 		}
+		return notebook;
 	}
 
 	@Override
@@ -57,13 +62,15 @@ public final class NotebookMemoryImpl implements NotebookDAO {
 	}
 
 	@Override
-	public void deleteNote(int index) {
+	public Notebook deleteNote(int index) {
 		notebook.deleteNote(index);
+		return notebook;
 	}
 	
 	@Override
-	public void deleteAllNotes() {
+	public Notebook deleteAllNotes() {
 		notebook.deleteNotebook();
+		return notebook;
 	}
 
 	@Override
@@ -72,74 +79,74 @@ public final class NotebookMemoryImpl implements NotebookDAO {
 	}
 
 	@Override
-	public ArrayList<Integer> findNoteByTitle(String title) {
-		ArrayList<Integer> indexOfFoundNote = new ArrayList<Integer>();
+	public ArrayList<Note> findNoteByTitle(String title) {
+		ArrayList<Note> arrayOfFoundNote = new ArrayList<Note>();
 		for (int i = 0; i < notebook.getNotebook().size(); i++) {
 			if (notebook.getNote(i) instanceof NoteWithTitle) {
 				NoteWithTitle noteWithTitle = (NoteWithTitle) notebook
 						.getNote(i);
 				if (noteWithTitle.getTitle().equals(title)) {
-					indexOfFoundNote.add(i);
+					arrayOfFoundNote.add(noteWithTitle);
 				}
 			}
 		}
-		return indexOfFoundNote;
+		return arrayOfFoundNote;
 	}
 
 	@Override
-	public ArrayList<Integer> findNoteBySignature(String signature) {
-		ArrayList<Integer> indexOfFoundNote = new ArrayList<Integer>();
+	public ArrayList<Note> findNoteBySignature(String signature) {
+		ArrayList<Note> arrayOfFoundNote = new ArrayList<Note>();
 		for (int i = 0; i < notebook.getNotebook().size(); i++) {
 			if (notebook.getNote(i) instanceof NoteWithSignature) {
 				NoteWithSignature noteWithSignature = (NoteWithSignature) notebook
 						.getNote(i);
 				if (noteWithSignature.getSignature().equals(signature)) {
-					indexOfFoundNote.add(i);
+					arrayOfFoundNote.add(noteWithSignature);
 				}
 			}
 		}
-		return indexOfFoundNote;
+		return arrayOfFoundNote;
 	}
 
 	@Override
-	public ArrayList<Integer> findNoteByEMail(String email) {
-		ArrayList<Integer> indexOfFoundNote = new ArrayList<Integer>();
+	public ArrayList<Note> findNoteByEMail(String email) {
+		ArrayList<Note> arrayOfFoundNote = new ArrayList<Note>();
 		for (int i = 0; i < notebook.getNotebook().size(); i++) {
 			if (notebook.getNote(i) instanceof NoteWithEMail) {
 				NoteWithEMail noteWithEMail = (NoteWithEMail) notebook
 						.getNote(i);
 				if (noteWithEMail.getEMail().equals(email)) {
-					indexOfFoundNote.add(i);
+					arrayOfFoundNote.add(noteWithEMail);
 				}
 			}
 		}
-		return indexOfFoundNote;
+		return arrayOfFoundNote;
 	}
 
 	@Override
-	public ArrayList<Integer> findNoteByDate(Date date) {
-		ArrayList<Integer> indexOfFoundNote = new ArrayList<Integer>();
+	public ArrayList<Note> findNoteByDate(Date date) {
+		ArrayList<Note> arrayOfFoundNote = new ArrayList<Note>();
 		for (int i = 0; i < notebook.getNotebook().size(); i++) {
 			if (notebook.getNote(i).getDate().equals(date)) {
-				indexOfFoundNote.add(i);
+				arrayOfFoundNote.add(notebook.getNote(i));
 			}
 		}
-		return indexOfFoundNote;
+		return arrayOfFoundNote;
 	}
 
 	@Override
-	public ArrayList<Integer> findNoteByNote(String note) {
-		ArrayList<Integer> indexOfFoundNote = new ArrayList<Integer>();
+	public ArrayList<Note> findNoteByNote(String note) {
+		ArrayList<Note> arrayOfFoundNote = new ArrayList<Note>();
 		for (int i = 0; i < notebook.getNotebook().size(); i++) {
 			if (notebook.getNote(i).getNote().equals(note)) {
-				indexOfFoundNote.add(i);
+				arrayOfFoundNote.add(notebook.getNote(i));
 			}
 		}
-		return indexOfFoundNote;
+		return arrayOfFoundNote;
 	}
 
 	@Override
-	public void formatNote(int index) {
+	public Notebook formatNote(int index) {
 		Note newNote = notebook.getNote(index);
 		if (newNote instanceof NoteWithEMail
 				|| newNote instanceof NoteWithSignature
@@ -149,18 +156,21 @@ public final class NotebookMemoryImpl implements NotebookDAO {
 		}
 		notebook.deleteNote(index);
 		notebook.setNote(index, newNote);
+		return notebook;
 	}
 
 	@Override
-	public void replaceNote(int indexOldNote, Note newNote) {
+	public Notebook replaceNote(int indexOldNote, Note newNote) {
 		notebook.deleteNote(indexOldNote);
 		notebook.setNote(indexOldNote, newNote);
+		return notebook;
 
 	}
 
 	@Override
-	public void sortNote() {
+	public Notebook sortNote() {
 		NoteComparator comparator = new NoteComparator();
 		Collections.sort(notebook.getNotebook(), comparator);
+		return notebook;
 	}
 }

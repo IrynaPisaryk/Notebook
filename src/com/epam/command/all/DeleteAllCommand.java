@@ -10,10 +10,9 @@ import com.epam.logic.NotebookEditor;
 public class DeleteAllCommand implements Command {
 
 	@Override
-	public Response execute(Request request) throws IOException{
-		Response response = new Response();
+	public Response execute(Request request) throws IOException{		
 		NotebookEditor editor = new NotebookEditor();
-		editor.deleteAllNotes();
+		Response response = new Response("deteleAllNotes", editor.deleteAllNotes());		
 		return response;
 	}
 }

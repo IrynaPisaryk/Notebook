@@ -5,41 +5,42 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.epam.notebook.Note;
+import com.epam.notebook.Notebook;
 
 public interface NotebookDAO {
-	void addNote(Date date, String note) throws IOException;
+	Notebook addNote(Date date, String note) throws IOException;
 
-	void addNoteWithEMail(Date date, String note, String email) throws IOException;
+	Notebook addNoteWithEMail(Date date, String note, String email) throws IOException;
 
-	void addNoteWithSignature(Date date, String note, String signature) throws IOException;
+	Notebook addNoteWithSignature(Date date, String note, String signature) throws IOException;
 
-	void addNoteWithTitle(Date date, String note, String title) throws IOException;
+	Notebook addNoteWithTitle(Date date, String note, String title) throws IOException;
 
-	void deleteNote(int index) throws IOException;
+	Notebook deleteNote(int index) throws IOException;
 	
-	void deleteAllNotes() throws IOException;
+	Notebook deleteAllNotes() throws IOException;
 
 	Note findNoteByIndex(int index);
 
-	ArrayList<Integer> findNoteByTitle(String title);
+	ArrayList<Note> findNoteByTitle(String title);
 
-	ArrayList<Integer> findNoteBySignature(String signature);
+	ArrayList<Note> findNoteBySignature(String signature);
 
-	ArrayList<Integer> findNoteByEMail(String email);
+	ArrayList<Note> findNoteByEMail(String email);
 
-	ArrayList<Integer> findNoteByDate(Date date);
+	ArrayList<Note> findNoteByDate(Date date);
 
-	ArrayList<Integer> findNoteByNote(String note);
+	ArrayList<Note> findNoteByNote(String note);
 
-	void changeNote(int index, String newNote) throws IOException;
+	Notebook changeNote(int index, String newNote) throws IOException;
 
-	void sortNote() throws IOException;
+	Notebook sortNote() throws IOException;
 
-	void replaceNote(int indexOldNote, Note newNote) throws IOException;
+	Notebook replaceNote(int indexOldNote, Note newNote) throws IOException;
 
 	Note cloneNote(int index) throws CloneNotSupportedException;
 
-	void formatNote(int index) throws IOException;
+	Notebook formatNote(int index) throws IOException;
 
 	
 }

@@ -2,272 +2,168 @@ package com.epam.view;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
-
 import com.epam.command.CommandName;
 import com.epam.command.Manager;
 import com.epam.command.Request;
 import com.epam.command.Response;
-import com.epam.notebook.Note;
-import com.epam.notebook.NoteWithEMail;
-import com.epam.notebook.NoteWithSignature;
-import com.epam.notebook.NoteWithTitle;
 
 public class View {
 
 	private Manager manager = new Manager();
+	private Request request = new Request();
 
 	private int showMenu(){
 		System.out.println("What you want to do?"+"\n"
-				+"add note: 1"+"\n"
-				+"change note: 2"+"\n"
-				+"clone note: 3"+"\n"
-				+"delete all notes: 4"+"\n"
-				+"delete note: 5"+"\n"
-				+"find note: 6"+"\n"
-				+"format note: 7"+"\n"
-				+"replace note: 8"+"\n"
-				+"sort note: 9"+"\n"
+				+"add simple note: 1"+"\n"
+				+"add note with email: 2"+"\n"
+				+"add note with signature: 3"+"\n"
+				+"add note with title: 4"+"\n"
+				+"change note: 5"+"\n"
+				+"clone note: 6"+"\n"
+				+"delete all notes: 7"+"\n"
+				+"delete note: 8"+"\n"
+				+"find note by index: 9"+"\n"
+				+"find note by email: 10"+"\n"
+				+"find note by signature: 11"+"\n"
+				+"find note by title: 12"+"\n"
+				+"find note by date: 13"+"\n"
+				+"find note by note: 14"+"\n"
+				+"format note: 15"+"\n"
+				+"replace note: 16"+"\n"
+				+"sort note: 17"+"\n"
 				+"exit: 0"+"\n");
 		Scanner scan = new Scanner(System.in);	
-		//hasNextInt()
-		//hasNextËşáîéÒèïÈñïîëüçóéÒóïèöà
-		int result = scan.nextInt();
-		if(result >= 0 && result < 10){
+		int result = 0;
+		if(scan.hasNextInt()){
+			result = scan.nextInt();
+			if(result >= 0 && result < 18){
+				return result;
+			}
+		}else{
+			System.out.println("Incorrect number");
 			return result;
 		}
-		else{
-			System.out.println("Incorrect number");
-			return 0;
-		}
-		
+		return result;
+
 	}
+
 	public void run() throws IOException, CloneNotSupportedException, ParseException{
 		int whatDo = -1;
 		while(whatDo != 0){
-			whatDo = showMenu();
-			Request request = prepareParams(whatDo);		
-			if(request == null){
+			whatDo = showMenu();	
+			if(prepareParams(whatDo, request) == null){
 				return;
-			}		
-			CommandName name = getCommandName(whatDo);
-			Response response = manager.doRequest(name, request);
-			printResponse(response);
+			}else{		
+				CommandName name = getCommandName(whatDo);
+				Response response = manager.doRequest(name, request);
+				Printer printer = new Printer();
+				printer.printResponse(request.getKey(), response);
+			}
 		}
 	}	
-	private CommandName getCommandName(int whatDo){		
+	private CommandName getCommandName(int whatDo){	
+
 		CommandName name = null;
 		switch(whatDo){
 		case(1):
 			name  = CommandName.getType("add");
 		break;
 		case(2):
-			name  = CommandName.getType("change");
+			name  = CommandName.getType("addEMail");
 		break;
 		case(3):
-			name  = CommandName.getType("clone");
+			name  = CommandName.getType("addSign");
 		break;
 		case(4):
-			name  = CommandName.getType("delete_all");
+			name  = CommandName.getType("addTitle");
 		break;
 		case(5):
-			name  = CommandName.getType("delete");
+			name  = CommandName.getType("change");
 		break;
 		case(6):
-			name  = CommandName.getType("find");
+			name  = CommandName.getType("clone");
 		break;
 		case(7):
-			name  = CommandName.getType("format");
+			name  = CommandName.getType("delete_all");
 		break;
 		case(8):
-			name  = CommandName.getType("replace");
+			name  = CommandName.getType("delete");
 		break;
 		case(9):
+			name  = CommandName.getType("find");
+		break;
+		case(10):
+			name  = CommandName.getType("findEMail");
+		break;
+		case(11):
+			name  = CommandName.getType("findSign");
+		break;
+		case(12):
+			name  = CommandName.getType("findTitle");
+		break;
+		case(13):
+			name  = CommandName.getType("findDate");
+		break;
+		case(14):
+			name  = CommandName.getType("findNote");
+		break;
+		case(15):
+			name  = CommandName.getType("format");
+		break;
+		case(16):
+			name  = CommandName.getType("replace");
+		break;
+		case(17):
 			name  = CommandName.getType("sort");
 		break;
 		}		
 		return name;
 	}
-	private void printResponse(Response response) {
-		if(response.getNotes() != null){
-			for(Note note : response.getNotes()){
-				System.out.println(note.toString());
-			}
-		}
 
-		if(response.getNotebook().getNotebook() != null){
-			for(Note note : response.getNotebook().getNotebook()){
-				System.out.println(note.toString());
-			}
-		}
+	private Request prepareParams(int i, Request request) throws ParseException {
 
-		if(response.getNote() != null){
-			System.out.println(response.getNote().toString());
-		}
-
-	}
-	private Request prepareParams(int i) throws ParseException {
-		Scanner scan1 = new Scanner(System.in);
-		Scanner scan2 = new Scanner(System.in);
-		Request request = new Request();
+		ParametersConductor conductor = new ParametersConductor();
 		switch(i){
 		case(1):
-			return prepareAddParams(scan1, scan2, request);
+			return conductor.prepareAddParams(request);
 		case(2):
-			return prepareChangeParams(scan1, scan2, request);
+			return conductor.prepareAddEMailParams(request);
 		case(3):
-			return prepareCloneParams(scan1, scan2, request);
+			return conductor.prepareAddSignParams(request);
 		case(4):
-			return prepareDeleteAllParams(scan1, scan2, request);
+			return conductor.prepareAddTitleParams(request);
 		case(5):
-			return prepareDeleteParams(scan1, scan2, request);
+			return conductor.prepareChangeParams(request);
 		case(6):
-			return prepareFindParams(scan1, scan2, request);
+			return conductor.prepareCloneParams(request);
 		case(7):
-			return prepareFormatParams(scan1, scan2, request);
+			return conductor.prepareDeleteAllParams(request);
 		case(8):
-			return prepareReplaceParams(scan1, scan2, request);
+			return conductor.prepareDeleteParams(request);
 		case(9):
-			return prepareSortParams(scan1, scan2, request);
+			return conductor.prepareFindParams(request);
+		case(10):
+			return conductor.prepareFindEMailParams(request);
+		case(11):
+			return conductor.prepareFindSignParams(request);
+		case(12):
+			return conductor.prepareFindTitleParams(request);
+		case(13):
+			return conductor.prepareFindDateParams(request);
+		case(14):
+			return conductor.prepareFindNoteParams(request);
+		case(15):
+			return conductor.prepareFormatParams(request);
+		case(16):
+			return conductor.prepareReplaceParams(request);
+		case(17):
+			return conductor.prepareSortParams(request);
 		case(0):
 			System.out.println("Bye");
-		scan1.close();
-		scan2.close();
 		return null;
 		}
-		scan1.close();
-		scan2.close();
 		return request;
 	}
-	private Request prepareAddParams(Scanner scan1, Scanner scan2, Request request) throws ParseException{
-		Date date = setDate();
-		System.out.println("What kind of note you want to add?"+"\n"
-				+"just note: 1"+"\n"
-				+"note with email: 2"+"\n"
-				+"note with signature: 3"+"\n"
-				+"note with title: 4"+"\n");
 
-		int result = scan1.nextInt();
-		switch(result){
-		case(1):
-			System.out.println("Enter note text:");
-		String text = scan2.nextLine();
-		Note note = new Note(date, text);
-		request.setParam("addNote", note);				
-		return request;
-		case(2):
-			System.out.println("Enter note text:");
-		text = scan2.nextLine();
-		System.out.println("Enter e-mail:");
-		String email = scan2.nextLine();
-		NoteWithEMail noteMail = new NoteWithEMail(date, text, email);
-		request.setParam("addNote", noteMail);				
-		return request;
-		case(3):
-			System.out.println("Enter note text:");
-		text = scan2.nextLine();
-		System.out.println("Enter signature:");
-		String sig = scan2.nextLine();
-		NoteWithSignature noteSign = new NoteWithSignature(date, text, sig);
-		request.setParam("addNote", noteSign);				
-		return request;
-		case(4):
-			System.out.println("Enter note text:");
-		text = scan2.nextLine();
-		System.out.println("Enter title:");
-		String title = scan2.nextLine();
-		NoteWithTitle noteTitle = new NoteWithTitle(date, text, title);
-		request.setParam("addNote", noteTitle);				
-		return request;
-		default:
-			System.out.println("Incorrect number");
-			return null;
-		}		
-	}
-	private Request prepareChangeParams(Scanner scan1, Scanner scan2, Request request){
-		System.out.println("Enter note index:");
-		int index = scan1.nextInt();
-		System.out.println("Enter new note text:");
-		String newText = scan2.nextLine();
-		request.setParam("changeNote", index, newText);
-		return request;
-	}
-	private Request prepareCloneParams(Scanner scan1, Scanner scan2, Request request){
-		System.out.println("Enter note index:");
-		int index = scan1.nextInt();
-		request.setParam("cloneNote", index);
-		return request;
-	}
-	private Request prepareDeleteAllParams(Scanner scan1, Scanner scan2, Request request){
-		request.setParam("deteleAllNotes");
-		return request;
-	}
-	private Request prepareDeleteParams(Scanner scan1, Scanner scan2, Request request){
-		System.out.println("Enter note index:");
-		int index = scan1.nextInt();
-		request.setParam("deleteNote", index);
-		return request;
-	}
-	private Request prepareFindParams(Scanner scan1, Scanner scan2, Request request) throws ParseException{
-		System.out.println("You want to find by index or some text field or date?"+"\n"
-				+"index: 1"+"\n"
-				+"text: 2"+"\n"
-				+"date: 3"+"\n");	
-		int result = scan1.nextInt();
-		switch(result){
-		case(1):
-			System.out.println("Enter index for search:");
-		int index = scan1.nextInt();
-		request.setParam("findNote", index);
-		return request;
-
-		case(2):
-			System.out.println("Enter text for search:");
-		String text = scan2.nextLine();
-		request.setParam("findNote", text);
-		return request;
-
-		case(3):
-			System.out.println("Enter date in ms for search in format dd.mm.yyyy:");
-		String indexDate = scan2.nextLine();		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd.M.yyyy");
-		Date dateFind = sdf.parse(indexDate);
-		request.setParam("findNote", dateFind);
-		return request;
-		default:
-			System.out.println("Incorrect number");
-			return null;
-		}
-	}
-	private Request prepareFormatParams(Scanner scan1, Scanner scan2, Request request){
-		System.out.println("Enter index of note you want to format:");
-		int index = scan1.nextInt();
-		request.setParam("formatNote", index);
-		return request;
-	}
-	private Request prepareReplaceParams(Scanner scan1, Scanner scan2, Request request) throws ParseException{
-		Date date = setDate();
-		System.out.println("Enter index of note you want to replace:");
-		int index = scan1.nextInt();
-		System.out.println("Enter text of new note:");
-		String text = scan2.nextLine();
-		Note newNote  = new Note(date, text);
-		request.setParam("replaceNote", index, newNote);
-		return request;
-	}
-	private Request prepareSortParams(Scanner scan1, Scanner scan2, Request request){
-		request.setParam("sortNote");
-		return request;
-	}	
-	private Date setDate() throws ParseException{
-		Date date;
-		System.out.println("Enter the date of note in format dd.mm.yyyy" );
-		Scanner scan = new Scanner(System.in);
-		String number = scan.nextLine();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd.M.yyyy");
-		date = sdf.parse(number);
-		return date;
-	}
 }

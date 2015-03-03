@@ -30,46 +30,51 @@ public final class NotebookFileImpl implements NotebookDAO{
 	}
 
 	@Override
-	public void addNote(Date date, String note) throws IOException {
+	public Notebook addNote(Date date, String note) throws IOException {
 		notebook = io.readNotebookFromFile();
 		Note newNote = new Note(date, note);
 		notebook.setNote(newNote);
 		io.writeNotebookIntoFile(notebook);
+		return notebook;
 
 	}
 
 	@Override
-	public void addNoteWithEMail(Date date, String note, String email) throws IOException {
+	public Notebook addNoteWithEMail(Date date, String note, String email) throws IOException {
 		notebook = io.readNotebookFromFile();
 		NoteWithEMail newMailNote = new NoteWithEMail(date, note, email);
 		notebook.setNote(newMailNote);
 		io.writeNotebookIntoFile(notebook);
+		return notebook;
 	}
 
 	@Override
-	public void addNoteWithSignature(Date date, String note, String signature) throws IOException {
+	public Notebook addNoteWithSignature(Date date, String note, String signature) throws IOException {
 		notebook = io.readNotebookFromFile();
 		NoteWithSignature newSignatureNote = new NoteWithSignature(date, note,
 				signature);
 		notebook.setNote(newSignatureNote);
 		io.writeNotebookIntoFile(notebook);
+		return notebook;
 	}
 
 	@Override
-	public void addNoteWithTitle(Date date, String note, String title) throws IOException {
+	public Notebook addNoteWithTitle(Date date, String note, String title) throws IOException {
 		notebook = io.readNotebookFromFile();
 		NoteWithTitle newTitleNote = new NoteWithTitle(date, note, title);
 		notebook.setNote(newTitleNote);
 		io.writeNotebookIntoFile(notebook);
+		return notebook;
 	}
 
 	@Override
-	public void changeNote(int index, String newNote) throws IOException {
+	public Notebook changeNote(int index, String newNote) throws IOException {
 		notebook = io.readNotebookFromFile();
 		if (notebook.getNote(index).getNote() != newNote) {
 			notebook.getNote(index).setNote(newNote);
 		}
 		io.writeNotebookIntoFile(notebook);
+		return notebook;
 	}
 
 	@Override
@@ -78,10 +83,11 @@ public final class NotebookFileImpl implements NotebookDAO{
 	}
 
 	@Override
-	public void deleteNote(int index) throws IOException {
+	public Notebook deleteNote(int index) throws IOException {
 		notebook = io.readNotebookFromFile();
 		notebook.deleteNote(index);
 		io.writeNotebookIntoFile(notebook);
+		return notebook;
 	}
 
 	@Override
@@ -91,79 +97,79 @@ public final class NotebookFileImpl implements NotebookDAO{
 	}
 
 	@Override
-	public ArrayList<Integer> findNoteByTitle(String title) {
+	public ArrayList<Note> findNoteByTitle(String title) {
 		notebook = io.readNotebookFromFile();
-		ArrayList<Integer> indexOfFoundNote = new ArrayList<Integer>();
+		ArrayList<Note> arrayOfFoundNote = new ArrayList<Note>();
 		for (int i = 0; i < notebook.getNotebook().size(); i++) {
 			if (notebook.getNote(i) instanceof NoteWithTitle) {
 				NoteWithTitle noteWithTitle = (NoteWithTitle) notebook
 						.getNote(i);
 				if (noteWithTitle.getTitle().equals(title)) {
-					indexOfFoundNote.add(i);
+					arrayOfFoundNote.add(noteWithTitle);
 				}
 			}
 		}
-		return indexOfFoundNote;
+		return arrayOfFoundNote;
 	}
 
 	@Override
-	public ArrayList<Integer> findNoteBySignature(String signature) {
+	public ArrayList<Note> findNoteBySignature(String signature) {
 		notebook = io.readNotebookFromFile();
-		ArrayList<Integer> indexOfFoundNote = new ArrayList<Integer>();
+		ArrayList<Note> arrayOfFoundNote = new ArrayList<Note>();
 		for (int i = 0; i < notebook.getNotebook().size(); i++) {
 			if (notebook.getNote(i) instanceof NoteWithSignature) {
 				NoteWithSignature noteWithSignature = (NoteWithSignature) notebook
 						.getNote(i);
 				if (noteWithSignature.getSignature().equals(signature)) {
-					indexOfFoundNote.add(i);
+					arrayOfFoundNote.add(noteWithSignature);
 				}
 			}
 		}
-		return indexOfFoundNote;
+		return arrayOfFoundNote;
 	}
 
 	@Override
-	public ArrayList<Integer> findNoteByEMail(String email) {
+	public ArrayList<Note> findNoteByEMail(String email) {
 		notebook = io.readNotebookFromFile();
-		ArrayList<Integer> indexOfFoundNote = new ArrayList<Integer>();
+		ArrayList<Note> arrayOfFoundNote = new ArrayList<Note>();
 		for (int i = 0; i < notebook.getNotebook().size(); i++) {
 			if (notebook.getNote(i) instanceof NoteWithEMail) {
 				NoteWithEMail noteWithEMail = (NoteWithEMail) notebook
 						.getNote(i);
 				if (noteWithEMail.getEMail().equals(email)) {
-					indexOfFoundNote.add(i);
+					arrayOfFoundNote.add(noteWithEMail);
 				}
 			}
 		}
-		return indexOfFoundNote;
+		return arrayOfFoundNote;
 	}
 
 	@Override
-	public ArrayList<Integer> findNoteByDate(Date date) {
+	public ArrayList<Note> findNoteByDate(Date date) {
 		notebook = io.readNotebookFromFile();
-		ArrayList<Integer> indexOfFoundNote = new ArrayList<Integer>();
+		ArrayList<Note> arrayOfFoundNote = new ArrayList<Note>();
 		for (int i = 0; i < notebook.getNotebook().size(); i++) {
 			if (notebook.getNote(i).getDate().equals(date)) {
-				indexOfFoundNote.add(i);
+				arrayOfFoundNote.add(notebook.getNote(i));
 			}
 		}
-		return indexOfFoundNote;
+		return arrayOfFoundNote;
 	}
 
 	@Override
-	public ArrayList<Integer> findNoteByNote(String note) {
+	public ArrayList<Note> findNoteByNote(String note) {
 		notebook = io.readNotebookFromFile();
-		ArrayList<Integer> indexOfFoundNote = new ArrayList<Integer>();
+		ArrayList<Note> arrayOfFoundNote = new ArrayList<Note>();
 		for (int i = 0; i < notebook.getNotebook().size(); i++) {
 			if (notebook.getNote(i).getNote().equals(note)) {
-				indexOfFoundNote.add(i);
+				arrayOfFoundNote.add(notebook.getNote(i));
 			}
 		}
-		return indexOfFoundNote;
+		return arrayOfFoundNote;
 	}
 
 	@Override
-	public void formatNote(int index) throws IOException {
+	public Notebook formatNote(int index) throws IOException {
 		notebook = io.readNotebookFromFile();
 		Note newNote = notebook.getNote(index);
 		if (newNote instanceof NoteWithEMail
@@ -175,29 +181,33 @@ public final class NotebookFileImpl implements NotebookDAO{
 		notebook.deleteNote(index);
 		notebook.setNote(index, newNote);
 		io.writeNotebookIntoFile(notebook);
+		return notebook;
 	}
 
 	@Override
-	public void replaceNote(int indexOldNote, Note newNote) throws IOException {
+	public Notebook replaceNote(int indexOldNote, Note newNote) throws IOException {
 		notebook = io.readNotebookFromFile();
 		notebook.deleteNote(indexOldNote);
 		notebook.setNote(indexOldNote, newNote);
 		io.writeNotebookIntoFile(notebook);
+		return notebook;
 	}
 
 	@Override
-	public void sortNote() throws IOException {
+	public Notebook sortNote() throws IOException {
 		notebook = io.readNotebookFromFile();
 		NoteComparator comparator = new NoteComparator();
 		Collections.sort(notebook.getNotebook(), comparator);
 		io.writeNotebookIntoFile(notebook);
+		return notebook;
 	}
 
 	@Override
-	public void deleteAllNotes() throws IOException {
+	public Notebook deleteAllNotes() throws IOException {
 		notebook = io.readNotebookFromFile();
 		notebook.deleteNotebook();
-		io.writeNotebookIntoFile(notebook);		
+		io.writeNotebookIntoFile(notebook);
+		return notebook;		
 	}
 
 }

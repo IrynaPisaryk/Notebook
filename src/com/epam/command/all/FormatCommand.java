@@ -11,10 +11,9 @@ public class FormatCommand implements Command {
 
 	@Override
 	public Response execute(Request request) throws IOException{
-		Response response = new Response();
 		NotebookEditor editor = new NotebookEditor();
 		Object[] obj = request.getParam("formatNote");
-		editor.formatNote((int)obj[0]);
+		Response response = new Response("formatNote", editor.formatNote((int)obj[0]));		
 		return response;
 	}
 }
