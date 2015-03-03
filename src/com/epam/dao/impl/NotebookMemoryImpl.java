@@ -17,10 +17,6 @@ public final class NotebookMemoryImpl implements NotebookDAO {
 
 	private Notebook notebook = NotebookAdapter.getInstance().getNotebook();
 
-	public Notebook getNotebook(){
-		return notebook;
-	}
-	
 	@Override
 	public void addNote(Date date, String note) {
 		Note newNote = new Note(date, note);

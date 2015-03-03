@@ -33,25 +33,13 @@ public class Response {
 		this.notes = notes;
 		this.notebook = notebook;
 	}
-
-	public void setNotebook(Notebook notebook){
-		this.notebook = notebook;
-	}
 	
 	public Notebook getNotebook(){
 		return notebook;
 	}
 	
-	public void setNotes(ArrayList<Note> notes){
-		this.notes = notes;
-	}
-	
 	public ArrayList<Note> getNotes(){
 		return notes;
-	}
-	
-	public void setNote(Note note){
-		this.note = note;
 	}
 	
 	public Note getNote(){

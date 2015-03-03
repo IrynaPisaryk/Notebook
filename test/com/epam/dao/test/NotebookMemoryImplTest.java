@@ -16,7 +16,7 @@ public class NotebookMemoryImplTest {
 	private static NotebookMemoryImpl notebookMemory = new NotebookMemoryImpl();
 	private Date date = new Date();
 	
-	@BeforeMethod
+	/*@BeforeMethod
 	public void beforeTest(){
 		notebookMemory.deleteAllNotes();
 	}
@@ -106,5 +106,5 @@ public class NotebookMemoryImplTest {
 		notebookMemory.addNote(date, "note");		
 		notebookMemory.addNoteWithEMail(date, "note", "a@a.com");
 		Assert.assertEquals(notebookMemory.findNoteByDate(date).size(), 2);
-	}
+	}*/
 }
