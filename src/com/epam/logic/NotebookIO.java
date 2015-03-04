@@ -1,57 +1,162 @@
 package com.epam.logic;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.io.Writer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import com.epam.notebook.Notebook;
+import com.epam.notebook.Note;
+import com.epam.notebook.NoteWithEMail;
+import com.epam.notebook.NoteWithSignature;
+import com.epam.notebook.NoteWithTitle;
 
-public final class NotebookIO{
-
-	//сделать ресет??
-	public void writeNotebookIntoFile(Notebook notebook) throws IOException{
-
-		String filename = "C:\\Users\\Irina_Pisarik\\Desktop\\test.txt";  
-		//String filename = "D:\\test.txt";   
-		FileOutputStream fos = null;
-		ObjectOutputStream out = null;
-		try
-		{
-			fos = new FileOutputStream(filename);
-			out = new ObjectOutputStream(fos);
-			out.writeObject(notebook);
-			out.close();
-		}
-		catch(IOException ex)
-		{
-			ex.printStackTrace();
-		}
+public final class NotebookIO{	
+	
+	
+	private File file = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test.txt");
+	//String filename = "D:\\test.txt";   
+	
+	public void setFile(){
+		file = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test.txt");
 	}
+	
+	public void writeNoteIntoFile(Note note) throws IOException{
+		
+		      Writer writer = new FileWriter(file);
+		      PrintWriter out = new PrintWriter(writer);
+		      out.println(note.toString());		      
+		      writer.close();	
+	}
+	
+	public void writeNoteIntoFile(String note) throws IOException{
+		
+	      Writer writer = new FileWriter(file);
+	      Reader reader = new FileReader(file);
+	      BufferedReader bufferedReader = new BufferedReader(reader);
+	      String line;
+	      while ((line = bufferedReader.readLine()) 
+	          != null) {
+	    	  if(line.equals(note)){
+	    		  PrintWriter out = new PrintWriter(writer);	      
+	    	      out.println(note);	      
+	    	      writer.close();	
+	    		  bufferedReader.close();	    		    		 
+	    	  }
+	      }
+	      	      
+	     
+}
+//
+	public String readNoteFromFile(int index) throws IOException{
 
-	public Notebook readNotebookFromFile(){
-
-		String filename = "C:\\Users\\Irina_Pisarik\\Desktop\\test.txt";
-		//String filename = "D:\\test.txt"; 
-		FileInputStream fis = null;
-		ObjectInputStream in = null;
-		try
-		{
-			fis = new FileInputStream(filename);
-			in = new ObjectInputStream(fis);
-			Notebook notebook = (Notebook)in.readObject();
-			in.close();
-			return notebook;
-		} catch(IOException ex)
-		{
-			ex.printStackTrace();
-		}
-		catch(ClassNotFoundException ex)
-		{
-			ex.printStackTrace();
-		}
+	      Reader reader = new FileReader(file);
+	      BufferedReader bufferedReader = new BufferedReader(reader);
+	      String line;
+	      int innerIndex=-1;
+	      while ((line = bufferedReader.readLine()) 
+	          != null) {
+	    	  innerIndex++;
+	    	  if(innerIndex == index){
+	    		  bufferedReader.close();
+	    		  return line;
+	    	  }
+	      }
+	      bufferedReader.close();
 		return null;
 
+	}	
+	
+	public Note returnNoteByIndex(int index) throws ParseException, IOException{
+		
+		Reader reader = new FileReader(file);
+	      BufferedReader bufferedReader = new BufferedReader(reader);
+	      String line;
+	      int innerIndex=-1;
+	      while ((line = bufferedReader.readLine()) 
+	          != null) {
+	    	  innerIndex++;
+	    	  if(innerIndex == index){
+	    		  bufferedReader.close();
+	    		  return changeLineintoNote(line);
+	    	  }
+	      }
+	      bufferedReader.close();
+		return null;
+	
 	}
+	
+	public static Note changeLineintoNote(String line) throws ParseException{
+		
+		Pattern p = Pattern.compile("(\\W|^)NoteWithEMail(\\W|$) ");  
+		Pattern p1 = Pattern.compile("(\\W|^)NoteWithSignature(\\W|$) ");  
+		Pattern p2 = Pattern.compile("(\\W|^)NoteWithTitle(\\W|$) ");  
+        Matcher m = p.matcher(line); 
+        Matcher m1 = p1.matcher(line); 
+        Matcher m2 = p2.matcher(line); 
+       
+        if(m.matches()){
+        	Date date;
+   		 	SimpleDateFormat sdf = new SimpleDateFormat("dd.M.yyyy");
+   			date = sdf.parse(line.substring(line.indexOf('['), line.indexOf(']')));
+   			line = line.substring(line.indexOf(']'), line.length());
+        	String email = line.substring(line.lastIndexOf('['), line.lastIndexOf(']'));
+        	String text = line.substring(0, line.lastIndexOf('['));
+        	return new NoteWithEMail(date, text, email);
+        }else if(m1.matches()){
+        	Date date;
+   		 	SimpleDateFormat sdf = new SimpleDateFormat("dd.M.yyyy");
+   			date = sdf.parse(line.substring(line.indexOf('['), line.indexOf(']')));
+   			line = line.substring(line.indexOf(']'), line.length());
+        	String sign = line.substring(line.lastIndexOf('['), line.lastIndexOf(']'));
+        	String text = line.substring(0, line.lastIndexOf('['));
+        	return new NoteWithSignature(date, text, sign);
+        }else if(m2.matches()){
+        	Date date;
+   		 	SimpleDateFormat sdf = new SimpleDateFormat("dd.M.yyyy");
+   			date = sdf.parse(line.substring(line.indexOf('['), line.indexOf(']')));
+   			line = line.substring(line.indexOf(']'), line.length());
+        	String title = line.substring(line.lastIndexOf('['), line.lastIndexOf(']'));
+        	String text = line.substring(0, line.lastIndexOf('['));
+        	return new NoteWithTitle(date, text, title);
+        }else{
+        	Date date;
+   		 	SimpleDateFormat sdf = new SimpleDateFormat("dd.M.yyyy");
+   			date = sdf.parse(line.substring(line.indexOf('['), line.indexOf(']')));
+   			String text = line.substring(line.indexOf(']'), line.length());
+   			return new Note(date, text);
+        }	
+	}
+	
+	
+	/*public Note readNotebookFromFile() throws IOException, ParseException{
+
+	      Reader reader = new FileReader(file);
+	      BufferedReader bufferedReader = new BufferedReader(reader);
+	      String line;
+	      while ((line = bufferedReader.readLine())!= null) {
+	    	 if(line.startsWith("Note")){
+	    		 Date date;
+	    		 SimpleDateFormat sdf = new SimpleDateFormat("dd.M.yyyy");
+	    			date = sdf.parse(line.substring(10, 27));
+	    		 String text = line.substring(45, line.length()-2);
+	    		 Note note = new Note(date, text);
+	    		 return note;
+	    	 }
+	    	 if(line.startsWith("NoteWithEMail")){
+	    		 
+	    	 }
+	      }
+	      bufferedReader.close();
+		return null;
+
+	}*/
 }

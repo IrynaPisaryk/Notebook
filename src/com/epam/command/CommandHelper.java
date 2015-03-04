@@ -3,18 +3,23 @@ package com.epam.command;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.epam.command.all.AddCommand;
-import com.epam.command.all.AddEMailCommand;
-import com.epam.command.all.AddSignCommand;
-import com.epam.command.all.AddTitleCommand;
-import com.epam.command.all.ChangeCommand;
-import com.epam.command.all.CloneCommand;
-import com.epam.command.all.DeleteAllCommand;
-import com.epam.command.all.DeleteCommand;
-import com.epam.command.all.FindCommand;
-import com.epam.command.all.FormatCommand;
-import com.epam.command.all.ReplaceCommand;
-import com.epam.command.all.SortCommand;
+import com.epam.command.impl.AddCommand;
+import com.epam.command.impl.AddEMailCommand;
+import com.epam.command.impl.AddSignCommand;
+import com.epam.command.impl.AddTitleCommand;
+import com.epam.command.impl.ChangeCommand;
+import com.epam.command.impl.CloneCommand;
+import com.epam.command.impl.DeleteAllCommand;
+import com.epam.command.impl.DeleteCommand;
+import com.epam.command.impl.FindCommand;
+import com.epam.command.impl.FindDateCommand;
+import com.epam.command.impl.FindEMailCommand;
+import com.epam.command.impl.FindNoteCommand;
+import com.epam.command.impl.FindSignCommand;
+import com.epam.command.impl.FindTitleCommand;
+import com.epam.command.impl.FormatCommand;
+import com.epam.command.impl.ReplaceCommand;
+import com.epam.command.impl.SortCommand;
 
 public class CommandHelper {
 
@@ -30,11 +35,11 @@ public class CommandHelper {
                     commands.put(CommandName.DELETE_ALL, new DeleteAllCommand());
                     
                     commands.put(CommandName.FIND, new FindCommand());
-                    commands.put(CommandName.FIND_BY_DATE, new FindCommand());
-                    commands.put(CommandName.FIND_BY_EMAIL, new FindCommand());
-                    commands.put(CommandName.FIND_BY_NOTE, new FindCommand());
-                    commands.put(CommandName.FIND_BY_SIGN, new FindCommand());
-                    commands.put(CommandName.FIND_BY_TITLE, new FindCommand());
+                    commands.put(CommandName.FIND_BY_DATE, new FindDateCommand());
+                    commands.put(CommandName.FIND_BY_EMAIL, new FindEMailCommand());
+                    commands.put(CommandName.FIND_BY_NOTE, new FindNoteCommand());
+                    commands.put(CommandName.FIND_BY_SIGN, new FindSignCommand());
+                    commands.put(CommandName.FIND_BY_TITLE, new FindTitleCommand());
                     
                     commands.put(CommandName.CHANGE, new ChangeCommand());
                     

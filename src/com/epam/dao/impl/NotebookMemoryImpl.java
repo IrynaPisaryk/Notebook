@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Date;
 
 import com.epam.notebook.Note;
-import com.epam.dao.NotebookDAO;
+import com.epam.dao.INotebookDAO;
 import com.epam.logic.NotebookAdapter;
 import com.epam.logic.comparator.NoteComparator;
 import com.epam.notebook.NoteWithEMail;
@@ -13,46 +13,41 @@ import com.epam.notebook.NoteWithSignature;
 import com.epam.notebook.NoteWithTitle;
 import com.epam.notebook.Notebook;
 
-public final class NotebookMemoryImpl implements NotebookDAO {
+public final class NotebookMemoryImpl implements INotebookDAO {
 
 	private Notebook notebook = NotebookAdapter.getInstance().getNotebook();
 
 	@Override
-	public Notebook addNote(Date date, String note) {
+	public void addNote(Date date, String note) {
 		Note newNote = new Note(date, note);
 		notebook.setNote(newNote);
-		return notebook;
 	}
 
 	@Override
-	public Notebook addNoteWithEMail(Date date, String note, String email) {
+	public void addNoteWithEMail(Date date, String note, String email) {
 		NoteWithEMail newMailNote = new NoteWithEMail(date, note, email);
 		notebook.setNote(newMailNote);
-		return notebook;
 	}
 
 	@Override
-	public Notebook addNoteWithSignature(Date date, String note, String signature) {
+	public void addNoteWithSignature(Date date, String note, String signature) {
 		NoteWithSignature newSignatureNote = new NoteWithSignature(date, note,
 				signature);
 		notebook.setNote(newSignatureNote);
-		return notebook;
 	}
 
 	@Override
-	public Notebook addNoteWithTitle(Date date, String note, String title) {
+	public void addNoteWithTitle(Date date, String note, String title) {
 		NoteWithTitle newTitleNote = new NoteWithTitle(date, note, title);
 		notebook.setNote(newTitleNote);
-		return notebook;
 
 	}
 
 	@Override
-	public Notebook changeNote(int index, String newNote) {
+	public void changeNote(int index, String newNote) {
 		if (!notebook.getNote(index).getNote().equals(newNote)) {
 			notebook.getNote(index).setNote(newNote);
 		}
-		return notebook;
 	}
 
 	@Override
@@ -62,15 +57,13 @@ public final class NotebookMemoryImpl implements NotebookDAO {
 	}
 
 	@Override
-	public Notebook deleteNote(int index) {
+	public void deleteNote(int index) {
 		notebook.deleteNote(index);
-		return notebook;
 	}
 	
 	@Override
-	public Notebook deleteAllNotes() {
+	public void deleteAllNotes() {
 		notebook.deleteNotebook();
-		return notebook;
 	}
 
 	@Override
@@ -146,7 +139,7 @@ public final class NotebookMemoryImpl implements NotebookDAO {
 	}
 
 	@Override
-	public Notebook formatNote(int index) {
+	public void formatNote(int index) {
 		Note newNote = notebook.getNote(index);
 		if (newNote instanceof NoteWithEMail
 				|| newNote instanceof NoteWithSignature
@@ -156,21 +149,18 @@ public final class NotebookMemoryImpl implements NotebookDAO {
 		}
 		notebook.deleteNote(index);
 		notebook.setNote(index, newNote);
-		return notebook;
 	}
 
 	@Override
-	public Notebook replaceNote(int indexOldNote, Note newNote) {
+	public void replaceNote(int indexOldNote, Note newNote) {
 		notebook.deleteNote(indexOldNote);
 		notebook.setNote(indexOldNote, newNote);
-		return notebook;
 
 	}
 
 	@Override
-	public Notebook sortNote() {
+	public void sortNote() {
 		NoteComparator comparator = new NoteComparator();
 		Collections.sort(notebook.getNotebook(), comparator);
-		return notebook;
 	}
 }

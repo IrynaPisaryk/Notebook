@@ -3,9 +3,9 @@ package com.epam.dao;
 public abstract class DAOFactory {
 
 	private static DAOEnum type = DAOEnum.getType("memory");
-	public abstract NotebookDAO getNotebookDAO();	
+	public abstract INotebookDAO getNotebookDAO();	
 	
-	public static NotebookDAO getDAO() {
+	public static INotebookDAO getDAO() {
 		switch (type) {
 		case USING_MEMORY:
 			return new NotebookMemoryDAOFactory().getNotebookDAO();

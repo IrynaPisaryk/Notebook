@@ -3,6 +3,7 @@ package com.epam.view;
 import java.util.ArrayList;
 
 import com.epam.command.Response;
+import com.epam.logic.NotebookAdapter;
 import com.epam.notebook.Note;
 import com.epam.notebook.Notebook;
 
@@ -10,8 +11,8 @@ public class Printer {
 
 	public void printResponse(String key, Response response) {
 
-		if(response.getParam(key) instanceof Notebook){
-			Notebook notebook = (Notebook)response.getParam(key);
+		if(response.getParam(key) == null){
+			Notebook notebook = NotebookAdapter.getInstance().getNotebook();
 			for(Note i: notebook.getNotebook()){
 				System.out.println(i.toString());
 			}

@@ -72,7 +72,7 @@ public class Note implements Cloneable, Serializable{
 
 	@Override
 	public String toString() {
-		return "Note [date=" + date + ", note=" + note + "]";
+		return "Note[date=" + date +"]"+ "[note=" + note + "]";
 	}	
 
 	public Note clone() throws CloneNotSupportedException{

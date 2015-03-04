@@ -6,7 +6,7 @@ public class NotebookMemoryDAOFactory extends DAOFactory {
 
 	private NotebookMemoryImpl instance = new NotebookMemoryImpl();
 	
-	public NotebookDAO getNotebookDAO(){
+	public INotebookDAO getNotebookDAO(){
 		return instance;
 		
 	}
