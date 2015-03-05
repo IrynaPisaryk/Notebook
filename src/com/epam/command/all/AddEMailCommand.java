@@ -26,7 +26,8 @@ public class AddEMailCommand implements Command {
 			this.note = (String)obj[1];
 			this.email = (String)obj[2];
 		}		
-		Response response = new Response("addEMail", editor.addNoteWithEMail(date, note, email));
+		editor.addNoteWithEMail(date, note, email);
+		Response response = new Response("addEMail", null);
 		return response;
 	}
 }

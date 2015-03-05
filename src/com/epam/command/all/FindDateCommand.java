@@ -1,6 +1,7 @@
 package com.epam.command.all;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 
 import com.epam.command.Command;
@@ -13,14 +14,15 @@ public class FindDateCommand implements Command {
 	private Date date;
 	
 	@Override
-	public Response execute(Request request) throws IOException{
+	public Response execute(Request request) throws IOException, ParseException{
 
 		NotebookEditor editor = new NotebookEditor();
 		Object[] params = request.getParam("findDate");
 		if(params.length != 0){
 			date = (Date) params[0];
 		}		
-		Response response = new Response("findDate", editor.findNoteByDate(date));
+		editor.findNoteByDate(date);
+		Response response = new Response("findDate", null);
 		return response;
 	}
 }

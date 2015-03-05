@@ -24,7 +24,8 @@ public class AddCommand implements Command {
 			this.date = (Date)obj[0];
 			this.note = (String)obj[1];
 		}		
-		Response response = new Response("addNote", editor.addNote(date, note));
+		editor.addNote(date, note);
+		Response response = new Response("addNote", null);
 		return response;
 	}
 

@@ -12,7 +12,8 @@ public class DeleteAllCommand implements Command {
 	@Override
 	public Response execute(Request request) throws IOException{		
 		NotebookEditor editor = new NotebookEditor();
-		Response response = new Response("deteleAllNotes", editor.deleteAllNotes());		
+		editor.deleteAllNotes();
+		Response response = new Response("deteleAllNotes", null);		
 		return response;
 	}
 }

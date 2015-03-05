@@ -26,7 +26,8 @@ public class AddSignCommand implements Command {
 			this.note = (String)obj[1];
 			this.sign = (String)obj[2];
 		}		
-		Response response = new Response("addSign", editor.addNoteWithSignature(date, note, sign));
+		editor.addNoteWithSignature(date, note, sign);
+		Response response = new Response("addSign", null);
 		return response;
 	}
 }

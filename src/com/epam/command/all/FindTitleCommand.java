@@ -1,6 +1,7 @@
 package com.epam.command.all;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import com.epam.command.Command;
 import com.epam.command.Request;
@@ -12,14 +13,15 @@ public class FindTitleCommand implements Command {
 	private String title;
 	
 	@Override
-	public Response execute(Request request) throws IOException{
+	public Response execute(Request request) throws IOException, ParseException{
 
 		NotebookEditor editor = new NotebookEditor();
 		Object[] params = request.getParam("findTitle");
 		if(params.length != 0){
 			title = (String) params[0];
 		}		
-		Response response = new Response("findTitle", editor.findNoteByTitle(title));
+		editor.findNoteByTitle(title);
+		Response response = new Response("findTitle", null);
 		return response;
 	}
 }

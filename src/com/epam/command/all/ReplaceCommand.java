@@ -14,7 +14,8 @@ public class ReplaceCommand implements Command {
 	public Response execute(Request request) throws IOException{		
 		NotebookEditor editor = new NotebookEditor();
 		Object[] obj = request.getParam("replaceNote");
-		Response response = new Response("replaceNote", editor.replaceNote((int) obj[0], (Note) obj[1]));		
+		editor.replaceNote((int) obj[0], (Note) obj[1]);
+		Response response = new Response("replaceNote", null);		
 		return response;
 	}
 }

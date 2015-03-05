@@ -1,6 +1,7 @@
 package com.epam.logic;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -24,11 +25,14 @@ import com.epam.notebook.NoteWithTitle;
 public final class NotebookIO{	
 
 
-	private File file = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test.txt");
-	//String filename = "D:\\test.txt";   
+	//private File file = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test.txt");
+	private File file = new File("D:\\test.txt");
+	private File file1 = new File("D:\\test1.txt");
+	
 
 	public void setFile(){
-		file = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test.txt");
+		//file = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test.txt");
+		file = new File("D:\\test.txt");
 	}
 
 	public void writeNoteIntoFile(Note note) throws IOException{
@@ -125,25 +129,42 @@ public final class NotebookIO{
 	}
 
 	public void writeNoteIntoFile(int index, Note note) throws IOException {
+		
+		File tempfile = File.createTempFile("D:\\", "test.txt");
+		
 		Writer writer = new FileWriter(file, true);
+		Writer writerTemp = new FileWriter(tempfile, true);
+		
 		Reader reader = new FileReader(file);		
+		Reader readerTemp = new FileReader(tempfile);
+		
+		BufferedWriter outTemp = new BufferedWriter(writerTemp);
+		
+		
 		BufferedReader bufferedReader = new BufferedReader(reader);
+		BufferedReader bufferedReaderTemp = new BufferedReader(readerTemp);
+		
 		String line;
-		int innerIndex =-1;
+		int innerIndex = 0;
 		while ((line = bufferedReader.readLine()) 
 				!= null) {
 			innerIndex++;
 			if(innerIndex == index){
-				RandomAccessFile raf = new RandomAccessFile(file, "w");
-				raf.seek(index);
-				raf.write();
-				raf.close();
-				
-				PrintWriter out = new PrintWriter(writer);	      
-				out.println(note.toString());	   
-				writer.close();	
-				//bufferedReader.close();	    		    		 
+				//PrintWriter out = new PrintWriter(writer);	
+				//out.println(note.toString());
+				//writer.close();	
+				//bufferedReader.close();	 
+				outTemp.write(note.toString());
+			}else{
+				outTemp.write(line);
 			}
+			line=null;
+			while((line = bufferedReaderTemp.readLine()) != null){
+				PrintWriter out = new PrintWriter(writer);	
+				out.println(line);
+			}
+			writer.close();
+			//tempfile.deleteOnExit();
 		}
 
 	}

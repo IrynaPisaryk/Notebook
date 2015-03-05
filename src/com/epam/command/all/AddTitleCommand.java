@@ -26,7 +26,8 @@ public class AddTitleCommand implements Command {
 			this.note = (String)obj[1];
 			this.title = (String)obj[2];
 		}		
-		Response response = new Response("addTitle", editor.addNoteWithTitle(date, note, title));
+		editor.addNoteWithTitle(date, note, title);
+		Response response = new Response("addTitle", null);
 		return response;
 	}
 }

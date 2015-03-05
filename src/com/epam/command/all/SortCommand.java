@@ -1,6 +1,7 @@
 package com.epam.command.all;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import com.epam.command.Command;
 import com.epam.command.Request;
@@ -10,9 +11,10 @@ import com.epam.logic.NotebookEditor;
 public class SortCommand implements Command {
 
 	@Override
-	public Response execute(Request request) throws IOException{		
+	public Response execute(Request request) throws IOException, ParseException{		
 		NotebookEditor editor = new NotebookEditor();
-		Response response = new Response("sortNote", editor.sortNote());		
+		editor.sortNote();
+		Response response = new Response("sortNote", null);		
 		return response;
 	}
 }
