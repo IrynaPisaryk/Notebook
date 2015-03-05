@@ -55,7 +55,7 @@ public final class NoteWithEMail extends Note {
 
 	@Override
 	public String toString() {
-		return "NoteWithEMail" + "[date=" + super.getDate() + "]" + "[note="
+		return "NoteWithEMail" + "[date=" + super.getDate().getYear()+"/"+super.getDate().getMonth()+"/"+super.getDate().getDay() + "]" + "[note="
 				+ super.getNote() + "]" + "[eMail=" + eMail + "]";
 	}
 

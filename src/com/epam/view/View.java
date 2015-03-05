@@ -57,8 +57,8 @@ public class View {
 			}else{		
 				CommandName name = getCommandName(whatDo);
 				Response response = manager.doRequest(name, request);
-				Printer printer = new Printer();
-				printer.printResponse(request.getKey(), response);
+				//Printer printer = new Printer();
+				//printer.printResponse(request.getKey(), response);
 			}
 		}
 	}	

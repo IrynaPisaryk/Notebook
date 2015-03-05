@@ -58,7 +58,7 @@ public final class NoteWithSignature extends Note {
 
 	@Override
 	public String toString() {
-		return "NoteWithSignature" + "[date=" + super.getDate() + "]"
+		return "NoteWithSignature" + "[date=" + super.getDate().getYear()+"/"+super.getDate().getMonth()+"/"+super.getDate().getDay() + "]"
 				+ "[note=" + super.getNote() + "]" + "[signature=" + signature
 				+ "]";
 	}

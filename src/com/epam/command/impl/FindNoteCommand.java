@@ -1,6 +1,7 @@
 package com.epam.command.impl;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import com.epam.command.Command;
 import com.epam.command.Request;
@@ -10,7 +11,7 @@ import com.epam.logic.NotebookEditor;
 public class FindNoteCommand implements Command {	
 	
 	@Override
-	public Response execute(Request request) throws IOException{
+	public Response execute(Request request) throws IOException, ParseException{
 
 		String note = null;
 		NotebookEditor editor = new NotebookEditor();

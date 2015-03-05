@@ -55,7 +55,7 @@ public final class NoteWithTitle extends Note {
 
 	@Override
 	public String toString() {
-		return "NoteWithTitle" + "[date=" + super.getDate() + "]" + "[note="
+		return "NoteWithTitle" + "[date=" + super.getDate().getYear()+"/"+super.getDate().getMonth()+"/"+super.getDate().getDay() + "]" + "[note="
 				+ super.getNote() + "]" + "[title=" + title + "]";
 	}
 

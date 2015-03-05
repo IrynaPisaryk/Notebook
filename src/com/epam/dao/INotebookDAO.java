@@ -18,31 +18,31 @@ public interface INotebookDAO {
 
 	void addNoteWithTitle(Date date, String note, String title) throws IOException;
 
-	void deleteNote(int index) throws IOException;
+	void deleteNote(int index) throws IOException, ParseException;
 	
 	void deleteAllNotes() throws IOException;
 
 	Note findNoteByIndex(int index) throws ParseException, IOException;
 
-	ArrayList<Note> findNoteByTitle(String title);
+	ArrayList<Note> findNoteByTitle(String title) throws IOException, ParseException;
 
-	ArrayList<Note> findNoteBySignature(String signature);
+	ArrayList<Note> findNoteBySignature(String signature) throws IOException, ParseException;
 
-	ArrayList<Note> findNoteByEMail(String email);
+	ArrayList<Note> findNoteByEMail(String email) throws IOException, ParseException;
 
-	ArrayList<Note> findNoteByDate(Date date);
+	ArrayList<Note> findNoteByDate(Date date) throws IOException, ParseException;
 
-	ArrayList<Note> findNoteByNote(String note);
+	ArrayList<Note> findNoteByNote(String note) throws IOException, ParseException;
 
-	void changeNote(int index, String newNote) throws IOException;
+	void changeNote(int index, String newNote) throws IOException, ParseException;
 
-	void sortNote() throws IOException;
+	void sortNote() throws IOException, ParseException;
 
 	void replaceNote(int indexOldNote, Note newNote) throws IOException;
 
-	Note cloneNote(int index) throws CloneNotSupportedException;
+	Note cloneNote(int index) throws CloneNotSupportedException, IOException, ParseException;
 
-	void formatNote(int index) throws IOException;
+	void formatNote(int index) throws IOException, ParseException;
 
 	
 }

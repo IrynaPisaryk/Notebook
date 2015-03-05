@@ -139,10 +139,9 @@ public class ParametersConductor {
 	
 	private Date setDate() throws ParseException{
 		Date date;
-		System.out.println("Enter the date of note in format dd.mm.yyyy" );
+		System.out.println("Enter the date of note in format dd/mm/yyyy" );
 		String number = scan2.nextLine();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd.M.yyyy");
-		date = sdf.parse(number);
+		date = new Date(number);
 		return date;
 	}
 	

@@ -8,7 +8,6 @@ import java.util.Date;
 import com.epam.dao.DAOFactory;
 import com.epam.dao.INotebookDAO;
 import com.epam.notebook.Note;
-import com.epam.notebook.Notebook;
 
 public final class NotebookEditor {
 
@@ -29,7 +28,7 @@ public final class NotebookEditor {
 	public void addNoteWithTitle(Date date, String note, String title) throws IOException{
         dao.addNoteWithTitle(date, note, title);
 	}
-	public void deleteNote(int index) throws IOException{
+	public void deleteNote(int index) throws IOException, ParseException{
         dao.deleteNote(index);
 	}
 	
@@ -40,34 +39,34 @@ public final class NotebookEditor {
 	public Note findNoteByIndex(int index) throws ParseException, IOException{
         return dao.findNoteByIndex(index);
 	}
-	public ArrayList<Note> findNoteByTitle(String title){
+	public ArrayList<Note> findNoteByTitle(String title) throws IOException, ParseException{
 		return dao.findNoteByTitle(title);
 	}
-	public ArrayList<Note> findNoteBySignature(String signature){
+	public ArrayList<Note> findNoteBySignature(String signature) throws IOException, ParseException{
 		return dao.findNoteBySignature(signature);
 	}
-	public ArrayList<Note> findNoteByEMail(String email){
+	public ArrayList<Note> findNoteByEMail(String email) throws IOException, ParseException{
 		return dao.findNoteByEMail(email);
 	}
-	public ArrayList<Note> findNoteByDate(Date date){
+	public ArrayList<Note> findNoteByDate(Date date) throws IOException, ParseException{
 		return dao.findNoteByDate(date);
 	}
-	public ArrayList<Note> findNoteByNote(String note){
+	public ArrayList<Note> findNoteByNote(String note) throws IOException, ParseException{
 		return dao.findNoteByNote(note);
 	}
-	public void changeNote(int index, String newNote) throws IOException{
+	public void changeNote(int index, String newNote) throws IOException, ParseException{
         dao.changeNote(index, newNote);
 	}
-	public void sortNote() throws IOException{
+	public void sortNote() throws IOException, ParseException{
 		dao.sortNote();
 	}
 	public void replaceNote(int indexOldNote, Note newNote) throws IOException{
         dao.replaceNote(indexOldNote, newNote);
 	}
-	public Note cloneNote(int index) throws CloneNotSupportedException{
+	public Note cloneNote(int index) throws CloneNotSupportedException, IOException, ParseException{
 		return dao.cloneNote(index);
 	}
-	public void formatNote(int index) throws IOException{
+	public void formatNote(int index) throws IOException, ParseException{
         dao.formatNote(index);
 	}
 
