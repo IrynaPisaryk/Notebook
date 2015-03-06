@@ -1,17 +1,14 @@
 package com.epam.logic;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.io.Writer;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -25,14 +22,15 @@ import com.epam.notebook.NoteWithTitle;
 public final class NotebookIO{	
 
 
-	//private File file = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test.txt");
-	private File file = new File("D:\\test.txt");
-	private File file1 = new File("D:\\test1.txt");
+	private File file = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test.txt");
+	private File file1 = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test1.txt");
+	//private File file = new File("D:\\test.txt");
+	//private File file1 = new File("D:\\test1.txt");
 	
 
 	public void setFile(){
-		//file = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test.txt");
-		file = new File("D:\\test.txt");
+		file = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test.txt");
+		//file = new File("D:\\test.txt");
 	}
 
 	public void writeNoteIntoFile(Note note) throws IOException{
@@ -129,45 +127,42 @@ public final class NotebookIO{
 	}
 
 	public void writeNoteIntoFile(int index, Note note) throws IOException {
-		
-		File tempfile = File.createTempFile("D:\\", "test.txt");
-		
-		Writer writer = new FileWriter(file, true);
-		Writer writerTemp = new FileWriter(tempfile, true);
-		
-		Reader reader = new FileReader(file);		
-		Reader readerTemp = new FileReader(tempfile);
-		
-		BufferedWriter outTemp = new BufferedWriter(writerTemp);
-		
-		
+				
+		Reader reader = new FileReader(file);
 		BufferedReader bufferedReader = new BufferedReader(reader);
-		BufferedReader bufferedReaderTemp = new BufferedReader(readerTemp);
+		
+		Writer writerTemp = new FileWriter(file1, true);
+		PrintWriter outTemp = new PrintWriter(writerTemp);		
+		
 		
 		String line;
-		int innerIndex = 0;
-		while ((line = bufferedReader.readLine()) 
-				!= null) {
-			innerIndex++;
-			if(innerIndex == index){
-				//PrintWriter out = new PrintWriter(writer);	
-				//out.println(note.toString());
-				//writer.close();	
-				//bufferedReader.close();	 
-				outTemp.write(note.toString());
+		int innerIndex=0;
+		while ((line = bufferedReader.readLine()) != null) {
+			if(innerIndex == index){				
+				outTemp.println(note.toString());
 			}else{
-				outTemp.write(line);
-			}
-			line=null;
+				outTemp.println(line);
+			}			
+			innerIndex++;			
+		}
+		bufferedReader.close();
+		outTemp.close();	
+		File fileNew = new File("C:\\Users\\Irina_Pisarik\\Desktop\\testNew.txt");		
+			Reader readerTemp = new FileReader(file1);
+			BufferedReader bufferedReaderTemp = new BufferedReader(readerTemp);
+			Writer writer = new FileWriter(fileNew, true);
+			PrintWriter out = new PrintWriter(writer);
 			while((line = bufferedReaderTemp.readLine()) != null){
-				PrintWriter out = new PrintWriter(writer);	
 				out.println(line);
 			}
-			writer.close();
-			//tempfile.deleteOnExit();
+			bufferedReaderTemp.close();
+			out.close();
+			file1.delete();	
+			file.delete();
+			file = fileNew;
 		}
-
-	}
+				
+	
 
 	public ArrayList<Note> readNotebookFromFile() throws IOException, ParseException {
 		ArrayList<Note> notesArray = new ArrayList<Note>();
