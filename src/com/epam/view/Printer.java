@@ -3,9 +3,7 @@ package com.epam.view;
 import java.util.ArrayList;
 
 import com.epam.command.Response;
-import com.epam.logic.NotebookAdapter;
 import com.epam.notebook.Note;
-import com.epam.notebook.Notebook;
 
 public class Printer {
 

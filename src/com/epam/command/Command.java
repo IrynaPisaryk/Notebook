@@ -1,10 +1,9 @@
 package com.epam.command;
 
-import java.io.IOException;
-import java.text.ParseException;
+import com.epam.exception.CommandException;
 
 public interface Command {
 
-	public Response execute(Request request) throws IOException, CloneNotSupportedException, ParseException;
+	public Response execute(Request request) throws CommandException;
 	
 }

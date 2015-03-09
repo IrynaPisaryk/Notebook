@@ -1,12 +1,11 @@
 package com.epam.exception;
 
-public class NotebookException extends Exception{
-
+public class CommandException extends Exception{
+	
 	private static final long serialVersionUID = 1L;
 
-	public NotebookException(String message){
+	public CommandException(String message){
 		super(message);
 		super.printStackTrace();
 	}
-	
 }

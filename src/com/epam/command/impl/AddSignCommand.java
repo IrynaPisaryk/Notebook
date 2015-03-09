@@ -1,17 +1,18 @@
 package com.epam.command.impl;
 
-import java.io.IOException;
 import java.util.Date;
 
 import com.epam.command.Command;
 import com.epam.command.Request;
 import com.epam.command.Response;
+import com.epam.exception.CommandException;
+import com.epam.exception.LogicException;
 import com.epam.logic.NotebookEditor;
 
 public class AddSignCommand implements Command {
 	
 	@Override
-	public Response execute(Request request) throws IOException{
+	public Response execute(Request request) throws CommandException{
 	
 		Date date = null;
 		String note = null;
@@ -26,7 +27,11 @@ public class AddSignCommand implements Command {
 			note = (String)obj[1];
 			sign = (String)obj[2];
 		}	
-		editor.addNoteWithSignature(date, note, sign);
+		try{
+			editor.addNoteWithSignature(date, note, sign);
+		}catch(LogicException e){
+			throw new CommandException("AddSign command function error");
+		}
 		Response response = new Response("addSign", null);
 		return response;
 	}

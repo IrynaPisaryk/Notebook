@@ -1,17 +1,15 @@
 package com.epam.exception;
 
-public class LogicException extends Exception{
-
+public class ViewException extends Exception{
+	
 	private static final long serialVersionUID = 1L;
 
-	public LogicException(String message){
+	public ViewException(String message){
 		super(message);
 		super.printStackTrace();
 	}
 	
-	public LogicException(){
+	public ViewException(){
 		super.printStackTrace();
 	}
-	
 }
-

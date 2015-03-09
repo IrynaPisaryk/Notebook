@@ -34,7 +34,8 @@ public class NotebookTest extends Object {
 		notebook.setNotebook(notes);
 	}
 
-	@Test
+	//exceptions
+	/*@Test
 	public void setNoteTest() {		
 		Note note = new Note(date, "Note4");
 		int index = 2;
@@ -72,6 +73,6 @@ public class NotebookTest extends Object {
 	@Test
 	public void getNotebookTest() {
 		Assert.assertEquals(notebook.getNotebook(), notes);
-	}
+	}*/
 
 }

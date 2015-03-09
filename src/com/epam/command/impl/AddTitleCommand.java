@@ -1,17 +1,18 @@
 package com.epam.command.impl;
 
-import java.io.IOException;
 import java.util.Date;
 
 import com.epam.command.Command;
 import com.epam.command.Request;
 import com.epam.command.Response;
+import com.epam.exception.CommandException;
+import com.epam.exception.LogicException;
 import com.epam.logic.NotebookEditor;
 
 public class AddTitleCommand implements Command {
 	
 	@Override
-	public Response execute(Request request) throws IOException{
+	public Response execute(Request request) throws CommandException{
 	
 		Date date = null;
 		String note = null;
@@ -26,7 +27,11 @@ public class AddTitleCommand implements Command {
 			note = (String)obj[1];
 			title = (String)obj[2];
 		}	
-		editor.addNoteWithTitle(date, note, title);
+		try{
+			editor.addNoteWithTitle(date, note, title);
+		}catch(LogicException e){
+			throw new CommandException("AddTitle command function error");
+		}
 		Response response = new Response("addTitle", null);
 		return response;
 	}

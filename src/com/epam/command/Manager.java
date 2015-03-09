@@ -1,15 +1,21 @@
 package com.epam.command;
 
-import java.io.IOException;
-import java.text.ParseException;
+import com.epam.exception.CommandException;
+import com.epam.exception.ManagerException;
 
 public class Manager {
 
 	private CommandHelper helper = new CommandHelper();
     
-    public Response doRequest(CommandName nc, Request request) throws IOException, CloneNotSupportedException, ParseException{
+    public Response doRequest(CommandName nc, Request request) throws ManagerException{
                     Command command = helper.getCommand(nc);
-                    Response response = command.execute(request);
+                    Response response = null;
+                    try{
+                    	response = command.execute(request);
+                    }catch(CommandException e){
+            			throw new ManagerException("Manager error");
+            		}
+                    
                     return response;
     }
 	

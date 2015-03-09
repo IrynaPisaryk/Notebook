@@ -1,12 +1,13 @@
 package com.epam.view;
 
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.Scanner;
+
 import com.epam.command.CommandName;
 import com.epam.command.Manager;
 import com.epam.command.Request;
 import com.epam.command.Response;
+import com.epam.exception.ManagerException;
+import com.epam.exception.ViewException;
 
 public class View {
 
@@ -48,7 +49,7 @@ public class View {
 
 	}
 
-	public void run() throws IOException, CloneNotSupportedException, ParseException{
+	public void run() throws ViewException{
 		int whatDo = -1;
 		while(whatDo != 0){
 			whatDo = showMenu();	
@@ -56,9 +57,18 @@ public class View {
 				return;
 			}else{		
 				CommandName name = getCommandName(whatDo);
-				Response response = manager.doRequest(name, request);
+				Response response = null;
+				try{
+					response = manager.doRequest(name, request);
+				}catch(ManagerException e){
+					throw new ViewException();
+				}
 				Printer printer = new Printer();
-				printer.printResponse(request.getKey(), response);
+				try{
+					printer.printResponse(request.getKey(), response);
+				}catch(NullPointerException e){
+					throw new ViewException();
+				}
 			}
 		}
 	}	
@@ -121,7 +131,7 @@ public class View {
 		return name;
 	}
 
-	private Request prepareParams(int i, Request request) throws ParseException {
+	private Request prepareParams(int i, Request request) throws ViewException {
 
 		ParametersConductor conductor = new ParametersConductor();
 		switch(i){

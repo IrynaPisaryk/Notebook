@@ -1,24 +1,32 @@
 package com.epam.command.impl;
 
-import java.io.IOException;
-import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.epam.command.Command;
 import com.epam.command.Request;
 import com.epam.command.Response;
+import com.epam.exception.CommandException;
+import com.epam.exception.LogicException;
 import com.epam.logic.NotebookEditor;
+import com.epam.notebook.Note;
 
 public class FindDateCommand implements Command {		
 	@Override
-	public Response execute(Request request) throws IOException, ParseException{
+	public Response execute(Request request) throws CommandException{
 		Date date = null;
 		NotebookEditor editor = new NotebookEditor();
 		Object[] params = request.getParam("findDate");
 		if(params.length != 0){
 			date = (Date) params[0];
 		}		
-		Response response = new Response("findDate", editor.findNoteByDate(date));
+		ArrayList<Note> notes = null;
+		try{
+			notes = editor.findNoteByDate(date);
+		}catch(LogicException e){
+			throw new CommandException("Find by date command function error");
+		}
+		Response response = new Response("findDate", notes);
 		return response;
 	}
 }

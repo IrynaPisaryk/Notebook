@@ -1,24 +1,32 @@
 package com.epam.command.impl;
 
-import java.io.IOException;
-import java.text.ParseException;
+import java.util.ArrayList;
 
 import com.epam.command.Command;
 import com.epam.command.Request;
 import com.epam.command.Response;
+import com.epam.exception.CommandException;
+import com.epam.exception.LogicException;
 import com.epam.logic.NotebookEditor;
+import com.epam.notebook.Note;
 
 public class FindEMailCommand implements Command {
 	
 	@Override
-	public Response execute(Request request) throws IOException, ParseException{
+	public Response execute(Request request) throws CommandException{
 		String email = null;
 		NotebookEditor editor = new NotebookEditor();
 		Object[] params = request.getParam("findEMail");
 		if(params.length != 0){
 			email = (String) params[0];
-		}		
-		Response response = new Response("findEMail", editor.findNoteByEMail(email));
+		}	
+		ArrayList<Note> notes = null;
+		try{
+			notes = editor.findNoteByEMail(email);
+		}catch(LogicException e){
+			throw new CommandException("Find by email command function error");
+		}
+		Response response = new Response("findEMail", notes);
 		return response;
 	}
 }

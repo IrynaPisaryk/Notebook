@@ -1,17 +1,17 @@
 package com.epam.command.impl;
 
-import java.io.IOException;
-import java.text.ParseException;
-
 import com.epam.command.Command;
 import com.epam.command.Request;
 import com.epam.command.Response;
+import com.epam.exception.CommandException;
+import com.epam.exception.LogicException;
 import com.epam.logic.NotebookEditor;
+import com.epam.notebook.Note;
 
 public class FindCommand implements Command {	
 	
 	@Override
-	public Response execute(Request request) throws IOException, ParseException{
+	public Response execute(Request request) throws CommandException{
 
 		int index = -1;
 		NotebookEditor editor = new NotebookEditor();
@@ -19,7 +19,13 @@ public class FindCommand implements Command {
 		if(params.length != 0){
 			index = (int) params[0];
 		}
-		Response response = new Response("find", editor.findNoteByIndex(index));
+		Note note = null;
+		try{
+			note = editor.findNoteByIndex(index);
+		}catch(LogicException e){
+			throw new CommandException("Find command function error");
+		}
+		Response response = new Response("find", note);
 		return response;
 	}
 }

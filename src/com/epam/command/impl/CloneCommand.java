@@ -1,20 +1,26 @@
 package com.epam.command.impl;
 
-import java.io.IOException;
-import java.text.ParseException;
-
 import com.epam.command.Command;
 import com.epam.command.Request;
 import com.epam.command.Response;
+import com.epam.exception.CommandException;
+import com.epam.exception.LogicException;
 import com.epam.logic.NotebookEditor;
+import com.epam.notebook.Note;
 
 public class CloneCommand implements Command {
 
 	@Override
-	public Response execute(Request request) throws IOException, CloneNotSupportedException, ParseException{
+	public Response execute(Request request) throws CommandException{
 		NotebookEditor editor = new NotebookEditor();
 		Object[] obj = request.getParam("cloneNote");
-		Response response = new Response("cloneNote", editor.cloneNote((int)obj[0]));		
+		Note note = null;
+		try{
+			note = editor.cloneNote((int)obj[0]);
+		}catch(LogicException e){
+			throw new CommandException("Clone command function error");
+		}
+		Response response = new Response("cloneNote", note);		
 		return response;
 	}
 }
