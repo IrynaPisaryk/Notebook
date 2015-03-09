@@ -5,44 +5,45 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.epam.exception.DAOException;
 import com.epam.notebook.Note;
 
 public interface INotebookDAO {
 	
 	//void-boolean
-	void addNote(Date date, String note) throws IOException;
+	void addNote(Date date, String note) throws DAOException;
 
-	void addNoteWithEMail(Date date, String note, String email) throws IOException;
+	void addNoteWithEMail(Date date, String note, String email) throws DAOException;
 
-	void addNoteWithSignature(Date date, String note, String signature) throws IOException;
+	void addNoteWithSignature(Date date, String note, String signature) throws DAOException;
 
-	void addNoteWithTitle(Date date, String note, String title) throws IOException;
+	void addNoteWithTitle(Date date, String note, String title) throws DAOException;
 
-	void deleteNote(int index) throws IOException, ParseException;
+	void deleteNote(int index) throws DAOException;
 	
-	void deleteAllNotes() throws IOException;
+	void deleteAllNotes() throws DAOException;
 
-	Note findNoteByIndex(int index) throws ParseException, IOException;
+	Note findNoteByIndex(int index) throws DAOException;
 
-	ArrayList<Note> findNoteByTitle(String title) throws IOException, ParseException;
+	ArrayList<Note> findNoteByTitle(String title) throws DAOException;
 
-	ArrayList<Note> findNoteBySignature(String signature) throws IOException, ParseException;
+	ArrayList<Note> findNoteBySignature(String signature) throws DAOException;
 
-	ArrayList<Note> findNoteByEMail(String email) throws IOException, ParseException;
+	ArrayList<Note> findNoteByEMail(String email) throws DAOException;
 
-	ArrayList<Note> findNoteByDate(Date date) throws IOException, ParseException;
+	ArrayList<Note> findNoteByDate(Date date) throws DAOException;
 
-	ArrayList<Note> findNoteByNote(String note) throws IOException, ParseException;
+	ArrayList<Note> findNoteByNote(String note) throws DAOException;
 
-	void changeNote(int index, String newNote) throws IOException, ParseException;
+	void changeNote(int index, String newNote) throws DAOException;
 
-	void sortNote() throws IOException, ParseException;
+	void sortNote() throws DAOException;
 
-	void replaceNote(int indexOldNote, Note newNote) throws IOException;
+	void replaceNote(int indexOldNote, Note newNote) throws DAOException;
 
-	Note cloneNote(int index) throws CloneNotSupportedException, IOException, ParseException;
+	Note cloneNote(int index) throws DAOException;
 
-	void formatNote(int index) throws IOException, ParseException;
+	void formatNote(int index) throws DAOException;
 
 	
 }

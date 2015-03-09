@@ -3,7 +3,6 @@ import java.util.Date;
 
 public final class NoteWithTitle extends Note {
 
-	private static final long serialVersionUID = 1L;
 	private String title;
 
 	public NoteWithTitle(Date date, String note, String title) {
@@ -55,7 +54,8 @@ public final class NoteWithTitle extends Note {
 
 	@Override
 	public String toString() {
-		return "NoteWithTitle" + "[date=" + super.getDate().getYear()+"/"+super.getDate().getMonth()+"/"+super.getDate().getDay() + "]" + "[note="
+		return "NoteWithTitle" + "[date=" + (super.getDate().getYear()+1900) +"/"+(super.getDate().getMonth()+1)
+				+"/"+super.getDate().getDate()+"]" + "[note="
 				+ super.getNote() + "]" + "[title=" + title + "]";
 	}
 

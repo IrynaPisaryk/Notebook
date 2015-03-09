@@ -1,19 +1,28 @@
 package com.epam.notebook;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public final class Notebook implements Serializable{
+import com.epam.exception.NotebookException;
 
-	private static final long serialVersionUID = 1L;
+public final class Notebook {
+
 	private ArrayList<Note> notebook = new ArrayList<Note>();
 	
-	public Note getNote(int index) {
+	public Note getNote(int index) throws NotebookException{
+		try{
 		return notebook.get(index);
+		}
+		catch(IndexOutOfBoundsException e){
+			throw new NotebookException("Notebook size is null");
+		}
 	}
 	
-	public Note getNote() {
-		return notebook.get(0);
+	public Note getNote() throws NotebookException{
+		try{
+			return notebook.get(0);
+		}catch(IndexOutOfBoundsException e){
+			throw new NotebookException("Notebook size is null");
+		}
 	}
 
 	public void setNote(int index, Note note) {
@@ -24,12 +33,20 @@ public final class Notebook implements Serializable{
 		notebook.add(note);
 	}
 
-	public void deleteNote(int index) {
-		notebook.remove(index);
+	public void deleteNote(int index) throws NotebookException{
+		try{
+			notebook.remove(index);
+		}catch(IndexOutOfBoundsException e){
+			throw new NotebookException("Notebook size is null");
+		}
 	}
 
-	public ArrayList<Note> getNotebook() {
-		return notebook;
+	public ArrayList<Note> getNotebook() throws NotebookException{
+		try{
+			return notebook;
+		}catch(IndexOutOfBoundsException e){
+			throw new NotebookException("Notebook size is null");
+		}
 	}
 
 	public void setNotebook(ArrayList<Note> notebook) {
@@ -37,10 +54,12 @@ public final class Notebook implements Serializable{
 		this.notebook.addAll(notebook);
 	}
 
-	public int deleteNotebook() {
-		notebook.clear();
+	public int deleteNotebook() throws NotebookException{
+		try{
+			notebook.clear();		
 		return notebook.size();
+		}catch(IndexOutOfBoundsException e){
+			throw new NotebookException("Notebook size is null");
+		}
 	}
-	
-
 }

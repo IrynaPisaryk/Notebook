@@ -1,10 +1,9 @@
 package com.epam.notebook;
-import java.io.Serializable;
+
 import java.util.Date;
 
-public class Note implements Cloneable, Serializable{
+public class Note implements Cloneable{
 
-	private static final long serialVersionUID = 1L;
 	private Date date;
 	private String note;
 	
@@ -72,16 +71,21 @@ public class Note implements Cloneable, Serializable{
 
 	@Override
 	public String toString() {
-		return "Note[date=" + date.getYear() +"/"+date.getMonth()+"/"+date.getDate()+"]"+ "[note=" + note + "]";
+		return "Note[date=" + (date.getYear()+1900) +"/"+(date.getMonth()+1)+"/"+date.getDate()+"]"+ "[note=" + note + "]";
 	}	
 
-	public Note clone() throws CloneNotSupportedException{
-		Note obj = null;
+	public Note clone() throws CloneNotSupportedException {
 		
-		obj = (Note) super.clone();
+		Note obj = null;		
+		try {
+			obj = (Note) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new CloneNotSupportedException();
+		}
 		if(null != this.date){
 			obj.date = (Date) this.date.clone();
 		}
 		return obj;
+		
 	}
 }

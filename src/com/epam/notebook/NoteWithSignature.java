@@ -4,7 +4,6 @@ import java.util.Date;
 
 public final class NoteWithSignature extends Note {
 
-	private static final long serialVersionUID = 1L;
 	private String signature;
 
 	public NoteWithSignature(Date date, String note, String signature) {
@@ -58,7 +57,8 @@ public final class NoteWithSignature extends Note {
 
 	@Override
 	public String toString() {
-		return "NoteWithSignature" + "[date=" + super.getDate().getYear()+"/"+super.getDate().getMonth()+"/"+super.getDate().getDay() + "]"
+		return "NoteWithSignature" + "[date=" + (super.getDate().getYear()+1900) +"/"+(super.getDate().getMonth()+1)
+				+"/"+super.getDate().getDate()+"]"
 				+ "[note=" + super.getNote() + "]" + "[signature=" + signature
 				+ "]";
 	}

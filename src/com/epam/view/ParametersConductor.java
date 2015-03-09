@@ -102,10 +102,8 @@ public class ParametersConductor {
 
 	public Request prepareFindDateParams(Request request) throws ParseException{
 		System.out.println("Enter date for search in format dd.mm.yyyy:");
-		String indexDate = scan2.nextLine();		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd.M.yyyy");
-		Date dateFind = sdf.parse(indexDate);
-		request.setParam("findDate", dateFind);
+		String indexDate = scan2.nextLine();	
+		request.setParam("findDate", new Date(indexDate));
 		return request;
 	}
 

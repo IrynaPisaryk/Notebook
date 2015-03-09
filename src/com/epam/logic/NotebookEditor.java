@@ -7,67 +7,144 @@ import java.util.Date;
 
 import com.epam.dao.DAOFactory;
 import com.epam.dao.INotebookDAO;
+import com.epam.exception.DAOException;
+import com.epam.exception.LogicException;
 import com.epam.notebook.Note;
 
 public final class NotebookEditor {
 
 	 INotebookDAO dao = DAOFactory.getDAO();
 	
-	public void addNote(Date date, String note) throws IOException{       
-        dao.addNote(date, note);
+	public void addNote(Date date, String note) throws LogicException{       
+        try{
+        	dao.addNote(date, note);
+        }catch(DAOException e){
+        	throw new LogicException();
+        }
 }
 	
-	public void addNoteWithEMail(Date date, String note, String email) throws IOException{
-       dao.addNoteWithEMail(date, note, email);
+	public void addNoteWithEMail(Date date, String note, String email) throws LogicException{
+       try{
+    	   dao.addNoteWithEMail(date, note, email);
+       }catch(DAOException e){
+       	throw new LogicException();
+       }
 }
 	
-	public void addNoteWithSignature(Date date, String note, String signature) throws IOException{
-        dao.addNoteWithSignature(date, note, signature);
+	public void addNoteWithSignature(Date date, String note, String signature) throws LogicException{
+        try{
+        	dao.addNoteWithSignature(date, note, signature);
+        }catch(DAOException e){
+        	throw new LogicException();
+        }
 }
 	
-	public void addNoteWithTitle(Date date, String note, String title) throws IOException{
-        dao.addNoteWithTitle(date, note, title);
+	public void addNoteWithTitle(Date date, String note, String title) throws LogicException{
+        try{
+        	dao.addNoteWithTitle(date, note, title);
+        }catch(DAOException e){
+        	throw new LogicException();
+        }
 	}
-	public void deleteNote(int index) throws IOException, ParseException{
-        dao.deleteNote(index);
+	public void deleteNote(int index) throws LogicException{
+        try{
+        	dao.deleteNote(index);
+        }catch(DAOException e){
+        	throw new LogicException();
+        }
 	}
 	
-	public void deleteAllNotes() throws IOException{
-        dao.deleteAllNotes();
+	public void deleteAllNotes() throws LogicException{
+        try{
+        	dao.deleteAllNotes();
+        }catch(DAOException e){
+        	throw new LogicException();
+        }
 	}
 	
-	public Note findNoteByIndex(int index) throws ParseException, IOException{
-        return dao.findNoteByIndex(index);
+	public Note findNoteByIndex(int index) throws LogicException{
+        try {
+			return dao.findNoteByIndex(index);
+		}catch (DAOException e) {
+			throw new LogicException();
+		}
 	}
-	public ArrayList<Note> findNoteByTitle(String title) throws IOException, ParseException{
-		return dao.findNoteByTitle(title);
+	
+	public ArrayList<Note> findNoteByTitle(String title) throws LogicException{
+		try{
+			return dao.findNoteByTitle(title);
+		}catch (DAOException e) {
+			throw new LogicException();
+		}
 	}
-	public ArrayList<Note> findNoteBySignature(String signature) throws IOException, ParseException{
-		return dao.findNoteBySignature(signature);
+	
+	public ArrayList<Note> findNoteBySignature(String signature) throws LogicException{
+		try{
+			return dao.findNoteBySignature(signature);
+		}catch (DAOException e) {
+			throw new LogicException();
+		}
 	}
-	public ArrayList<Note> findNoteByEMail(String email) throws IOException, ParseException{
-		return dao.findNoteByEMail(email);
+	
+	public ArrayList<Note> findNoteByEMail(String email) throws LogicException{
+		try{
+			return dao.findNoteByEMail(email);
+		}catch (DAOException e) {
+			throw new LogicException();
+		}
 	}
-	public ArrayList<Note> findNoteByDate(Date date) throws IOException, ParseException{
-		return dao.findNoteByDate(date);
+	
+	public ArrayList<Note> findNoteByDate(Date date) throws LogicException{
+		try{
+			return dao.findNoteByDate(date);
+		}catch (DAOException e) {
+			throw new LogicException();
+		}
 	}
-	public ArrayList<Note> findNoteByNote(String note) throws IOException, ParseException{
-		return dao.findNoteByNote(note);
+	public ArrayList<Note> findNoteByNote(String note) throws LogicException{
+		try{
+			return dao.findNoteByNote(note);
+		}catch (DAOException e) {
+			throw new LogicException();
+		}
 	}
-	public void changeNote(int index, String newNote) throws IOException, ParseException{
-        dao.changeNote(index, newNote);
+	public void changeNote(int index, String newNote) throws LogicException{
+        try{
+        	dao.changeNote(index, newNote);
+        }catch (DAOException e) {
+			throw new LogicException();
+		}
 	}
-	public void sortNote() throws IOException, ParseException{
-		dao.sortNote();
+	
+	public void sortNote() throws LogicException{
+		try{
+			dao.sortNote();
+		}catch(DAOException e){
+        	throw new LogicException();
+        }
 	}
-	public void replaceNote(int indexOldNote, Note newNote) throws IOException{
-        dao.replaceNote(indexOldNote, newNote);
+	public void replaceNote(int indexOldNote, Note newNote) throws LogicException{
+        try{
+        	dao.replaceNote(indexOldNote, newNote);
+        }catch(DAOException e){
+        	throw new LogicException();
+        }
 	}
-	public Note cloneNote(int index) throws CloneNotSupportedException, IOException, ParseException{
-		return dao.cloneNote(index);
+	
+	public Note cloneNote(int index) throws LogicException{
+		try{
+			return dao.cloneNote(index);
+		}catch (DAOException e) {
+			throw new LogicException();
+		}
 	}
-	public void formatNote(int index) throws IOException, ParseException{
-        dao.formatNote(index);
+	
+	public void formatNote(int index) throws LogicException{
+        try{
+        	dao.formatNote(index);
+        }catch (DAOException e) {
+			throw new LogicException();
+		}
 	}
 
 }

@@ -1,9 +1,9 @@
 package com.epam.notebook;
+
 import java.util.Date;
 
 public final class NoteWithEMail extends Note {
 
-	private static final long serialVersionUID = 1L;
 	private String eMail;
 
 	public NoteWithEMail(Date date, String note, String eMail) {
@@ -55,7 +55,8 @@ public final class NoteWithEMail extends Note {
 
 	@Override
 	public String toString() {
-		return "NoteWithEMail" + "[date=" + super.getDate().getYear()+"/"+super.getDate().getMonth()+"/"+super.getDate().getDay() + "]" + "[note="
+		return "NoteWithEMail" + "[date=" + (super.getDate().getYear()+1900) +"/"+(super.getDate().getMonth()+1)
+				+"/"+super.getDate().getDate()+ "]" + "[note="
 				+ super.getNote() + "]" + "[eMail=" + eMail + "]";
 	}
 
