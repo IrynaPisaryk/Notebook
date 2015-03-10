@@ -6,9 +6,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import com.epam.dao.INotebookDAO;
 import com.epam.exception.DAOException;
+import com.epam.logger.LoggerApp;
 import com.epam.logic.NotebookIO;
 import com.epam.logic.comparator.NoteComparator;
 import com.epam.notebook.Note;
@@ -22,6 +24,7 @@ public final class NotebookFileImpl implements INotebookDAO{
 	//private File file1 = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test1.txt");
 	private File file = new File("D:\\test.txt");
 	private File file1 = new File("D:\\test1.txt");
+	private Logger logger = LoggerApp.getInstance().getLogger();
 
 
 	@Override
@@ -30,7 +33,8 @@ public final class NotebookFileImpl implements INotebookDAO{
 		Note note = new Note(date, text);
 		try{
 			io.writeNoteIntoFile(file, note);
-		}catch(IOException e){
+		}catch(IOException e){			
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not write note into file");
 		}
 
@@ -43,6 +47,7 @@ public final class NotebookFileImpl implements INotebookDAO{
 		try{
 			io.writeNoteIntoFile(file, note);
 		}catch(IOException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not write note with email into file");
 		}
 	}
@@ -55,6 +60,7 @@ public final class NotebookFileImpl implements INotebookDAO{
 		try{
 			io.writeNoteIntoFile(file, note);
 		}catch(IOException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not write note with signature into file");
 		}
 	}
@@ -67,6 +73,7 @@ public final class NotebookFileImpl implements INotebookDAO{
 		try{
 			io.writeNoteIntoFile(file, note);
 		}catch(IOException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not write note with title into file");
 		}
 	}
@@ -77,6 +84,7 @@ public final class NotebookFileImpl implements INotebookDAO{
 		try{
 			io.writeNoteIntoFile(file, file1, index);
 		}catch(IOException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not delete note from file");
 		}
 		
@@ -88,6 +96,7 @@ public final class NotebookFileImpl implements INotebookDAO{
 		try{
 			io.setFile(file);
 		}catch(IOException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not delete note from file");
 		}
 	}
@@ -98,8 +107,10 @@ public final class NotebookFileImpl implements INotebookDAO{
 		try{
 			return io.readNoteFromFile(file, index);
 		}catch(IOException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not find note by index into file");
 		}catch(ParseException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not find note by index into file");
 		}
 	}
@@ -120,8 +131,10 @@ public final class NotebookFileImpl implements INotebookDAO{
 		}
 		return foundNotes;
 		}catch(IOException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not find note by title into file");
 		}catch(ParseException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not find note by title into file");
 		}
 	}
@@ -142,8 +155,10 @@ public final class NotebookFileImpl implements INotebookDAO{
 		}
 		return foundNotes;
 		}catch(IOException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not find note by signature into file");
 		}catch(ParseException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not find note by signature into file");
 		}
 	}
@@ -164,8 +179,10 @@ public final class NotebookFileImpl implements INotebookDAO{
 		}
 		return foundNotes;
 		}catch(IOException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not find note by email into file");
 		}catch(ParseException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not find note by email into file");
 		}
 	}
@@ -209,8 +226,10 @@ public final class NotebookFileImpl implements INotebookDAO{
 		
 		return foundNotes;
 		}catch(IOException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not find note by date into file");
 		}catch(ParseException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not find note by date into file");
 		}
 	}
@@ -229,8 +248,10 @@ public final class NotebookFileImpl implements INotebookDAO{
 
 		return foundNotes;
 		}catch(IOException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not find note by note into file");
 		}catch(ParseException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not find note by note into file");
 		}
 	}
@@ -243,8 +264,10 @@ public final class NotebookFileImpl implements INotebookDAO{
 		note.setNote(newNote);	
 		io.writeNoteIntoFile(file, file1, index, note);		
 		}catch(IOException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not change note into file");
 		}catch(ParseException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not change note into file");
 		}
 	}
@@ -259,8 +282,10 @@ public final class NotebookFileImpl implements INotebookDAO{
 		io.setFile(file);
 		io.writeNotebookIntoFile(file, notes);
 		}catch(IOException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not sort note into file");
 		}catch(ParseException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not sort note into file");
 		}
 	}
@@ -272,6 +297,7 @@ public final class NotebookFileImpl implements INotebookDAO{
 		try{
 			io.writeNoteIntoFile(file, file1, indexOldNote, newNote);
 		}catch(IOException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not replace note into file");
 		}
 	}
@@ -283,11 +309,11 @@ public final class NotebookFileImpl implements INotebookDAO{
 		Note note = io.readNoteFromFile(file, index);		
 		return note.clone();
 		}catch(IOException e){
-			throw new DAOException("Can not clone note from file");
-		}catch(CloneNotSupportedException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not clone note from file");
 		}
 		catch(ParseException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not clone note from file");
 		}
 	}
@@ -302,8 +328,10 @@ public final class NotebookFileImpl implements INotebookDAO{
 		}
 		io.writeNoteIntoFile(file, file1, index, note);
 		}catch(IOException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not find note by index into file");
 		}catch(ParseException e){
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not find note by index into file");
 		}
 	}		

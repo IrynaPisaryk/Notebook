@@ -1,7 +1,10 @@
 package com.epam.command;
 
+import java.util.logging.Logger;
+
 import com.epam.exception.CommandException;
 import com.epam.exception.ManagerException;
+import com.epam.logger.LoggerApp;
 
 public class Manager {
 
@@ -12,10 +15,9 @@ public class Manager {
                     Response response = null;
                     try{
                     	response = command.execute(request);
-                    }catch(CommandException e){
+                    }catch(CommandException e){                    	
             			throw new ManagerException("Manager error");
-            		}
-                    
+            		}                    
                     return response;
     }
 	

@@ -1,8 +1,11 @@
 package com.epam.notebook;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.epam.exception.NotebookException;
+import com.epam.logger.LoggerApp;
 
 public final class Notebook {
 
@@ -13,6 +16,8 @@ public final class Notebook {
 		return notebook.get(index);
 		}
 		catch(IndexOutOfBoundsException e){
+			Logger logger = LoggerApp.getInstance().getLogger();
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new NotebookException("Notebook size is null");
 		}
 	}
@@ -21,6 +26,8 @@ public final class Notebook {
 		try{
 			return notebook.get(0);
 		}catch(IndexOutOfBoundsException e){
+			Logger logger = LoggerApp.getInstance().getLogger();
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new NotebookException("Notebook size is null");
 		}
 	}
@@ -37,6 +44,8 @@ public final class Notebook {
 		try{
 			notebook.remove(index);
 		}catch(IndexOutOfBoundsException e){
+			Logger logger = LoggerApp.getInstance().getLogger();
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new NotebookException("Notebook size is null");
 		}
 	}
@@ -45,6 +54,8 @@ public final class Notebook {
 		try{
 			return notebook;
 		}catch(IndexOutOfBoundsException e){
+			Logger logger = LoggerApp.getInstance().getLogger();
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new NotebookException("Notebook size is null");
 		}
 	}
@@ -59,6 +70,8 @@ public final class Notebook {
 			notebook.clear();		
 		return notebook.size();
 		}catch(IndexOutOfBoundsException e){
+			Logger logger = LoggerApp.getInstance().getLogger();
+			logger.log(Level.SEVERE, "Exception", e);
 			throw new NotebookException("Notebook size is null");
 		}
 	}

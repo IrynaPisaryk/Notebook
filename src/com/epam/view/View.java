@@ -1,6 +1,8 @@
 package com.epam.view;
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.epam.command.CommandName;
 import com.epam.command.Manager;
@@ -8,6 +10,7 @@ import com.epam.command.Request;
 import com.epam.command.Response;
 import com.epam.exception.ManagerException;
 import com.epam.exception.ViewException;
+import com.epam.logger.LoggerApp;
 
 public class View {
 
@@ -48,12 +51,21 @@ public class View {
 		return result;
 
 	}
-
-	public void run() throws ViewException{
+	
+	public void run() {
 		int whatDo = -1;
 		while(whatDo != 0){
 			whatDo = showMenu();	
-			if(prepareParams(whatDo, request) == null){
+			Request req = null;
+			try{
+				req = prepareParams(whatDo, request);
+			}catch(ViewException e){
+				Logger logger = LoggerApp.getInstance().getLogger();
+				logger.log(Level.SEVERE, "Exception", e);
+				System.out.println("Input patemeters error"+"\n");
+				
+			}
+			if( req == null){
 				return;
 			}else{		
 				CommandName name = getCommandName(whatDo);
@@ -61,13 +73,18 @@ public class View {
 				try{
 					response = manager.doRequest(name, request);
 				}catch(ManagerException e){
-					throw new ViewException();
+					Logger logger = LoggerApp.getInstance().getLogger();
+					logger.log(Level.SEVERE, "Exception", e);
+					System.out.println("Programm error"+"\n");
+					response = new Response("", null);
 				}
 				Printer printer = new Printer();
 				try{
 					printer.printResponse(request.getKey(), response);
-				}catch(NullPointerException e){
-					throw new ViewException();
+				}catch(ViewException e){
+					Logger logger = LoggerApp.getInstance().getLogger();
+					logger.log(Level.SEVERE, "Exception", e);
+					System.out.println("Printer error"+"\n");
 				}
 			}
 		}

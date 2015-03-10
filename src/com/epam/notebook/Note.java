@@ -1,6 +1,10 @@
 package com.epam.notebook;
 
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.epam.logger.LoggerApp;
 
 public class Note implements Cloneable{
 
@@ -74,13 +78,14 @@ public class Note implements Cloneable{
 		return "Note[date=" + (date.getYear()+1900) +"/"+(date.getMonth()+1)+"/"+date.getDate()+"]"+ "[note=" + note + "]";
 	}	
 
-	public Note clone() throws CloneNotSupportedException {
-		
+	public Note clone() {		
 		Note obj = null;		
 		try {
 			obj = (Note) super.clone();
 		} catch (CloneNotSupportedException e) {
-			throw new CloneNotSupportedException();
+			Logger logger = LoggerApp.getInstance().getLogger();
+			logger.log(Level.SEVERE, "Exception", e);
+			System.out.println("Can't clone note");
 		}
 		if(null != this.date){
 			obj.date = (Date) this.date.clone();
