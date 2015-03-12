@@ -16,7 +16,7 @@ public enum DAOEnum {
 				return type;
 			}
 		}
-		throw new RuntimeException("unknown type");
+		return null;
 	}
 
 	public String getTypeValue() {

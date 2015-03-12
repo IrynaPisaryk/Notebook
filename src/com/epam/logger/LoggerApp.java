@@ -5,6 +5,8 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.epam.resource.ResourceProvider;
+
 public final class LoggerApp {
 	
 	private static final LoggerApp instance = new LoggerApp();
@@ -13,7 +15,7 @@ public final class LoggerApp {
 
 	{
 		try {
-			fh = new FileHandler("C:\\Users\\Irina_Pisarik\\Desktop\\LogApp");
+			fh = new FileHandler(ResourceProvider.getLoggerKeeper());
 			logger.addHandler(fh);			
 		} catch (SecurityException e) {
 			logger.log(Level.SEVERE, "Can't get log because secure error occured", e);

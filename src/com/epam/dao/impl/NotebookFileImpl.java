@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import com.epam.dao.INotebookDAO;
 import com.epam.exception.DAOException;
 import com.epam.logger.LoggerApp;
@@ -17,13 +18,12 @@ import com.epam.notebook.Note;
 import com.epam.notebook.NoteWithEMail;
 import com.epam.notebook.NoteWithSignature;
 import com.epam.notebook.NoteWithTitle;
+import com.epam.resource.ResourceProvider;
 
 public final class NotebookFileImpl implements INotebookDAO{
-
-	//private File file = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test.txt");
-	//private File file1 = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test1.txt");
-	private File file = new File("D:\\test.txt");
-	private File file1 = new File("D:\\test1.txt");
+	
+	private File file = new File(ResourceProvider.getFilePathKeeper());
+	private File fileTemp = new File(ResourceProvider.getFileTempPathKeeper());
 	private Logger logger = LoggerApp.getInstance().getLogger();
 
 
@@ -82,7 +82,7 @@ public final class NotebookFileImpl implements INotebookDAO{
 	public void deleteNote(int index) throws DAOException{
 		NotebookIO io = new NotebookIO();
 		try{
-			io.writeNoteIntoFile(file, file1, index);
+			io.writeNoteIntoFile(file, fileTemp, index);
 		}catch(IOException e){
 			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not delete note from file");
@@ -262,7 +262,7 @@ public final class NotebookFileImpl implements INotebookDAO{
 		try{
 		Note note = io.readNoteFromFile(file, index);
 		note.setNote(newNote);	
-		io.writeNoteIntoFile(file, file1, index, note);		
+		io.writeNoteIntoFile(file, fileTemp, index, note);		
 		}catch(IOException e){
 			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not change note into file");
@@ -295,7 +295,7 @@ public final class NotebookFileImpl implements INotebookDAO{
 			throws DAOException {
 		NotebookIO io = new NotebookIO();
 		try{
-			io.writeNoteIntoFile(file, file1, indexOldNote, newNote);
+			io.writeNoteIntoFile(file, fileTemp, indexOldNote, newNote);
 		}catch(IOException e){
 			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not replace note into file");
@@ -326,7 +326,7 @@ public final class NotebookFileImpl implements INotebookDAO{
 		if(!(note.toString().startsWith("Note["))){
 			note = new Note(note.getDate(), note.getNote());
 		}
-		io.writeNoteIntoFile(file, file1, index, note);
+		io.writeNoteIntoFile(file, fileTemp, index, note);
 		}catch(IOException e){
 			logger.log(Level.SEVERE, "Exception", e);
 			throw new DAOException("Can not find note by index into file");

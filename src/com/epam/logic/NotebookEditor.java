@@ -15,12 +15,12 @@ import com.epam.notebook.Note;
 public final class NotebookEditor {
 
 	 INotebookDAO dao = DAOFactory.getDAO();
+	 Logger logger = LoggerApp.getInstance().getLogger();
 	
 	public void addNote(Date date, String note) throws LogicException{       
         try{
         	dao.addNote(date, note);
-        }catch(DAOException e){
-        	Logger logger = LoggerApp.getInstance().getLogger();
+        }catch(DAOException e){        	
 			logger.log(Level.SEVERE, "Exception", e);
         	throw new LogicException();
         }
@@ -30,7 +30,6 @@ public final class NotebookEditor {
        try{
     	   dao.addNoteWithEMail(date, note, email);
        }catch(DAOException e){
-    	   Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);
        	throw new LogicException();
        }
@@ -40,7 +39,6 @@ public final class NotebookEditor {
         try{
         	dao.addNoteWithSignature(date, note, signature);
         }catch(DAOException e){
-        	Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);
         	throw new LogicException();
         }
@@ -50,7 +48,6 @@ public final class NotebookEditor {
         try{
         	dao.addNoteWithTitle(date, note, title);
         }catch(DAOException e){
-        	Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);
         	throw new LogicException();
         }
@@ -59,7 +56,6 @@ public final class NotebookEditor {
         try{
         	dao.deleteNote(index);
         }catch(DAOException e){
-        	Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);
         	throw new LogicException();
         }
@@ -69,7 +65,6 @@ public final class NotebookEditor {
         try{
         	dao.deleteAllNotes();
         }catch(DAOException e){
-        	Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);
         	throw new LogicException();
         }
@@ -79,7 +74,6 @@ public final class NotebookEditor {
         try {
 			return dao.findNoteByIndex(index);
 		}catch (DAOException e) {
-			Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);
 			throw new LogicException();
 		}
@@ -89,7 +83,6 @@ public final class NotebookEditor {
 		try{
 			return dao.findNoteByTitle(title);
 		}catch (DAOException e) {
-			Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);
 			throw new LogicException();
 		}
@@ -99,7 +92,6 @@ public final class NotebookEditor {
 		try{
 			return dao.findNoteBySignature(signature);
 		}catch (DAOException e) {
-			Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);
 			throw new LogicException();
 		}
@@ -109,7 +101,6 @@ public final class NotebookEditor {
 		try{
 			return dao.findNoteByEMail(email);
 		}catch (DAOException e) {
-			Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);
 			throw new LogicException();
 		}
@@ -119,7 +110,6 @@ public final class NotebookEditor {
 		try{
 			return dao.findNoteByDate(date);
 		}catch (DAOException e) {
-			Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);
 			throw new LogicException();
 		}
@@ -128,7 +118,6 @@ public final class NotebookEditor {
 		try{
 			return dao.findNoteByNote(note);
 		}catch (DAOException e) {
-			Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);
 			throw new LogicException();
 		}
@@ -137,7 +126,6 @@ public final class NotebookEditor {
         try{
         	dao.changeNote(index, newNote);
         }catch (DAOException e) {
-        	Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);
 			throw new LogicException();
 		}
@@ -147,7 +135,6 @@ public final class NotebookEditor {
 		try{
 			dao.sortNote();
 		}catch(DAOException e){
-			Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);
         	throw new LogicException();
         }
@@ -156,7 +143,6 @@ public final class NotebookEditor {
         try{
         	dao.replaceNote(indexOldNote, newNote);
         }catch(DAOException e){
-        	Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);
         	throw new LogicException();
         }
@@ -166,7 +152,6 @@ public final class NotebookEditor {
 		try{
 			return dao.cloneNote(index);
 		}catch (DAOException e) {
-			Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);
 			throw new LogicException();
 		}
@@ -176,10 +161,8 @@ public final class NotebookEditor {
         try{
         	dao.formatNote(index);
         }catch (DAOException e) {
-        	Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);
 			throw new LogicException();
 		}
 	}
-
 }
