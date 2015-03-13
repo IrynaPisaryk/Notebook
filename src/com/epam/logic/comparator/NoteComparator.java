@@ -38,4 +38,3 @@ public final class NoteComparator implements Comparator<Note> {
 			return 1;
 	}
 }
-

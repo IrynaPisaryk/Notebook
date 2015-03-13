@@ -2,7 +2,6 @@ package com.epam.command.impl;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import com.epam.command.Command;
 import com.epam.command.Request;
 import com.epam.command.Response;
@@ -14,17 +13,17 @@ import com.epam.logic.NotebookEditor;
 public class SortCommand implements Command {
 
 	@Override
-	public Response execute(Request request) throws CommandException{		
+	public Response execute(Request request) throws CommandException {
 		NotebookEditor editor = new NotebookEditor();
 		Logger logger = LoggerApp.getInstance().getLogger();
-		try{
+		try {
 			editor.sortNote();
-		}catch(LogicException e){			
+		} catch (LogicException e) {
 			logger.log(Level.SEVERE, "Exception", e);
 			throw new CommandException("Sort command function error");
 		}
-		Response response = new Response("sortNote", null);	
-		logger.info("SortNote  ");
+		Response response = new Response("sortNote", null);
+		logger.info("Sort notes");
 		return response;
 	}
 }

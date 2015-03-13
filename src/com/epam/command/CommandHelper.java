@@ -25,36 +25,36 @@ public class CommandHelper {
 
 	private Map<CommandName, Command> commands = new HashMap<>();
 
-    public CommandHelper(){ 
-                    commands.put(CommandName.ADD, new AddCommand());
-                    commands.put(CommandName.ADD_EMAIL_NOTE, new AddEMailCommand());
-                    commands.put(CommandName.ADD_SIGN_NOTE, new AddSignCommand());
-                    commands.put(CommandName.ADD_TITLE_NOTE, new AddTitleCommand());
-                    
-                    commands.put(CommandName.DETETE, new DeleteCommand());
-                    commands.put(CommandName.DELETE_ALL, new DeleteAllCommand());
-                    
-                    commands.put(CommandName.FIND, new FindCommand());
-                    commands.put(CommandName.FIND_BY_DATE, new FindDateCommand());
-                    commands.put(CommandName.FIND_BY_EMAIL, new FindEMailCommand());
-                    commands.put(CommandName.FIND_BY_NOTE, new FindNoteCommand());
-                    commands.put(CommandName.FIND_BY_SIGN, new FindSignCommand());
-                    commands.put(CommandName.FIND_BY_TITLE, new FindTitleCommand());
-                    
-                    commands.put(CommandName.CHANGE, new ChangeCommand());
-                    
-                    commands.put(CommandName.SORT, new SortCommand());
-                    
-                    commands.put(CommandName.REPLACE, new ReplaceCommand());    
-                    
-                    commands.put(CommandName.CLONE, new CloneCommand());
-                    
-                    commands.put(CommandName.FORMAT, new FormatCommand());
-    }
-    
-    public Command getCommand(CommandName nameCommand){
-                    Command command = commands.get(nameCommand);
-                    return command;
-    }
-	
+	public CommandHelper() {
+		commands.put(CommandName.ADD, new AddCommand());
+		commands.put(CommandName.ADD_EMAIL_NOTE, new AddEMailCommand());
+		commands.put(CommandName.ADD_SIGN_NOTE, new AddSignCommand());
+		commands.put(CommandName.ADD_TITLE_NOTE, new AddTitleCommand());
+
+		commands.put(CommandName.DETETE, new DeleteCommand());
+		commands.put(CommandName.DELETE_ALL, new DeleteAllCommand());
+
+		commands.put(CommandName.FIND, new FindCommand());
+		commands.put(CommandName.FIND_BY_DATE, new FindDateCommand());
+		commands.put(CommandName.FIND_BY_EMAIL, new FindEMailCommand());
+		commands.put(CommandName.FIND_BY_NOTE, new FindNoteCommand());
+		commands.put(CommandName.FIND_BY_SIGN, new FindSignCommand());
+		commands.put(CommandName.FIND_BY_TITLE, new FindTitleCommand());
+
+		commands.put(CommandName.CHANGE, new ChangeCommand());
+
+		commands.put(CommandName.SORT, new SortCommand());
+
+		commands.put(CommandName.REPLACE, new ReplaceCommand());
+
+		commands.put(CommandName.CLONE, new CloneCommand());
+
+		commands.put(CommandName.FORMAT, new FormatCommand());
+	}
+
+	public Command getCommand(CommandName nameCommand) {
+		Command command = commands.get(nameCommand);
+		return command;
+	}
+
 }

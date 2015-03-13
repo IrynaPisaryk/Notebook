@@ -10,10 +10,10 @@ import com.epam.logger.LoggerApp;
 public final class Notebook {
 
 	private ArrayList<Note> notebook = new ArrayList<Note>();
-	
+
 	public Note getNote(int index) throws NotebookException{
 		try{
-		return notebook.get(index);
+			return notebook.get(index);
 		}
 		catch(IndexOutOfBoundsException e){
 			Logger logger = LoggerApp.getInstance().getLogger();
@@ -21,7 +21,7 @@ public final class Notebook {
 			throw new NotebookException("Notebook size is null");
 		}
 	}
-	
+
 	public Note getNote() throws NotebookException{
 		try{
 			return notebook.get(0);
@@ -35,7 +35,7 @@ public final class Notebook {
 	public void setNote(int index, Note note) {
 		notebook.add(index, note);
 	}
-	
+
 	public void setNote(Note note) {
 		notebook.add(note);
 	}
@@ -68,7 +68,7 @@ public final class Notebook {
 	public int deleteNotebook() throws NotebookException{
 		try{
 			notebook.clear();		
-		return notebook.size();
+			return notebook.size();
 		}catch(IndexOutOfBoundsException e){
 			Logger logger = LoggerApp.getInstance().getLogger();
 			logger.log(Level.SEVERE, "Exception", e);

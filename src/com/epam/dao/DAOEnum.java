@@ -11,7 +11,7 @@ public enum DAOEnum {
 	}
 
 	static public DAOEnum getType(String pType) {
-		for (DAOEnum type: DAOEnum.values()) {
+		for (DAOEnum type : DAOEnum.values()) {
 			if (type.getTypeValue().equals(pType)) {
 				return type;
 			}

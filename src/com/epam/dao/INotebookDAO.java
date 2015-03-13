@@ -7,18 +7,20 @@ import com.epam.exception.DAOException;
 import com.epam.notebook.Note;
 
 public interface INotebookDAO {
-	
-	//void-boolean
+
 	void addNote(Date date, String note) throws DAOException;
 
-	void addNoteWithEMail(Date date, String note, String email) throws DAOException;
+	void addNoteWithEMail(Date date, String note, String email)
+			throws DAOException;
 
-	void addNoteWithSignature(Date date, String note, String signature) throws DAOException;
+	void addNoteWithSignature(Date date, String note, String signature)
+			throws DAOException;
 
-	void addNoteWithTitle(Date date, String note, String title) throws DAOException;
+	void addNoteWithTitle(Date date, String note, String title)
+			throws DAOException;
 
 	void deleteNote(int index) throws DAOException;
-	
+
 	void deleteAllNotes() throws DAOException;
 
 	Note findNoteByIndex(int index) throws DAOException;
@@ -43,5 +45,4 @@ public interface INotebookDAO {
 
 	void formatNote(int index) throws DAOException;
 
-	
 }

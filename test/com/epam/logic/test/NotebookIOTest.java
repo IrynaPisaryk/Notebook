@@ -1,46 +1,36 @@
 package com.epam.logic.test;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Reader;
-import java.io.Writer;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import com.epam.logic.NotebookIO;
 import com.epam.notebook.Note;
 import com.epam.notebook.NoteWithEMail;
 import com.epam.notebook.NoteWithSignature;
 import com.epam.notebook.NoteWithTitle;
+import com.epam.resource.ResourceProvider;
 
 public class NotebookIOTest {
  
 	private File file;
-	private File file1;
+	private File fileTemp;
 	
 	@BeforeTest
-	public void beforeTest(){		
-		//File file = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test.txt");
-		//File file1 = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test1.txt");
-		file = new File("D:\\testFile.txt");
-		file1 = new File("D:\\testTempFile.txt");
+	public void beforeTest(){
+		file = new File(ResourceProvider.getFileTestPathKeeper());
+		fileTemp = new File(ResourceProvider.getFileTempTestPathKeeper());
 	}
   
 	@AfterTest
 	public void afterTest(){		
 		file.deleteOnExit();
+		fileTemp.deleteOnExit();
 	}
   		
 
@@ -64,11 +54,11 @@ public class NotebookIOTest {
 	
 	@Test
 	public void readNoteFromFileTest() throws IOException, ParseException {	
-		File fTest = new File("D:\\FTest.txt");
+		File fTest = new File(ResourceProvider.getFileFTempTestPathKeeper());		
 		NotebookIO io = new NotebookIO();
 		Note note = io.readNoteFromFile(fTest, 0);		
-		Date d = new Date("2015/06/06");
-		Note note1 = new Note(d, "I hate this world");		
+		Date d = new Date("2015/01/01");
+		Note note1 = new Note(d, "all");		
 		Assert.assertEquals(note.toString(), note1.toString());
 	}	
 		
@@ -88,7 +78,6 @@ public class NotebookIOTest {
 
 	@Test
 	public void changeLineintoNoteTest() throws ParseException {
-
 		String line = "Note[date=2015/6/6][note=ira]";		
 		Date date = new Date("2015/6/6");
 		String text = "ira";
@@ -123,27 +112,27 @@ public class NotebookIOTest {
 
 	@Test
 	public void returnSizeTest() throws IOException {
-		File fTest = new File("D:\\FTest.txt");
+		File fTest = new File(ResourceProvider.getFileFTempTestPathKeeper());
 		NotebookIO io = new NotebookIO();
-		Assert.assertEquals(io.returnSize(fTest), 1);
+		Assert.assertEquals(io.returnSize(fTest), 12);
 	}
 
 	@Test
 	public void writeNoteIntoFileInPositionTest() throws IOException, ParseException {
-		File fTest = new File("D:\\newTest.txt");
+		File fTest = new File(ResourceProvider.getFileNoTempTestPathKeeper());
 		NotebookIO io = new NotebookIO();
 		ArrayList<Note> array = new ArrayList<Note>();
 		array.add(new Note(new Date("2015/01/01"), "all"));
 		array.add(new Note(new Date("2013/06/06"), "rere"));
 		array.add(new Note(new Date("2010/03/16"), "mimimi"));
 		io.writeNotebookIntoFile(fTest, array);
-		io.writeNoteIntoFile(fTest, file1, 1, new Note(new Date("2015/04/01"), "olimpicus"));
+		io.writeNoteIntoFile(fTest, fileTemp, 1, new Note(new Date("2015/04/01"), "olimpicus"));
 		Assert.assertEquals(io.readNoteFromFile(fTest, 1), new Note(new Date("2015/04/01"), "olimpicus"));
 	}
 
 
 	public void readNotebookFromFileTest() throws IOException, ParseException {
-		File fTest = new File("D:\\newTest.txt");
+		File fTest = new File(ResourceProvider.getFileNoTempTestPathKeeper());
 		NotebookIO io = new NotebookIO();
 		ArrayList<Note> array = new ArrayList<Note>();
 		array.add(new Note(new Date("2015/01/01"), "all"));
@@ -155,7 +144,8 @@ public class NotebookIOTest {
 
 	@Test
 	public void writeNotebookIntoFileTest() throws IOException, ParseException {
-		File fTest = new File("D:\\newTest1.txt");
+		File fTest = new File(ResourceProvider.getFileFTempTestPathKeeper());
+		fTest.createNewFile();
 		NotebookIO io = new NotebookIO();
 		ArrayList<Note> array = new ArrayList<Note>();
 		array.add(new Note(new Date("2015/01/01"), "all"));
