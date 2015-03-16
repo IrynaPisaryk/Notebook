@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.epam.exception.NotebookException;
 import com.epam.notebook.Note;
 import com.epam.notebook.Notebook;
 
@@ -35,8 +36,8 @@ public class NotebookTest extends Object {
 	}
 
 	//exceptions
-	/*@Test
-	public void setNoteTest() {		
+	@Test
+	public void setNoteTest() throws NotebookException {		
 		Note note = new Note(date, "Note4");
 		int index = 2;
 		notebook.setNote(index, note);
@@ -44,20 +45,20 @@ public class NotebookTest extends Object {
 	}
 
 	@Test
-	public void deleteNoteTest() {
+	public void deleteNoteTest() throws NotebookException {
 		Note note = notebook.getNote(2);
 		notebook.deleteNote(1);
 		Assert.assertEquals(notebook.getNote(1), note);
 	}
 
 	@Test
-	public void deleteNotebookTest() {
+	public void deleteNotebookTest() throws NotebookException {
 		notebook.deleteNotebook();
 		Assert.assertEquals(notebook.getNotebook().size(), 0);
 	}
 
 	@Test
-	public void setNotebookTest() {
+	public void setNotebookTest() throws NotebookException {
 		ArrayList<Note> notes = new ArrayList<Note>();
 		notes.add(new Note(date, "Note5"));
 		notebook.setNotebook(notes);
@@ -65,14 +66,14 @@ public class NotebookTest extends Object {
 	}
 
 	@Test
-	public void getNoteTest() {
+	public void getNoteTest() throws NotebookException {
 		int index = 2;
 		Assert.assertEquals(notebook.getNote(index), this.notes.get(index));
 	}
 
 	@Test
-	public void getNotebookTest() {
+	public void getNotebookTest() throws NotebookException {
 		Assert.assertEquals(notebook.getNotebook(), notes);
-	}*/
+	}
 
 }

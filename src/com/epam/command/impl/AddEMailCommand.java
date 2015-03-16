@@ -3,6 +3,7 @@ package com.epam.command.impl;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import com.epam.command.Command;
 import com.epam.command.Request;
 import com.epam.command.Response;
@@ -23,16 +24,19 @@ public class AddEMailCommand implements Command {
 
 		Object[] obj = request.getParam("addEMail");
 
-		if (obj.length != 0) {
-			date = (Date) obj[0];
-			note = (String) obj[1];
-			email = (String) obj[2];
-		}
 		try {
+			if (obj.length != 0) {
+				date = (Date) obj[0];
+				note = (String) obj[1];
+				email = (String) obj[2];
+			}
 			editor.addNoteWithEMail(date, note, email);
 		} catch (LogicException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new CommandException("AddEMail command function error");
+			logger.log(Level.SEVERE, "AddEMail function error", e);
+			throw new CommandException("AddEMail function error");
+		} catch (NullPointerException e) {
+			logger.log(Level.SEVERE, "Input parameters for AddEMail function error", e);
+			throw new CommandException("Input parameters for AddEMail function error");
 		}
 		Response response = new Response("addEMail", null);		
 		logger.info("Create new note with email with fields: " + date.toString() + " and " + note + "and" + email);

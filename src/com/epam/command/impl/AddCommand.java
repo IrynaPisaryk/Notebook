@@ -21,17 +21,22 @@ public class AddCommand implements Command {
 		Logger logger = LoggerApp.getInstance().getLogger();
 
 		Object[] obj = request.getParam("addNote");
-
-		if (obj.length != 0) {
-			date = (Date) obj[0];
-			note = (String) obj[1];
-		}
 		try {
+			
+			if (obj.length != 0) {
+				date = (Date) obj[0];
+				note = (String) obj[1];
+			}		
 			editor.addNote(date, note);
+			
 		} catch (LogicException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new CommandException("Add command function error");
-		}
+			logger.log(Level.SEVERE, "Add function error", e);
+			throw new CommandException("Add function error");
+		} catch (NullPointerException e) {
+			logger.log(Level.SEVERE, "Input parameters for add function error", e);
+			throw new CommandException("Input parameters for add function error");
+		}		
+		
 		Response response = new Response("addNote", null);
 		logger.info("Create new simple note with fields: " + date.toString() + " and " + note);	
 		return response;

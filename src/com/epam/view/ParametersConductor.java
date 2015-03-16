@@ -186,11 +186,13 @@ public class ParametersConductor {
 		System.out.println("Enter date for search in format dd.mm.yyyy:");
 		String indexDate = null;
 		try {
-			indexDate = scan2.nextLine();
+			indexDate = scan2.nextLine();	
+			request.setParam("findDate", new Date(indexDate));
 		} catch (InputMismatchException e) {
 			throw new ViewException();
+		} catch(IllegalArgumentException e){
+			throw new ViewException();
 		}
-		request.setParam("findDate", new Date(indexDate));
 		return request;
 	}
 

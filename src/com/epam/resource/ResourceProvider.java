@@ -13,9 +13,8 @@ public class ResourceProvider {
 	private static String filePathKeeper = null;
 	private static String fileTempPathKeeper = null;
 	private static String fileTestPathKeeper = null;
-	private static String fileTempTestPathKeeper = null;
-	private static String fileNoTempTestPathKeeper = null;
-	private static String fileFTempTestPathKeeper = null;
+	private static String fileTest1PathKeeper = null;
+	private static String fileTest2PathKeeper = null;
 
 	public static String getDataKeeper() {
 		dataKeeper = resources.getString("DataKeeper");
@@ -41,21 +40,14 @@ public class ResourceProvider {
 		fileTestPathKeeper = resources.getString("FileTestPathKeeper");
 		return fileTestPathKeeper;
 	}
-
-	public static String getFileTempTestPathKeeper() {
-		fileTempTestPathKeeper = resources.getString("FileTempTestPathKeeper");
-		return fileTempTestPathKeeper;
+	
+	public static String getFileTest1PathKeeper() {
+		fileTest1PathKeeper = resources.getString("FileTest1PathKeeper");
+		return fileTest1PathKeeper;
 	}
-
-	public static String getFileNoTempTestPathKeeper() {
-		fileNoTempTestPathKeeper = resources
-				.getString("FileNoTempTestPathKeeper");
-		return fileNoTempTestPathKeeper;
-	}
-
-	public static String getFileFTempTestPathKeeper() {
-		fileFTempTestPathKeeper = resources
-				.getString("FileFTempTestPathKeeper");
-		return fileFTempTestPathKeeper;
+	
+	public static String getFileTest2PathKeeper() {
+		fileTest2PathKeeper = resources.getString("FileTest2PathKeeper");
+		return fileTest2PathKeeper;
 	}
 }

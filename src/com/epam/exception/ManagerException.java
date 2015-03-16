@@ -6,11 +6,9 @@ public class ManagerException extends Exception {
 
 	public ManagerException(String message) {
 		super(message);
-		super.printStackTrace();
 	}
 
 	public ManagerException() {
-		super.printStackTrace();
 	}
 
 }

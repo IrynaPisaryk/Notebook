@@ -3,6 +3,7 @@ package com.epam.command.impl;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import com.epam.command.Command;
 import com.epam.command.Request;
 import com.epam.command.Response;
@@ -25,16 +26,19 @@ public class AddSignCommand implements Command {
 
 		Object[] obj = request.getParam("addSign");
 
-		if (obj.length != 0) {
-			date = (Date) obj[0];
-			note = (String) obj[1];
-			sign = (String) obj[2];
-		}
 		try {
+			if (obj.length != 0) {
+				date = (Date) obj[0];
+				note = (String) obj[1];
+				sign = (String) obj[2];
+			}
 			editor.addNoteWithSignature(date, note, sign);
 		} catch (LogicException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new CommandException("AddSign command function error");
+			logger.log(Level.SEVERE, "AddSign function error", e);
+			throw new CommandException("AddSign function error");
+		} catch (NullPointerException e) {
+			logger.log(Level.SEVERE, "Input parameters for AddSign function error", e);
+			throw new CommandException("Input parameters for AddSign function error");
 		}
 		Response response = new Response("addSign", null);
 		logger.info("Create new note with signature with fields: " + date.toString() + " and " + note + "and" + sign);

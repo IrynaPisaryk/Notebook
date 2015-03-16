@@ -18,11 +18,11 @@ public final class LoggerApp {
 			fh = new FileHandler(ResourceProvider.getLoggerKeeper());
 			logger.addHandler(fh);
 		} catch (SecurityException e) {
-			logger.log(Level.SEVERE,
-					"Can't get log because secure error occured", e);
+			logger.log(Level.SEVERE, "Can't get log because secure error occured", e);
 		} catch (IOException e) {
 			logger.log(Level.SEVERE, "Can't get log because i/o error occured",	e);
 		} 
+		
 	}
 
 	public static LoggerApp getInstance() {

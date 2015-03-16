@@ -16,7 +16,7 @@ import com.epam.notebook.NoteWithTitle;
 
 public class NotebookMemoryImplTest {
 	
-	private static NotebookMemoryImpl notebookMemory = new NotebookMemoryImpl();
+	private NotebookMemoryImpl notebookMemory = new NotebookMemoryImpl();
 	private Date date = new Date();
 	
 	@BeforeMethod

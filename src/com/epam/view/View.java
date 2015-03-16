@@ -16,8 +16,11 @@ public class View {
 
 	private Manager manager = new Manager();
 	private Request request = new Request();
+	private Logger logger = LoggerApp.getInstance().getLogger();
+	private Printer printer = new Printer();
 
 	private int showMenu(){
+		
 		System.out.println("What you want to do?"+"\n"
 				+"add simple note: 1"+"\n"
 				+"add note with email: 2"+"\n"
@@ -37,54 +40,55 @@ public class View {
 				+"replace note: 16"+"\n"
 				+"sort note: 17"+"\n"
 				+"exit: 0"+"\n");
+		
 		Scanner scan = new Scanner(System.in);	
 		int result = 0;
+		int failFlag = -100;
+		
 		if(scan.hasNextInt()){
 			result = scan.nextInt();
 			if(result >= 0 && result < 18){
 				return result;
+			}else{
+				System.out.println("Incorrect number");
+				return failFlag;
 			}
 		}else{
-			System.out.println("Incorrect number");
-			return result;
+			System.out.println("Incorrect symbol");
+			return failFlag;
 		}
-		return result;
 
 	}
 	
 	public void run() {
 		int whatDo = -1;
+		int failFlag = -100;
+		
 		while(whatDo != 0){
-			whatDo = showMenu();	
-			Request req = null;
-			try{
-				req = prepareParams(whatDo, request);
-			}catch(ViewException e){
-				Logger logger = LoggerApp.getInstance().getLogger();
-				logger.log(Level.SEVERE, "Exception", e);
-				System.out.println("Input patemeters error"+"\n");
-				
+			whatDo = showMenu();
+			if(whatDo == failFlag){
+				return;
 			}
-			if( req == null){
+			try{
+				request = prepareParams(whatDo, request);
+			}catch(ViewException e){
+				logger.log(Level.SEVERE, "Input patemeters error", e);				
+			}			
+			if( request == null){
 				return;
 			}else{		
-				CommandName name = getCommandName(whatDo);
-				Response response = null;
-				try{
-					response = manager.doRequest(name, request);
-				}catch(ManagerException e){
-					Logger logger = LoggerApp.getInstance().getLogger();
-					logger.log(Level.SEVERE, "Exception", e);
-					System.out.println("Programm error"+"\n");
-					response = new Response("", null);
-				}
-				Printer printer = new Printer();
-				try{
-					printer.printResponse(request.getKey(), response);
-				}catch(ViewException e){
-					Logger logger = LoggerApp.getInstance().getLogger();
-					logger.log(Level.SEVERE, "Exception", e);
-					System.out.println("Printer error"+"\n");
+					CommandName name = getCommandName(whatDo);
+					Response response = null;
+					try{
+						response = manager.doRequest(name, this.request);
+					}catch(ManagerException e){
+						logger.log(Level.SEVERE, "Programm error", e);
+						response = new Response("", null);
+					}
+					try{
+						printer.printResponse(this.request.getKey(), response);
+					}catch(ViewException e){
+						logger.log(Level.SEVERE, "Printer error", e);
 				}
 			}
 		}

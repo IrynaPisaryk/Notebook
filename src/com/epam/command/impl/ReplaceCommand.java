@@ -21,8 +21,11 @@ public class ReplaceCommand implements Command {
 		try {
 			editor.replaceNote((int) obj[0], (Note) obj[1]);
 		} catch (LogicException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new CommandException("Replace command function error");
+			logger.log(Level.SEVERE, "Replace function error", e);
+			throw new CommandException("Replace function error");
+		} catch (NullPointerException e) {
+			logger.log(Level.SEVERE, "Input parameters for replace function error", e);
+			throw new CommandException("Input parameters for replace function error");
 		}
 		Response response = new Response("replaceNote", null);
 		logger.info("Replace note with id=" + (int) obj[0]);

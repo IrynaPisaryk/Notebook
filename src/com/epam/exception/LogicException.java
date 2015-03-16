@@ -6,11 +6,9 @@ public class LogicException extends Exception {
 
 	public LogicException(String message) {
 		super(message);
-		super.printStackTrace();
 	}
 
 	public LogicException() {
-		super.printStackTrace();
 	}
 
 }
