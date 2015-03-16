@@ -1,14 +1,11 @@
 package com.epam.dao.impl;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import com.epam.dao.INotebookDAO;
 import com.epam.exception.DAOException;
 import com.epam.exception.LogicException;
@@ -216,7 +213,6 @@ public final class NotebookFileImpl implements INotebookDAO {
 					foundNotes.add(note);
 				}
 			}
-
 			return foundNotes;
 		} catch (LogicException e) {
 			logger.log(Level.SEVERE, "Exception", e);
