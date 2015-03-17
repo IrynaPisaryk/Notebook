@@ -24,6 +24,22 @@ public final class NotebookFileImpl implements INotebookDAO {
 	private File fileTemp = new File(ResourceProvider.getFileTempPathKeeper());
 	private Logger logger = LoggerApp.getInstance().getLogger();
 
+	public void setFile(File file){
+		this.file = file;
+	}
+
+	public void setFileTemp(File file){
+		fileTemp = file;
+	}
+	
+	public File getFile(){
+		return file;
+	}
+	
+	public File getFileTemp(){
+		return fileTemp;
+	}
+
 	@Override
 	public void addNote(Date date, String text) throws DAOException {
 		NotebookIO io = new NotebookIO();

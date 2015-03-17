@@ -3,21 +3,24 @@ package com.epam.logic.test;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import com.epam.exception.LogicException;
 import com.epam.logic.NotebookIO;
 import com.epam.notebook.Note;
 import com.epam.notebook.NoteWithEMail;
 import com.epam.notebook.NoteWithSignature;
 import com.epam.notebook.NoteWithTitle;
+import com.epam.property.TestProvider;
 import com.epam.resource.ResourceProvider;
 
 public class NotebookIOTest {
  
 	@Test
 	public void setFileTest() throws LogicException{
-		File file = new File(ResourceProvider.getFileTestPathKeeper());
+		File file = new File(TestProvider.getFileTestPathKeeper());
 		NotebookIO io = new NotebookIO();
 		io.setFile(file);
 		Assert.assertEquals(file.length(), 0);
@@ -26,7 +29,7 @@ public class NotebookIOTest {
 	
 	@Test
 	public void writeNoteIntoFileTest() throws LogicException {	
-		File file = new File(ResourceProvider.getFileTestPathKeeper());
+		File file = new File(TestProvider.getFileTestPathKeeper());
 		Date d = new Date("2015/06/06");
 		Note note = new Note(d, "I hate this world");
 		NotebookIO io = new NotebookIO();
@@ -38,7 +41,7 @@ public class NotebookIOTest {
 	
 	@Test
 	public void readNoteFromFileTest() throws LogicException {			
-		File file = new File(ResourceProvider.getFileTestPathKeeper());
+		File file = new File(TestProvider.getFileTestPathKeeper());
 		Date d = new Date("2015/01/01");
 		Note note1 = new Note(d, "all");
 		NotebookIO io = new NotebookIO();
@@ -50,7 +53,7 @@ public class NotebookIOTest {
 		
 	@Test
 	public void readNoteFromFileByIndexTest() throws LogicException {
-		File file = new File(ResourceProvider.getFileTestPathKeeper());
+		File file = new File(TestProvider.getFileTestPathKeeper());
 		NotebookIO io = new NotebookIO();
 		Date date = new Date("2015/06/06");
 		Note note = new Note(date, "ira");
@@ -65,7 +68,7 @@ public class NotebookIOTest {
 
 	@Test
 	public void changeLineintoNoteTest() throws LogicException {
-		File file = new File(ResourceProvider.getFileTestPathKeeper());
+		File file = new File(TestProvider.getFileTestPathKeeper());
 		String line = "Note[date=2015/6/6][note=ira]";		
 		Date date = new Date("2015/6/6");
 		String text = "ira";
@@ -101,16 +104,19 @@ public class NotebookIOTest {
 
 	@Test
 	public void returnSizeTest() throws LogicException {	
-		File file = new File(ResourceProvider.getFileTest1PathKeeper());
+		File file = new File(TestProvider.getFileTest1PathKeeper());
+		Date d = new Date("2015/06/06");
+		Note note = new Note(d, "I hate this world");
 		NotebookIO io = new NotebookIO();
-		Assert.assertEquals(io.returnSize(file), 0);
+		io.writeNoteIntoFile(file, note);
+		Assert.assertEquals(io.returnSize(file), 1);
 		file.delete();
 	}
 
 	@Test
 	public void writeNoteIntoFileInPositionTest() throws LogicException {
-		File file = new File(ResourceProvider.getFileTestPathKeeper());
-		File fileTemp = new File(ResourceProvider.getFileTest2PathKeeper());
+		File file = new File(TestProvider.getFileTestPathKeeper());
+		File fileTemp = new File(TestProvider.getFileTest2PathKeeper());
 		NotebookIO io = new NotebookIO();
 		ArrayList<Note> array = new ArrayList<Note>();
 		array.add(new Note(new Date("2015/01/01"), "all"));
@@ -125,7 +131,7 @@ public class NotebookIOTest {
 
 
 	public void readNotebookFromFileTest() throws LogicException {
-		File file = new File(ResourceProvider.getFileTestPathKeeper());
+		File file = new File(TestProvider.getFileTestPathKeeper());
 		NotebookIO io = new NotebookIO();
 		ArrayList<Note> array = new ArrayList<Note>();
 		array.add(new Note(new Date("2015/01/01"), "all"));
@@ -138,7 +144,7 @@ public class NotebookIOTest {
 
 	@Test
 	public void writeNotebookIntoFileTest() throws LogicException {
-		File file = new File(ResourceProvider.getFileTestPathKeeper());
+		File file = new File(TestProvider.getFileTestPathKeeper());
 		NotebookIO io = new NotebookIO();
 		ArrayList<Note> array = new ArrayList<Note>();
 		array.add(new Note(new Date("2015/01/01"), "all"));

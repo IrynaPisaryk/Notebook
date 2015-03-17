@@ -3,9 +3,11 @@ package com.epam.logger;
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.epam.resource.ResourceProvider;
+import com.epam.runner.Runner;
 
 public final class LoggerApp {
 
@@ -13,8 +15,9 @@ public final class LoggerApp {
 	private Logger logger = Logger.getLogger(LoggerApp.class.getName());
 	private FileHandler fh = null;
 
-	{
+	{		
 		try {
+			//LogManager.getLogManager().readConfiguration(Runner.class.getResourceAsStream("/LoggerConfig.properties"));
 			fh = new FileHandler(ResourceProvider.getLoggerKeeper());
 			logger.addHandler(fh);
 		} catch (SecurityException e) {
