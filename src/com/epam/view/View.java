@@ -1,5 +1,12 @@
 package com.epam.view;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,33 +25,58 @@ public class View {
 	private Request request = new Request();
 	private Logger logger = LoggerApp.getInstance().getLogger();
 	private Printer printer = new Printer();
-
-	private int showMenu(){
-		
-		System.out.println("What you want to do?"+"\n"
-				+"add simple note: 1"+"\n"
-				+"add note with email: 2"+"\n"
-				+"add note with signature: 3"+"\n"
-				+"add note with title: 4"+"\n"
-				+"change note: 5"+"\n"
-				+"clone note: 6"+"\n"
-				+"delete all notes: 7"+"\n"
-				+"delete note: 8"+"\n"
-				+"find note by index: 9"+"\n"
-				+"find note by email: 10"+"\n"
-				+"find note by signature: 11"+"\n"
-				+"find note by title: 12"+"\n"
-				+"find note by date: 13"+"\n"
-				+"find note by note: 14"+"\n"
-				+"format note: 15"+"\n"
-				+"replace note: 16"+"\n"
-				+"sort note: 17"+"\n"
-				+"exit: 0"+"\n");
-		
+	private Locale locale = getLocale();
+	
+	public static Locale getLocale(){		
+		System.out.println("Please, change language: english(1)/russian(2)");
 		Scanner scan = new Scanner(System.in);	
-		int result = 0;
-		int failFlag = -100;
+		int resultLang = 0;
+		if(scan.hasNextInt()){
+			resultLang = scan.nextInt();			
+			switch(resultLang){			
+			case(1):
+				return new Locale("en", "US");
+			case(2):				
+				return new Locale("ru", "RU");
+			default:
+				System.out.println("Incorrect number");
+			return null;
+			}			
+			
+		}else{
+			System.out.println("Incorrect symbol");
+			return null;
+		}
+	}
+	
+	public static int getMenu(Locale locale){
 		
+		ResourceBundle resourseMenu = null;
+		String path = System.getProperty("user.dir");
+		File file = new File(path);
+		URL[] urls = new URL[1];
+		
+		ClassLoader loader;
+		 {
+			try {
+				urls[0] = file.toURI().toURL();
+			} catch (MalformedURLException e) {
+				System.out.println("Can not path to resourse file");
+				e.printStackTrace();
+			}
+			loader = new URLClassLoader(urls);
+			try{
+				resourseMenu = ResourceBundle.getBundle("Menu", locale, loader);
+			} catch(MissingResourceException e){
+				System.out.println("Missing resource file");
+				e.printStackTrace();
+			}
+		}
+		 
+		System.out.println(resourseMenu.getString("menu"));
+		Scanner scan = new Scanner(System.in);
+		int result = 0;		
+		int failFlag = -100;
 		if(scan.hasNextInt()){
 			result = scan.nextInt();
 			if(result >= 0 && result < 18){
@@ -57,15 +89,13 @@ public class View {
 			System.out.println("Incorrect symbol");
 			return failFlag;
 		}
-
 	}
 	
-	public void run() {
+ 	public void run() {
 		int whatDo = -1;
-		int failFlag = -100;
-		
+		int failFlag = -100;		
 		while(whatDo != 0){
-			whatDo = showMenu();
+			whatDo = getMenu(locale);
 			if(whatDo == failFlag){
 				return;
 			}
@@ -93,6 +123,7 @@ public class View {
 			}
 		}
 	}	
+	
 	private CommandName getCommandName(int whatDo){	
 
 		CommandName name = null;

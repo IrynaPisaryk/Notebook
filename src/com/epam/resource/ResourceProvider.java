@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class ResourceProvider {
@@ -16,7 +17,7 @@ public class ResourceProvider {
 	private static URL[] urls = new URL[1];
 	
 	private static ClassLoader loader;
-	private static ResourceBundle resources; 
+	private static ResourceBundle resources;
 	
 	private static String dataKeeper = null;
 	private static String loggerKeeper = null;
@@ -27,11 +28,16 @@ public class ResourceProvider {
 		try {
 			urls[0] = file.toURI().toURL();
 		} catch (MalformedURLException e) {
-			System.out.println("Can not find resourse file");
+			System.out.println("Can not path to resourse file");
 			e.printStackTrace();
 		}
 		loader = new URLClassLoader(urls);
-		resources = ResourceBundle.getBundle("ProgramResource", locale, loader);
+		try{
+			resources = ResourceBundle.getBundle("ProgramResource", locale, loader);
+		} catch(MissingResourceException e){
+			System.out.println("Missing resource file");
+			e.printStackTrace();
+		}
 	}
 	
 	public static String getDataKeeper() {
