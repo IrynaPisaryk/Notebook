@@ -1,23 +1,25 @@
 package com.epam.logger;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import com.epam.resource.ResourceProvider;
-import com.epam.runner.Runner;
 
 public final class LoggerApp {
-
+	
 	private static final LoggerApp instance = new LoggerApp();
 	private Logger logger = Logger.getLogger(LoggerApp.class.getName());
 	private FileHandler fh = null;
-
+	private String pathToConfigFile = System.getProperty("user.dir") + "\\LoggerConfig.properties";
+	
 	{		
 		try {
-			//LogManager.getLogManager().readConfiguration(Runner.class.getResourceAsStream("/LoggerConfig.properties"));
+			InputStream iStream = new FileInputStream(pathToConfigFile);
+			LogManager.getLogManager().readConfiguration(iStream);
 			fh = new FileHandler(ResourceProvider.getLoggerKeeper());
 			logger.addHandler(fh);
 		} catch (SecurityException e) {

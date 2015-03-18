@@ -4,8 +4,7 @@ import com.epam.resource.ResourceProvider;
 
 public abstract class DAOFactory {
 
-	private static DAOEnum type = DAOEnum.getType(ResourceProvider
-			.getDataKeeper());
+	private static DAOEnum type = DAOEnum.getType(ResourceProvider.getDataKeeper());
 
 	public abstract INotebookDAO getNotebookDAO();
 

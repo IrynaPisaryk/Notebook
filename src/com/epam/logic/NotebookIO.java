@@ -10,7 +10,6 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Date;
-
 import com.epam.exception.LogicException;
 import com.epam.notebook.Note;
 import com.epam.notebook.NoteWithEMail;

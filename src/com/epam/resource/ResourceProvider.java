@@ -1,6 +1,7 @@
 package com.epam.resource;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Locale;
@@ -10,14 +11,28 @@ public class ResourceProvider {
 
 	private static final Locale locale = Locale.ENGLISH;
 	
-	private static File file = new File(System.getProperty("user.dir"));
-	private static URL[] urls = {file.toURI().toURL()};
-	private static ClassLoader loader = new URLClassLoader(urls);
-	private static ResourceBundle resources = ResourceBundle.getBundle("ProgramResource", locale, loader);
+	private static String path = System.getProperty("user.dir");
+	private static File file = new File(path);
+	private static URL[] urls = new URL[1];
+	
+	private static ClassLoader loader;
+	private static ResourceBundle resources; 
+	
 	private static String dataKeeper = null;
 	private static String loggerKeeper = null;
 	private static String filePathKeeper = null;
 	private static String fileTempPathKeeper = null;
+	
+	static {
+		try {
+			urls[0] = file.toURI().toURL();
+		} catch (MalformedURLException e) {
+			System.out.println("Can not find resourse file");
+			e.printStackTrace();
+		}
+		loader = new URLClassLoader(urls);
+		resources = ResourceBundle.getBundle("ProgramResource", locale, loader);
+	}
 	
 	public static String getDataKeeper() {
 		dataKeeper = resources.getString("DataKeeper");

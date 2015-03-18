@@ -1,17 +1,39 @@
 package com.epam.property;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class TestProvider {
 	
 	private static final Locale locale = Locale.ENGLISH;
-	private static ResourceBundle resources = ResourceBundle.getBundle("TestResource", locale);
+	
+	private static String path = System.getProperty("user.dir");
+	private static File file = new File(path);
+	private static URL[] urls = new URL[1];
+	
+	private static ClassLoader loader;	
+	private static ResourceBundle resources;
+	
 	private static String NotebookFileImplNoFile = null;
 	private static String NotebookFileImplNoFileTemp = null;
 	private static String FileTestPathKeeper = null;
 	private static String FileTest1PathKeeper = null;
 	private static String FileTest2PathKeeper = null;
+	
+	static {
+		try {
+			urls[0] = file.toURI().toURL();
+		} catch (MalformedURLException e) {
+			System.out.println("Can not find resourse file");
+			e.printStackTrace();
+		}
+		loader = new URLClassLoader(urls);
+		resources = ResourceBundle.getBundle("TestResource", locale, loader);
+	}
 	
 	public static String getNotebookFileImplNoFile() {
 		NotebookFileImplNoFile = resources.getString("NotebookFileImplNoFile");
