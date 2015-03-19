@@ -77,6 +77,8 @@ public final class NotebookFileImpl implements INotebookDAO {
 			io.writeNoteIntoFile(file, note);
 		} catch (LogicException e) {
 			logger.log(Level.SEVERE, "Exception", e);
+			//throw new DAOException(
+					//"Can not write note with signature into file", e);
 			throw new DAOException(
 					"Can not write note with signature into file");
 		}

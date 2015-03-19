@@ -25,9 +25,15 @@ public class View {
 	private Request request = new Request();
 	private Logger logger = LoggerApp.getInstance().getLogger();
 	private Printer printer = new Printer();
-	private Locale locale = getLocale();
+	private static Locale locale = null;
+	private static ResourceBundle resourseMenu = null;
 	
-	public static Locale getLocale(){		
+	static {
+		
+		getLocale();
+	}
+	
+	public static void getLocale(){		
 		System.out.println("Please, change language: english(1)/russian(2)");
 		Scanner scan = new Scanner(System.in);	
 		int resultLang = 0;
@@ -35,23 +41,19 @@ public class View {
 			resultLang = scan.nextInt();			
 			switch(resultLang){			
 			case(1):
-				return new Locale("en", "US");
+				locale = new Locale("en", "US");
+			break;
 			case(2):				
-				return new Locale("ru", "RU");
-			default:
-				System.out.println("Incorrect number");
-			return null;
-			}			
-			
+				locale =  new Locale("ru", "RU");
+			break;
+			}						
 		}else{
 			System.out.println("Incorrect symbol");
-			return null;
+			return;
 		}
 	}
 	
-	public static int getMenu(Locale locale){
-		
-		ResourceBundle resourseMenu = null;
+	public static int getMenu(){			
 		String path = System.getProperty("user.dir");
 		File file = new File(path);
 		URL[] urls = new URL[1];
@@ -65,14 +67,13 @@ public class View {
 				e.printStackTrace();
 			}
 			loader = new URLClassLoader(urls);
-			try{
+			try{		
 				resourseMenu = ResourceBundle.getBundle("Menu", locale, loader);
 			} catch(MissingResourceException e){
 				System.out.println("Missing resource file");
 				e.printStackTrace();
 			}
 		}
-		 
 		System.out.println(resourseMenu.getString("menu"));
 		Scanner scan = new Scanner(System.in);
 		int result = 0;		
@@ -95,7 +96,7 @@ public class View {
 		int whatDo = -1;
 		int failFlag = -100;		
 		while(whatDo != 0){
-			whatDo = getMenu(locale);
+			whatDo = getMenu();
 			if(whatDo == failFlag){
 				return;
 			}
@@ -116,7 +117,7 @@ public class View {
 						response = new Response("", null);
 					}
 					try{
-						printer.printResponse(this.request.getKey(), response);
+						printer.printResponse(this.request.getKey(), response, resourseMenu);
 					}catch(ViewException e){
 						logger.log(Level.SEVERE, "Printer error", e);
 				}
@@ -188,41 +189,41 @@ public class View {
 		ParametersConductor conductor = new ParametersConductor();
 		switch(i){
 		case(1):
-			return conductor.prepareAddParams(request);
+			return conductor.prepareAddParams(request, resourseMenu);
 		case(2):
-			return conductor.prepareAddEMailParams(request);
+			return conductor.prepareAddEMailParams(request, resourseMenu);
 		case(3):
-			return conductor.prepareAddSignParams(request);
+			return conductor.prepareAddSignParams(request, resourseMenu);
 		case(4):
-			return conductor.prepareAddTitleParams(request);
+			return conductor.prepareAddTitleParams(request, resourseMenu);
 		case(5):
-			return conductor.prepareChangeParams(request);
+			return conductor.prepareChangeParams(request, resourseMenu);
 		case(6):
-			return conductor.prepareCloneParams(request);
+			return conductor.prepareCloneParams(request, resourseMenu);
 		case(7):
 			return conductor.prepareDeleteAllParams(request);
 		case(8):
-			return conductor.prepareDeleteParams(request);
+			return conductor.prepareDeleteParams(request, resourseMenu);
 		case(9):
-			return conductor.prepareFindParams(request);
+			return conductor.prepareFindParams(request, resourseMenu);
 		case(10):
-			return conductor.prepareFindEMailParams(request);
+			return conductor.prepareFindEMailParams(request, resourseMenu);
 		case(11):
-			return conductor.prepareFindSignParams(request);
+			return conductor.prepareFindSignParams(request, resourseMenu);
 		case(12):
-			return conductor.prepareFindTitleParams(request);
+			return conductor.prepareFindTitleParams(request, resourseMenu);
 		case(13):
-			return conductor.prepareFindDateParams(request);
+			return conductor.prepareFindDateParams(request, resourseMenu);
 		case(14):
-			return conductor.prepareFindNoteParams(request);
+			return conductor.prepareFindNoteParams(request, resourseMenu);
 		case(15):
-			return conductor.prepareFormatParams(request);
+			return conductor.prepareFormatParams(request, resourseMenu);
 		case(16):
-			return conductor.prepareReplaceParams(request);
+			return conductor.prepareReplaceParams(request, resourseMenu);
 		case(17):
 			return conductor.prepareSortParams(request);
 		case(0):
-			System.out.println("Bye");
+			System.out.println(resourseMenu.getString("exitWord"));
 		return null;
 		}
 		return request;

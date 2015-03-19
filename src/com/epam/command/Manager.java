@@ -15,6 +15,8 @@ public class Manager {
 			response = command.execute(request);
 		} catch (CommandException e) {
 			throw new ManagerException("Manager error");
+			//log
+			//response
 		}
 		return response;
 	}
