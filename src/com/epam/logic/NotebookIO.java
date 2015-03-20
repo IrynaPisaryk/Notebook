@@ -10,7 +10,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Date;
-import com.epam.exception.LogicException;
+
 import com.epam.notebook.Note;
 import com.epam.notebook.NoteWithEMail;
 import com.epam.notebook.NoteWithSignature;
@@ -23,7 +23,7 @@ public final class NotebookIO {
 		try{
 			file.createNewFile();
 		} catch(IOException e){
-			throw new LogicException();
+			throw new LogicException(e);
 		}
 	}
 
@@ -34,7 +34,7 @@ public final class NotebookIO {
 			out.println(note.toString());
 			writer.close();
 		} catch(IOException e){
-			throw new LogicException();
+			throw new LogicException(e);
 		}
 	}
 
@@ -53,7 +53,7 @@ public final class NotebookIO {
 			}
 			bufferedReader.close();
 		} catch(IOException e){
-			throw new LogicException();
+			throw new LogicException(e);
 		}		
 		return null;
 
@@ -110,7 +110,7 @@ public final class NotebookIO {
 			bufferedReader.close();
 			return innerIndex;
 		} catch(IOException e){
-			throw new LogicException();
+			throw new LogicException(e);
 		}
 
 	}
@@ -147,7 +147,7 @@ public final class NotebookIO {
 			out.close();
 			file1.delete();
 		} catch(IOException e){
-			throw new LogicException();
+			throw new LogicException(e);
 		}
 	}
 
@@ -183,7 +183,7 @@ public final class NotebookIO {
 			out.close();
 			file1.delete();
 		} catch(IOException e){
-			throw new LogicException();
+			throw new LogicException(e);
 		}
 	}
 
@@ -201,7 +201,7 @@ public final class NotebookIO {
 			bufferedReader.close();
 			return notesArray;
 		}catch(IOException e){
-			throw new LogicException();
+			throw new LogicException(e);
 		}
 
 	}
@@ -216,7 +216,7 @@ public final class NotebookIO {
 			}
 			writer.close();
 		} catch(IOException e){
-			throw new LogicException();
+			throw new LogicException(e);
 		}
 
 	}

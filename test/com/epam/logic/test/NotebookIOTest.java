@@ -7,7 +7,7 @@ import java.util.Date;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.epam.exception.LogicException;
+import com.epam.logic.LogicException;
 import com.epam.logic.NotebookIO;
 import com.epam.notebook.Note;
 import com.epam.notebook.NoteWithEMail;

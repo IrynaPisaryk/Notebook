@@ -1,15 +1,12 @@
 package com.epam.command.impl;
 
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.epam.command.Command;
+import com.epam.command.CommandException;
 import com.epam.command.Request;
 import com.epam.command.Response;
-import com.epam.exception.CommandException;
-import com.epam.exception.LogicException;
-import com.epam.logger.LoggerApp;
+import com.epam.logic.LogicException;
 import com.epam.logic.NotebookEditor;
 
 public class AddSignCommand implements Command {
@@ -20,7 +17,6 @@ public class AddSignCommand implements Command {
 		Date date = null;
 		String note = null;
 		String sign = null;
-		Logger logger = LoggerApp.getInstance().getLogger();
 
 		NotebookEditor editor = new NotebookEditor();
 
@@ -34,14 +30,11 @@ public class AddSignCommand implements Command {
 			}
 			editor.addNoteWithSignature(date, note, sign);
 		} catch (LogicException e) {
-			logger.log(Level.SEVERE, "AddSign function error", e);
-			throw new CommandException("AddSign function error");
+			throw new CommandException("AddSign function error", e);
 		} catch (NullPointerException e) {
-			logger.log(Level.SEVERE, "Input parameters for AddSign function error", e);
-			throw new CommandException("Input parameters for AddSign function error");
+			throw new CommandException("Input parameters for AddSign function error", e);
 		}
 		Response response = new Response("addSign", null);
-		logger.info("Create new note with signature with fields: " + date.toString() + " and " + note + "and" + sign);
 		return response;
 	}
 }

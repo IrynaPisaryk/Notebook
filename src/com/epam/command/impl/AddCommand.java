@@ -1,14 +1,12 @@
 package com.epam.command.impl;
 
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import com.epam.command.Command;
+import com.epam.command.CommandException;
 import com.epam.command.Request;
 import com.epam.command.Response;
-import com.epam.exception.CommandException;
-import com.epam.exception.LogicException;
-import com.epam.logger.LoggerApp;
+import com.epam.logic.LogicException;
 import com.epam.logic.NotebookEditor;
 
 public class AddCommand implements Command {
@@ -18,7 +16,6 @@ public class AddCommand implements Command {
 		Date date = null;
 		String note = null;
 		NotebookEditor editor = new NotebookEditor();
-		Logger logger = LoggerApp.getInstance().getLogger();
 
 		Object[] obj = request.getParam("addNote");
 		try {
@@ -30,15 +27,12 @@ public class AddCommand implements Command {
 			editor.addNote(date, note);
 			
 		} catch (LogicException e) {
-			logger.log(Level.SEVERE, "Add function error", e);
-			throw new CommandException("Add function error");
+			throw new CommandException("Add function error", e);
 		} catch (NullPointerException e) {
-			logger.log(Level.SEVERE, "Input parameters for add function error", e);
-			throw new CommandException("Input parameters for add function error");
+			throw new CommandException("Input parameters for add function error", e);
 		}		
 		
-		Response response = new Response("addNote", null);
-		logger.info("Create new simple note with fields: " + date.toString() + " and " + note);	
+		Response response = new Response("addNote", null);	
 		return response;
 	}
 

@@ -3,24 +3,21 @@ package com.epam.dao.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import com.epam.notebook.Note;
+import com.epam.dao.DAOException;
 import com.epam.dao.INotebookDAO;
-import com.epam.exception.DAOException;
-import com.epam.exception.NotebookException;
-import com.epam.logger.LoggerApp;
 import com.epam.logic.NotebookAdapter;
 import com.epam.logic.comparator.NoteComparator;
 import com.epam.notebook.NoteWithEMail;
 import com.epam.notebook.NoteWithSignature;
 import com.epam.notebook.NoteWithTitle;
 import com.epam.notebook.Notebook;
+import com.epam.notebook.NotebookException;
 
 public final class NotebookMemoryImpl implements INotebookDAO {
 
 	private Notebook notebook = NotebookAdapter.getInstance().getNotebook();
-	private Logger logger = LoggerApp.getInstance().getLogger();
 
 	@Override
 	public void addNote(Date date, String note) {
@@ -55,8 +52,7 @@ public final class NotebookMemoryImpl implements INotebookDAO {
 				notebook.getNote(index).setNote(newNote);
 			}
 		} catch (NotebookException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new DAOException("ChangeNote fucnction error");
+			throw new DAOException("ChangeNote fucnction error", e);
 		}
 	}
 
@@ -65,8 +61,7 @@ public final class NotebookMemoryImpl implements INotebookDAO {
 		try {
 			return notebook.getNote(index).clone();
 		} catch (NotebookException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new DAOException("CloneNote fucnction error");
+			throw new DAOException("CloneNote fucnction error", e);
 		}
 	}
 
@@ -75,8 +70,7 @@ public final class NotebookMemoryImpl implements INotebookDAO {
 		try {
 			notebook.deleteNote(index);
 		} catch (NotebookException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new DAOException("DeleteNote fucnction error");
+			throw new DAOException("DeleteNote fucnction error", e);
 		}
 	}
 
@@ -85,8 +79,7 @@ public final class NotebookMemoryImpl implements INotebookDAO {
 		try {
 			notebook.deleteNotebook();
 		} catch (NotebookException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new DAOException("DeleteNote fucnction error");
+			throw new DAOException("DeleteNote fucnction error", e);
 		}
 	}
 
@@ -95,8 +88,7 @@ public final class NotebookMemoryImpl implements INotebookDAO {
 		try {
 			return notebook.getNote(index);
 		} catch (NotebookException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new DAOException("FindNoteByIndex fucnction error");
+			throw new DAOException("FindNoteByIndex fucnction error", e);
 		}
 	}
 
@@ -115,8 +107,7 @@ public final class NotebookMemoryImpl implements INotebookDAO {
 			}
 			return arrayOfFoundNote;
 		} catch (NotebookException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new DAOException("FindNoteByTitle fucnction error");
+			throw new DAOException("FindNoteByTitle fucnction error", e);
 		}
 	}
 
@@ -136,8 +127,7 @@ public final class NotebookMemoryImpl implements INotebookDAO {
 			}
 			return arrayOfFoundNote;
 		} catch (NotebookException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new DAOException("FindNoteBySignature fucnction error");
+			throw new DAOException("FindNoteBySignature fucnction error", e);
 		}
 	}
 
@@ -156,8 +146,7 @@ public final class NotebookMemoryImpl implements INotebookDAO {
 			}
 			return arrayOfFoundNote;
 		} catch (NotebookException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new DAOException("FindNoteByEMail fucnction error");
+			throw new DAOException("FindNoteByEMail fucnction error", e);
 		}
 	}
 
@@ -172,8 +161,7 @@ public final class NotebookMemoryImpl implements INotebookDAO {
 			}
 			return arrayOfFoundNote;
 		} catch (NotebookException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new DAOException("FindNoteByDate fucnction error");
+			throw new DAOException("FindNoteByDate fucnction error", e);
 		}
 	}
 
@@ -188,8 +176,7 @@ public final class NotebookMemoryImpl implements INotebookDAO {
 			}
 			return arrayOfFoundNote;
 		} catch (NotebookException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new DAOException("FindNoteByNote fucnction error");
+			throw new DAOException("FindNoteByNote fucnction error", e);
 		}
 	}
 
@@ -206,8 +193,7 @@ public final class NotebookMemoryImpl implements INotebookDAO {
 			notebook.deleteNote(index);
 			notebook.setNote(index, newNote);
 		} catch (NotebookException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new DAOException("FormatNote fucnction error");
+			throw new DAOException("FormatNote fucnction error", e);
 		}
 	}
 
@@ -217,8 +203,7 @@ public final class NotebookMemoryImpl implements INotebookDAO {
 			notebook.deleteNote(indexOldNote);
 			notebook.setNote(indexOldNote, newNote);
 		} catch (NotebookException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new DAOException("DeleteNote fucnction error");
+			throw new DAOException("DeleteNote fucnction error", e);
 		}
 
 	}
@@ -229,8 +214,7 @@ public final class NotebookMemoryImpl implements INotebookDAO {
 			NoteComparator comparator = new NoteComparator();
 			Collections.sort(notebook.getNotebook(), comparator);
 		} catch (NotebookException e) {
-			logger.log(Level.SEVERE, "Exception", e);
-			throw new DAOException("DeleteNote fucnction error");
+			throw new DAOException("DeleteNote fucnction error", e);
 		}
 	}
 }

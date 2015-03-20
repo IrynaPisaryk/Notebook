@@ -3,7 +3,6 @@ package com.epam.dao;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.epam.exception.DAOException;
 import com.epam.notebook.Note;
 
 public interface INotebookDAO {

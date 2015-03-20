@@ -4,8 +4,8 @@ import java.io.File;
 
 import org.testng.annotations.Test;
 
+import com.epam.dao.DAOException;
 import com.epam.dao.impl.NotebookFileImpl;
-import com.epam.exception.DAOException;
 import com.epam.property.TestProvider;
 
 //if file is't exist

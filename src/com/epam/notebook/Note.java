@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.epam.logger.LoggerApp;
 
 public class Note implements Cloneable{
 
@@ -83,8 +82,6 @@ public class Note implements Cloneable{
 		try {
 			obj = (Note) super.clone();
 		} catch (CloneNotSupportedException e) {
-			Logger logger = LoggerApp.getInstance().getLogger();
-			logger.log(Level.SEVERE, "Exception", e);
 			System.out.println("Can't clone note");
 		}
 		if(null != this.date){

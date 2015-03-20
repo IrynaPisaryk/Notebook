@@ -7,17 +7,17 @@ import java.util.Date;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.epam.dao.DAOException;
 import com.epam.dao.impl.NotebookFileImpl;
 import com.epam.dao.impl.NotebookMemoryImpl;
-import com.epam.exception.DAOException;
-import com.epam.exception.LogicException;
-import com.epam.exception.NotebookException;
+import com.epam.logic.LogicException;
 import com.epam.logic.NotebookAdapter;
 import com.epam.logic.NotebookIO;
 import com.epam.notebook.Note;
 import com.epam.notebook.NoteWithEMail;
 import com.epam.notebook.NoteWithSignature;
 import com.epam.notebook.NoteWithTitle;
+import com.epam.notebook.NotebookException;
 import com.epam.property.TestProvider;
 
 

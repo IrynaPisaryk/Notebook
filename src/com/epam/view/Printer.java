@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.epam.command.Response;
-import com.epam.exception.NotebookException;
 import com.epam.exception.ViewException;
 import com.epam.logic.NotebookAdapter;
 import com.epam.notebook.Note;
 import com.epam.notebook.Notebook;
+import com.epam.notebook.NotebookException;
 
 public class Printer {
 

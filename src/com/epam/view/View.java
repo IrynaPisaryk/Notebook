@@ -8,28 +8,23 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.epam.command.CommandName;
 import com.epam.command.Manager;
+import com.epam.command.ManagerException;
 import com.epam.command.Request;
 import com.epam.command.Response;
-import com.epam.exception.ManagerException;
 import com.epam.exception.ViewException;
-import com.epam.logger.LoggerApp;
 
 public class View {
 
 	private Manager manager = new Manager();
 	private Request request = new Request();
-	private Logger logger = LoggerApp.getInstance().getLogger();
 	private Printer printer = new Printer();
 	private static Locale locale = null;
 	private static ResourceBundle resourseMenu = null;
 	
-	static {
-		
+	static {		
 		getLocale();
 	}
 	
@@ -103,23 +98,23 @@ public class View {
 			try{
 				request = prepareParams(whatDo, request);
 			}catch(ViewException e){
-				logger.log(Level.SEVERE, "Input patemeters error", e);				
+				//logger.log(Level.SEVERE, "Input patemeters error", e);				
 			}			
 			if( request == null){
 				return;
 			}else{		
 					CommandName name = getCommandName(whatDo);
 					Response response = null;
-					try{
+					//try{
 						response = manager.doRequest(name, this.request);
-					}catch(ManagerException e){
-						logger.log(Level.SEVERE, "Programm error", e);
+						/*}catch(ManagerException e){
+						//logger.log(Level.SEVERE, "Programm error", e);
 						response = new Response("", null);
-					}
+					}*/
 					try{
 						printer.printResponse(this.request.getKey(), response, resourseMenu);
 					}catch(ViewException e){
-						logger.log(Level.SEVERE, "Printer error", e);
+						//logger.log(Level.SEVERE, "Printer error", e);
 				}
 			}
 		}

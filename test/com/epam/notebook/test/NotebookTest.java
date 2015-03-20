@@ -7,9 +7,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.epam.exception.NotebookException;
 import com.epam.notebook.Note;
 import com.epam.notebook.Notebook;
+import com.epam.notebook.NotebookException;
 
 public class NotebookTest extends Object {
 

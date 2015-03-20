@@ -1,24 +1,29 @@
 package com.epam.command;
 
-import com.epam.exception.CommandException;
-import com.epam.exception.ManagerException;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 public class Manager {
 
 	private CommandHelper helper = new CommandHelper();
+	//public static Logger log;
 
-	public Response doRequest(CommandName nc, Request request)
-			throws ManagerException {
+	public Response doRequest(CommandName nc, Request request) {
+		
+		//String nameFile = "log4j.properties";
+		//PropertyConfigurator.configure(nameFile);
+		//log = Logger.getRootLogger();
+		
 		Command command = helper.getCommand(nc);
 		Response response = null;
 		try {
 			response = command.execute(request);
 		} catch (CommandException e) {
-			throw new ManagerException("Manager error");
-			//log
-			//response
+			System.out.println("Program error occured");
+			e.printStackTrace();
+			//Logger.getLogger(e.getClass()).log(Level.ERROR, e);			
 		}
 		return response;
 	}
-
 }
