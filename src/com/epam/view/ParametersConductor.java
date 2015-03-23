@@ -12,7 +12,6 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import com.epam.command.Request;
-import com.epam.exception.ViewException;
 import com.epam.notebook.Note;
 
 public class ParametersConductor {

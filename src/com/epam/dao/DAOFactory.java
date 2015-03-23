@@ -15,6 +15,8 @@ public abstract class DAOFactory {
 				return new NotebookMemoryDAOFactory().getNotebookDAO();
 			case USING_FILE:
 				return new NotebookFileDAOFactory().getNotebookDAO();
+			case USING_XML:
+				return new NotebookXmlDAOFactory().getNotebookDAO();
 			default:
 				return null;
 			}

@@ -14,7 +14,6 @@ import com.epam.command.Manager;
 import com.epam.command.ManagerException;
 import com.epam.command.Request;
 import com.epam.command.Response;
-import com.epam.exception.ViewException;
 
 public class View {
 
@@ -98,23 +97,23 @@ public class View {
 			try{
 				request = prepareParams(whatDo, request);
 			}catch(ViewException e){
-				//logger.log(Level.SEVERE, "Input patemeters error", e);				
+				System.out.println("Input parameters error");
+				return;
 			}			
 			if( request == null){
 				return;
 			}else{		
 					CommandName name = getCommandName(whatDo);
 					Response response = null;
-					//try{
-						response = manager.doRequest(name, this.request);
-						/*}catch(ManagerException e){
-						//logger.log(Level.SEVERE, "Programm error", e);
-						response = new Response("", null);
-					}*/
+					response = manager.doRequest(name, this.request);
+					if(response == null){
+						return;
+					}
 					try{
 						printer.printResponse(this.request.getKey(), response, resourseMenu);
 					}catch(ViewException e){
-						//logger.log(Level.SEVERE, "Printer error", e);
+						System.out.println("Printer error");
+						return;
 				}
 			}
 		}

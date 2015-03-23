@@ -2,7 +2,7 @@ package com.epam.dao;
 
 public enum DAOEnum {
 
-	USING_MEMORY("memory"), USING_FILE("file");
+	USING_MEMORY("memory"), USING_FILE("file"), USING_XML("xml");
 
 	private String typeValue;
 

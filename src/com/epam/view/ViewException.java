@@ -1,4 +1,4 @@
-package com.epam.exception;
+package com.epam.view;
 
 public class ViewException extends Exception {
 
