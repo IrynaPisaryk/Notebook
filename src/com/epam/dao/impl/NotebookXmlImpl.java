@@ -1,6 +1,7 @@
 package com.epam.dao.impl;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,10 +17,14 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
+import org.xml.sax.SAXException;
 
 import com.epam.dao.DAOException;
 import com.epam.dao.INotebookDAO;
@@ -30,6 +35,10 @@ public class NotebookXmlImpl implements INotebookDAO{
 	//write
 	private DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	private Document doc;
+	private int noteCount = 0;
+	private Element rootElement = null;
+	
+	
 	{
 		factory.setNamespaceAware(true);
 		
@@ -37,124 +46,179 @@ public class NotebookXmlImpl implements INotebookDAO{
 			doc = factory.newDocumentBuilder().newDocument();
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
-		}
+		}		
 		
-		Element root = doc.createElement("Notebook");
-		root.setAttribute("xmlns", "http://com/epam/dao/impl/schemas/");
-		doc.appendChild(root);
-		 
-		Element item1 = doc.createElement("Note");
-		item1.setAttribute("id", "0");
-		root.appendChild(item1);
-		             
-		Element item2 = doc.createElement("date");
-		item2.setAttribute("val", new Date().toString());
-		item1.appendChild(item2);
-		             
-		Element item3 = doc.createElement("text");
-		item3.setAttribute("val", "note text");
-		item1.appendChild(item3);    
+		rootElement = doc.createElement("Notebook");
+		rootElement.setAttribute("xmlns", "http://com/epam/dao/impl/schemas/");
+		doc.appendChild(rootElement);
 		
-		Element item4 = doc.createElement("Note");
-		item4.setAttribute("id", "1");
-		root.appendChild(item4);
+		//----------------------
 		
-		Element item5 = doc.createElement("date");
-		item5.setAttribute("val", new Date("1111/11/11").toString());
-		item4.appendChild(item5);
-		             
-		Element item6 = doc.createElement("text");
-		item6.setAttribute("val", "note textAAAAAAAAA");
-		item4.appendChild(item6);    
+		Element note1 = doc.createElement("Note");
+		rootElement.appendChild(note1);
 		
-		File file = new File("D:\\test.xml");
+		Attr attr1 = doc.createAttribute("id");
+		attr1.setValue("1");
+		note1.setAttributeNode(attr1); 
+		
+		Element param01 = doc.createElement("date");
+		param01.appendChild(doc.createTextNode(new Date("1111/11/11").toString()));
+		note1.appendChild(param01);
+		
+		Element param11 = doc.createElement("text");
+		param11.appendChild(doc.createTextNode("fuckAAAAA"));
+		note1.appendChild(param11);    
+		
+		File file = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test.xml");
 		 
 		Transformer transformer = null;
 		try {
 			transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.transform(new DOMSource(root), new StreamResult(file));
+			transformer.transform(new DOMSource(rootElement), new StreamResult(file));
 		} catch (TransformerConfigurationException | TransformerFactoryConfigurationError e1) {
 			e1.printStackTrace();
 		} catch (TransformerException e) {
 			e.printStackTrace();
 		}
 		//parse		
-		 try {
+		
 			 
-				DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			 
-				Document doc = dBuilder.parse(file);
-			 
-				System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
-				System.out.println( doc.getDocumentElement().getAttribute("xmlns"));
-			 
-				if (doc.hasChildNodes()) {
+				DocumentBuilder dBuilder;
+				
 					
-					System.out.println("dot1!");
-			 
-					for (int count = 0; count < doc.getChildNodes().getLength(); count++) {
-						
-						System.out.println("dot2!");
+					try {
+						dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+					
+					Document doc = dBuilder.parse(file);					
+					
+					doc.getDocumentElement().normalize();
+					 
+					System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+				 
+					NodeList nList = doc.getElementsByTagName("Note");
+					
+					System.out.println("----------------------------");
+					
+					for (int temp = 0; temp < nList.getLength(); temp++) {
 						 
-						Node tempNode = doc.getChildNodes().item(count);
-					 
-						// make sure it's element node.
-						if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
-					 
-							System.out.println(tempNode.getNodeValue());
-							System.out.println(tempNode.getTextContent());
-					 
-							if (tempNode.hasAttributes()) {
-								
-								System.out.println("dot3!");
-								
-								NamedNodeMap nodeMap = tempNode.getAttributes();
-					 
-								for (int i = 0; i < nodeMap.
-										getLength(); i++) {
-					 
-									Node node = nodeMap.item(i);
-									System.out.println(node.getNodeName());
-									System.out.println(node.getNodeValue());
-					 
-								}
-					 
-							}
-					
-			 
-				}
-					}}
-			    } catch (Exception e) {
-				System.out.println(e.getMessage());
-			    }
-	}
+						Node nNode = nList.item(temp);
+				 
+						System.out.println("\nCurrent Element :" + nNode.getNodeName());
+				 
+						if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				 
+							Element eElement = (Element) nNode;
+				 
+							System.out.println("note id : " + eElement.getAttribute("id"));
+							System.out.println("date : " + eElement.getElementsByTagName("date").item(0).getTextContent());
+							System.out.println("text : " + eElement.getElementsByTagName("text").item(0).getTextContent());
+							
+						}
+					}
+										
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 	
-	
-	
-	
+					}	
 
 	@Override
 	public void addNote(Date date, String note) throws DAOException {
-		// TODO Auto-generated method stub
+		
+		Element currentNote = doc.createElement("Note");
+		rootElement.appendChild(currentNote);
+ 
+		Attr attr = doc.createAttribute("id");
+		attr.setValue(noteCount+"");
+		currentNote.setAttributeNode(attr); 
+		
+		Element param0 = doc.createElement("date");
+		param0.appendChild(doc.createTextNode(date.toString()));
+		currentNote.appendChild(param0);
+		
+		Element param1 = doc.createElement("text");
+		param1.appendChild(doc.createTextNode(note));
+		currentNote.appendChild(param1);
+		
+		noteCount++;
 		
 	}
 
 	@Override
 	public void addNoteWithEMail(Date date, String note, String email) throws DAOException {
-		// TODO Auto-generated method stub
 		
+		Element currentNote = doc.createElement("NoteWithEMail");
+		rootElement.appendChild(currentNote);
+ 
+		Attr attr = doc.createAttribute("id");
+		attr.setValue(noteCount+"");
+		currentNote.setAttributeNode(attr); 
+		
+		Element param0 = doc.createElement("date");
+		param0.appendChild(doc.createTextNode(date.toString()));
+		currentNote.appendChild(param0);
+		
+		Element param1 = doc.createElement("text");
+		param1.appendChild(doc.createTextNode(note));
+		currentNote.appendChild(param1);
+		
+		Element param2 = doc.createElement("email");
+		param2.appendChild(doc.createTextNode(email));
+		currentNote.appendChild(param2);
+		
+		noteCount++;
 	}
 
 	@Override
 	public void addNoteWithSignature(Date date, String note, String signature) throws DAOException {
-		// TODO Auto-generated method stub
+
+		Element currentNote = doc.createElement("NoteWithSignature");
+		rootElement.appendChild(currentNote);
+ 
+		Attr attr = doc.createAttribute("id");
+		attr.setValue(noteCount+"");
+		currentNote.setAttributeNode(attr); 
+		
+		Element param0 = doc.createElement("date");
+		param0.appendChild(doc.createTextNode(date.toString()));
+		currentNote.appendChild(param0);
+		
+		Element param1 = doc.createElement("text");
+		param1.appendChild(doc.createTextNode(note));
+		currentNote.appendChild(param1);
+		
+		Element param2 = doc.createElement("signature");
+		param2.appendChild(doc.createTextNode(signature));
+		currentNote.appendChild(param2);
+		
+		noteCount++;
 		
 	}
 
 	@Override
 	public void addNoteWithTitle(Date date, String note, String title) throws DAOException {
-		// TODO Auto-generated method stub
+
+		Element currentNote = doc.createElement("NoteWithTitle");
+		rootElement.appendChild(currentNote);
+ 
+		Attr attr = doc.createAttribute("id");
+		attr.setValue(noteCount+"");
+		currentNote.setAttributeNode(attr); 
+		
+		Element param0 = doc.createElement("date");
+		param0.appendChild(doc.createTextNode(date.toString()));
+		currentNote.appendChild(param0);
+		
+		Element param1 = doc.createElement("text");
+		param1.appendChild(doc.createTextNode(note));
+		currentNote.appendChild(param1);
+		
+		Element param2 = doc.createElement("title");
+		param2.appendChild(doc.createTextNode(title));
+		currentNote.appendChild(param2);
+		
+		noteCount++;		
 		
 	}
 

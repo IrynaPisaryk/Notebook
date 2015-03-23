@@ -3,3 +3,4 @@ bin/
 test-output/
 /.classpath
 /.project
+apache-log4j-1.2.17/
