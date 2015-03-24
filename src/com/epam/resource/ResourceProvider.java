@@ -20,9 +20,10 @@ public class ResourceProvider {
 	private static ResourceBundle resources;
 	
 	private static String dataKeeper = null;
-	private static String loggerKeeper = null;
+	private static String xmlPathKeeper = null;
 	private static String filePathKeeper = null;
 	private static String fileTempPathKeeper = null;
+	
 	
 	static {
 		try {
@@ -45,9 +46,9 @@ public class ResourceProvider {
 		return dataKeeper;
 	}
 
-	public static String getLoggerKeeper() {
-		loggerKeeper = resources.getString("LoggerKeeper");
-		return loggerKeeper;
+	public static String getXmlKeeper() {
+		xmlPathKeeper = resources.getString("XmlPath");
+		return xmlPathKeeper;
 	}
 
 	public static String getFilePathKeeper() {

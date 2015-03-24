@@ -28,198 +28,34 @@ import org.xml.sax.SAXException;
 
 import com.epam.dao.DAOException;
 import com.epam.dao.INotebookDAO;
+import com.epam.logic.NotebookXml;
 import com.epam.notebook.Note;
+import com.epam.resource.ResourceProvider;
 
-public class NotebookXmlImpl implements INotebookDAO{
-	
-	//write
-	private DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	private Document doc;
-	private int noteCount = 0;
-	private Element rootElement = null;
-	
-	
-	{
-		factory.setNamespaceAware(true);
-		
-		try {
-			doc = factory.newDocumentBuilder().newDocument();
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		}		
-		
-		rootElement = doc.createElement("Notebook");
-		rootElement.setAttribute("xmlns", "http://com/epam/dao/impl/schemas/");
-		doc.appendChild(rootElement);
-		
-		//----------------------
-		
-		Element note1 = doc.createElement("Note");
-		rootElement.appendChild(note1);
-		
-		Attr attr1 = doc.createAttribute("id");
-		attr1.setValue("1");
-		note1.setAttributeNode(attr1); 
-		
-		Element param01 = doc.createElement("date");
-		param01.appendChild(doc.createTextNode(new Date("1111/11/11").toString()));
-		note1.appendChild(param01);
-		
-		Element param11 = doc.createElement("text");
-		param11.appendChild(doc.createTextNode("fuckAAAAA"));
-		note1.appendChild(param11);    
-		
-		File file = new File("C:\\Users\\Irina_Pisarik\\Desktop\\test.xml");
-		 
-		Transformer transformer = null;
-		try {
-			transformer = TransformerFactory.newInstance().newTransformer();
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.transform(new DOMSource(rootElement), new StreamResult(file));
-		} catch (TransformerConfigurationException | TransformerFactoryConfigurationError e1) {
-			e1.printStackTrace();
-		} catch (TransformerException e) {
-			e.printStackTrace();
-		}
-		//parse		
-		
-			 
-				DocumentBuilder dBuilder;
-				
-					
-					try {
-						dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-					
-					Document doc = dBuilder.parse(file);					
-					
-					doc.getDocumentElement().normalize();
-					 
-					System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-				 
-					NodeList nList = doc.getElementsByTagName("Note");
-					
-					System.out.println("----------------------------");
-					
-					for (int temp = 0; temp < nList.getLength(); temp++) {
-						 
-						Node nNode = nList.item(temp);
-				 
-						System.out.println("\nCurrent Element :" + nNode.getNodeName());
-				 
-						if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				 
-							Element eElement = (Element) nNode;
-				 
-							System.out.println("note id : " + eElement.getAttribute("id"));
-							System.out.println("date : " + eElement.getElementsByTagName("date").item(0).getTextContent());
-							System.out.println("text : " + eElement.getElementsByTagName("text").item(0).getTextContent());
-							
-						}
-					}
-										
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-	
-					}	
+public class NotebookXmlImpl implements INotebookDAO{					
 
 	@Override
-	public void addNote(Date date, String note) throws DAOException {
-		
-		Element currentNote = doc.createElement("Note");
-		rootElement.appendChild(currentNote);
- 
-		Attr attr = doc.createAttribute("id");
-		attr.setValue(noteCount+"");
-		currentNote.setAttributeNode(attr); 
-		
-		Element param0 = doc.createElement("date");
-		param0.appendChild(doc.createTextNode(date.toString()));
-		currentNote.appendChild(param0);
-		
-		Element param1 = doc.createElement("text");
-		param1.appendChild(doc.createTextNode(note));
-		currentNote.appendChild(param1);
-		
-		noteCount++;
-		
+	public void addNote(Date date, String note) throws DAOException {	
+		NotebookXml io = new NotebookXml();
+		io.addSimpleNote(date, note);
 	}
 
 	@Override
-	public void addNoteWithEMail(Date date, String note, String email) throws DAOException {
-		
-		Element currentNote = doc.createElement("NoteWithEMail");
-		rootElement.appendChild(currentNote);
- 
-		Attr attr = doc.createAttribute("id");
-		attr.setValue(noteCount+"");
-		currentNote.setAttributeNode(attr); 
-		
-		Element param0 = doc.createElement("date");
-		param0.appendChild(doc.createTextNode(date.toString()));
-		currentNote.appendChild(param0);
-		
-		Element param1 = doc.createElement("text");
-		param1.appendChild(doc.createTextNode(note));
-		currentNote.appendChild(param1);
-		
-		Element param2 = doc.createElement("email");
-		param2.appendChild(doc.createTextNode(email));
-		currentNote.appendChild(param2);
-		
-		noteCount++;
+	public void addNoteWithEMail(Date date, String note, String email) throws DAOException {		
+		NotebookXml io = new NotebookXml();
+		io.addNoteWithEMail(date, note, email);
 	}
 
 	@Override
 	public void addNoteWithSignature(Date date, String note, String signature) throws DAOException {
-
-		Element currentNote = doc.createElement("NoteWithSignature");
-		rootElement.appendChild(currentNote);
- 
-		Attr attr = doc.createAttribute("id");
-		attr.setValue(noteCount+"");
-		currentNote.setAttributeNode(attr); 
-		
-		Element param0 = doc.createElement("date");
-		param0.appendChild(doc.createTextNode(date.toString()));
-		currentNote.appendChild(param0);
-		
-		Element param1 = doc.createElement("text");
-		param1.appendChild(doc.createTextNode(note));
-		currentNote.appendChild(param1);
-		
-		Element param2 = doc.createElement("signature");
-		param2.appendChild(doc.createTextNode(signature));
-		currentNote.appendChild(param2);
-		
-		noteCount++;
-		
+		NotebookXml io = new NotebookXml();
+		io.addNoteWithSignature(date, note, signature);
 	}
 
 	@Override
 	public void addNoteWithTitle(Date date, String note, String title) throws DAOException {
-
-		Element currentNote = doc.createElement("NoteWithTitle");
-		rootElement.appendChild(currentNote);
- 
-		Attr attr = doc.createAttribute("id");
-		attr.setValue(noteCount+"");
-		currentNote.setAttributeNode(attr); 
-		
-		Element param0 = doc.createElement("date");
-		param0.appendChild(doc.createTextNode(date.toString()));
-		currentNote.appendChild(param0);
-		
-		Element param1 = doc.createElement("text");
-		param1.appendChild(doc.createTextNode(note));
-		currentNote.appendChild(param1);
-		
-		Element param2 = doc.createElement("title");
-		param2.appendChild(doc.createTextNode(title));
-		currentNote.appendChild(param2);
-		
-		noteCount++;		
-		
+		NotebookXml io = new NotebookXml();
+		io.addNoteWithTitle(date, note, title);
 	}
 
 	@Override
