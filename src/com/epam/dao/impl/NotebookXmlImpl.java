@@ -43,19 +43,19 @@ public class NotebookXmlImpl implements INotebookDAO{
 	@Override
 	public void addNoteWithEMail(Date date, String note, String email) throws DAOException {		
 		NotebookXml io = new NotebookXml();
-		io.addNoteWithEMail(date, note, email);
+		//io.addNoteWithEMail(date, note, email);
 	}
 
 	@Override
 	public void addNoteWithSignature(Date date, String note, String signature) throws DAOException {
-		NotebookXml io = new NotebookXml();
-		io.addNoteWithSignature(date, note, signature);
+		//NotebookXml io = new NotebookXml();
+		//io.addNoteWithSignature(date, note, signature);
 	}
 
 	@Override
 	public void addNoteWithTitle(Date date, String note, String title) throws DAOException {
-		NotebookXml io = new NotebookXml();
-		io.addNoteWithTitle(date, note, title);
+		//NotebookXml io = new NotebookXml();
+		//io.addNoteWithTitle(date, note, title);
 	}
 
 	@Override

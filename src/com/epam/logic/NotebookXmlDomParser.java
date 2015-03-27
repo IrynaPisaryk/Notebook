@@ -22,15 +22,19 @@ import com.epam.notebook.NoteWithTitle;
 public class NotebookXmlDomParser {	
 
 	private DocumentBuilder dBuilder;
+	private ArrayList<Note> notes;
 
-	public Map<String, Object> xmlDomParser(File file){
+	public ArrayList<Note> xmlDomParser(File file){
 
+		notes = new ArrayList<Note>();
+		
 		try {
 
 			if(!file.exists()){
 				return null;
-			}			
-			/*dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			}
+			
+			dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document doc = dBuilder.parse(file);	
 			doc.getDocumentElement().normalize();
 
@@ -45,73 +49,8 @@ public class NotebookXmlDomParser {
 					notes.add(note);
 				}				
 			}
-			return notes;*/
+			return notes;	
 
-			
-			//вылетает потому что всё время заходит в первый цикл. Не находит тэги для записей с параметрами
-			
-			
-			dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			Document doc = dBuilder.parse(file);	
-			doc.getDocumentElement().normalize();
-			Map<String, Object> notes = new HashMap<String, Object>();
-
-			NodeList noteList = doc.getElementsByTagName("Note");
-			NodeList noteMailList = doc.getElementsByTagName("NoteWithEMail");
-			NodeList noteSignList = doc.getElementsByTagName("NoteWithSignature");
-			NodeList noteTitleList = doc.getElementsByTagName("NoteWithTitle");
-
-			if(noteList.getLength() != 0){
-				
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				
-				for (int i = 0; i < noteList.getLength(); i++) {
-					Node nNode = noteList.item(i);
-					if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-						Element eElement = (Element) nNode;
-						Note note = new Note(new Date(eElement.getElementsByTagName("date").item(0).getTextContent()), eElement.getElementsByTagName("text").item(0).getTextContent());
-						notes.put(eElement.getAttribute("id"), note);
-					}	
-				}
-			}
-
-			if(noteMailList.getLength() != 0){
-				
-				System.out.println("1111111111111111111111111111111111111111111");
-				
-				for (int i = 0; i < noteMailList.getLength(); i++) {
-					Node nNode = noteMailList.item(i);
-					if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-						Element eElement = (Element) nNode;
-						NoteWithEMail note = new NoteWithEMail(new Date(eElement.getElementsByTagName("date").item(0).getTextContent()), eElement.getElementsByTagName("text").item(0).getTextContent(), eElement.getElementsByTagName("email").item(0).getTextContent());
-						notes.put(eElement.getAttribute("id"), note);
-					}	
-				}
-			}
-
-			if(noteSignList.getLength() != 0){
-				for (int i = 0; i < noteSignList.getLength(); i++) {
-					Node nNode = noteSignList.item(i);
-					if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-						Element eElement = (Element) nNode;
-						NoteWithSignature note = new NoteWithSignature(new Date(eElement.getElementsByTagName("date").item(0).getTextContent()), eElement.getElementsByTagName("text").item(0).getTextContent(), eElement.getElementsByTagName("signature").item(0).getTextContent());
-						notes.put(eElement.getAttribute("id"), note);
-					}	
-				}
-			}
-
-			if(noteTitleList.getLength() != 0){
-				for (int i = 0; i < noteTitleList.getLength(); i++) {
-					Node nNode = noteTitleList.item(i);
-					if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-						Element eElement = (Element) nNode;
-						NoteWithTitle note = new NoteWithTitle(new Date(eElement.getElementsByTagName("date").item(0).getTextContent()), eElement.getElementsByTagName("text").item(0).getTextContent(), eElement.getElementsByTagName("title").item(0).getTextContent());
-						notes.put(eElement.getAttribute("id"), note);
-					}	
-				}
-			}
-
-			return notes;
 
 		} catch (Exception e) {
 			e.printStackTrace();			
